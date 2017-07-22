@@ -54,6 +54,7 @@
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/tab_background"
             app:tabIndicatorColor="@android:color/transparent"
             app:tabTextColor="@color/colorUnselected"
             app:tabSelectedTextColor="@color/colorAccent"/>
