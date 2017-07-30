@@ -16,7 +16,12 @@ public class ApplicationBase extends Application {
 
         // TextView 폰트 설정
         Typekit.getInstance()
-                .addNormal(Typekit.createFromAsset(this, "NanumSquareOTFLight.otf"))
-                .addBold(Typekit.createFromAsset(this, "NanumSquareOTFBold.otf"));
+                //한글 폰트
+                .addNormal(Typekit.createFromAsset(this, "NotoSans-Regular.ttf"))
+                .addBold(Typekit.createFromAsset(this, "NotoSans-Bold.ttf"))
+
+                //영어 - 숫자 폰트
+                .addCustom1(Typekit.createFromAsset(this, "Roboto-Regular.ttf"))
+                .addCustom2(Typekit.createFromAsset(this, "Roboto-Bold.ttf"));
     }
 }
