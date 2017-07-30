@@ -1,95 +1,112 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#f5f5f5"
-    android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.teamnexters.volleytalk.ui_pages.MainActivity">
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:overScrollMode="always"
+    tools:context="com.teamnexters.volleytalk.MainActivity">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_mainImage_news"
-        android:layout_width="match_parent"
-        android:layout_height="200dp">
-
-    </android.support.v4.view.ViewPager>
-
-    <me.relex.circleindicator.CircleIndicator
-        android:id="@+id/indicator_mainImage_news"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"/>
-
-
-    <RelativeLayout
-        android:id="@+id/header_days_match_news"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/lv_days_match_header">
+        android:background="#f5f5f5"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="15dp"
-            android:layout_width="wrap_content"
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_photo_news"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="20dp">
+
+        </android.support.v4.view.ViewPager>
+
+        <me.relex.circleindicator.CircleIndicator
+            android:id="@+id/indicator_photo_news"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            app:ci_drawable="@drawable/selected_circleindicator"
+            app:ci_drawable_unselected="@drawable/unselected_circleindicator" />
+
+
+        <RelativeLayout
+            android:id="@+id/header_days_match_news"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ico_previous"/>
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/lv_days_match_header">
 
-        <TextView
-            android:id="@+id/info_news"
-            android:layout_centerInParent="true"
-            android:text="오늘의 경기"
-            android:layout_width="wrap_content"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="15dp"
+                android:src="@mipmap/ico_previous" />
+
+            <TextView
+                android:id="@+id/info_news"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="오늘의 경기"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/info_news"
+                android:text="2017.01.07"
+                android:textColor="#9b9b9b"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="15dp"
+                android:src="@mipmap/ico_next" />
+
+        </RelativeLayout>
+
+        <com.teamnexters.volleytalk.ui_element.NonScrollListView
+            android:id="@+id/lv_days_match_news"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textColor="@android:color/white"/>
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/lv_days_match_bg"
+            android:divider="@drawable/lv_days_match_divider"
+            android:elevation="4dp" />
 
-        <TextView
-            android:layout_toEndOf="@id/info_news"
-            android:layout_centerVertical="true"
-            android:text="2017.01.07"
-            android:layout_marginStart="10dp"
-            android:layout_width="wrap_content"
+        <com.teamnexters.volleytalk.ui_element.NonScrollListView
+            android:id="@+id/lv_thumbnail_news"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textColor="#9b9b9b"/>
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/lv_background"
+            android:divider="@drawable/lv_days_match_divider"
+            android:elevation="4dp" />
 
-        <ImageView
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="15dp"
-            android:layout_width="wrap_content"
+        <com.teamnexters.volleytalk.ui_element.NonScrollListView
+            android:id="@+id/lv_text_news"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ico_next"/>
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/lv_background"
+            android:divider="@drawable/lv_days_match_divider"
+            android:elevation="4dp" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
-    <ListView
-        android:id="@+id/lv_days_match_news"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:isScrollContainer="false"
-        android:divider="@drawable/lv_days_match_divider"
-        android:dividerHeight="1dp"
-        android:background="@android:color/white"
-        android:outlineProvider="bounds"
-        android:elevation="4dp">
-
-    </ListView>
-
-   <!--
-
-   <ListView
-        android:id="@+id/lv_thumbnail_news"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp">
-
-
-    </ListView> -->
-
-
-
-</LinearLayout>
+</ScrollView>

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
  * Created by MIN on 2017. 7. 13..
  */
 
-public class LikeFragment extends Fragment {
+public class FollowFragment extends Fragment {
 
     @Nullable
     @Override

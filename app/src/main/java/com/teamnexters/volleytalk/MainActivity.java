@@ -1,4 +1,4 @@
-package com.teamnexters.volleytalk.ui_pages;
+package com.teamnexters.volleytalk;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,12 +6,14 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.teamnexters.volleytalk.R;
+import com.teamnexters.volleytalk.news.NewsFragment;
+import com.teamnexters.volleytalk.ui_pages.FollowFragment;
+import com.teamnexters.volleytalk.ui_pages.PlayerFragment;
+import com.teamnexters.volleytalk.ui_pages.TeamFragment;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private Context context;
+
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -35,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
         context = this;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setBackground(ContextCompat.getDrawable(this, R.drawable.actionbar_background));
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
@@ -46,9 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
-        // tabLayout의 배경이 원하는 방식대로 안됨. 다른 방식 찾아보기 or 직접 구현
-        // tabLayout.setBackground(ContextCompat.getDrawable(this, R.drawable.tab_background));
     }
 
 
@@ -76,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment = Fragment.instantiate(context, PlayerFragment.class.getName());
                     break;
                 case 3:
-                    fragment = Fragment.instantiate(context, LikeFragment.class.getName());
+                    fragment = Fragment.instantiate(context, FollowFragment.class.getName());
                     break;
             }
 
@@ -98,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 case 2:
                     return "Player";
                 case 3:
-                    return "Like";
+                    return "Follow";
             }
             return null;
         }

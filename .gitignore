@@ -59,6 +59,9 @@ obj/
 *.iws
 /out/
 
+# Project configurations
+.app/src/main/java/com/teamnexters/volleytalk/config/Config.java
+
 # User-specific configurations
 .idea/libraries/
 .idea/workspace.xml
