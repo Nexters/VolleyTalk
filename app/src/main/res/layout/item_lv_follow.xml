@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:layout_gravity="center_vertical"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <ImageView
+        android:id="@+id/iv_yellow_star_follow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="8dp"
+        android:src="@mipmap/oval"/>
+
+    <TextView
+        android:id="@+id/tv_team_name_follow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:layout_marginStart="15dp"
+        android:layout_gravity="center_vertical"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        android:textColor="@android:color/black"
+        android:letterSpacing="-0.01"
+        android:lineSpacingExtra="16sp"/>
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_num_like_follow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="normal"
+            android:textColor="#093971"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="0sp"
+            android:gravity="center_horizontal"
+            android:text="9999+"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="#9b9b9b"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="0sp"
+            android:gravity="center_horizontal"
+            android:text="Like"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_num_post_follow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:textColor="#093971"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="0sp"
+            android:gravity="center_horizontal"
+            android:text="1799"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:textColor="#9b9b9b"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="0sp"
+            android:gravity="center_horizontal"
+            android:text="Post"/>
+    </LinearLayout>
+
+</LinearLayout>

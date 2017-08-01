@@ -60,7 +60,7 @@ obj/
 /out/
 
 # Project configurations
-.app/src/main/java/com/teamnexters/volleytalk/config/Config.java
+app/src/main/java/com/teamnexters/volleytalk/config/Config.java
 
 # User-specific configurations
 .idea/libraries/

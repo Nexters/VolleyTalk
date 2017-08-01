@@ -42,7 +42,7 @@
 
 
                 <ImageView
-                    android:id="@+id/iv_membership"
+                    android:id="@+id/iv_to_my_page"
                     android:src="@mipmap/ico_user"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -72,72 +72,3 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </android.support.design.widget.CoordinatorLayout>
-
-
-<!--
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_content"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/holo_red_dark"
-    android:orientation="vertical"
-    tools:context="com.teamnexters.volleytalk.MainActivity">
-
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@drawable/actionbar_background">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/tv_title"
-                android:text="@string/app_name"
-                android:textAlignment="center"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:layout_centerVertical="true"
-                android:gravity="center_vertical"
-                android:textSize="18sp"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
-
-
-            <ImageView
-                android:id="@+id/iv_membership"
-                android:src="@mipmap/ico_user"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="15dp"
-                android:layout_alignParentEnd="true"/>
-
-        </RelativeLayout>
-
-    </android.support.v7.widget.Toolbar>
-
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/tab_background"
-        android:elevation="4dp"
-        android:outlineProvider="background"
-        app:tabIndicatorColor="@android:color/transparent"
-        app:tabTextColor="@color/colorUnselected"
-        app:tabSelectedTextColor="@color/colorAccent"/>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-</LinearLayout>
-
--->

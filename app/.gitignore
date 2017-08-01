@@ -1,1 +1,3 @@
 /build
+/src/main/res/values/kakao_strings.xml
+/src/main/java/com/teamnexters/volleytalk/config/Config.java
