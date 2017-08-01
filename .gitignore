@@ -1,4 +1,5 @@
-ndroidStudio ###
+<<<<<<< AtYeoksam
+### AndroidStudio ###
 # Covers files to be ignored for android development using Android Studio.
 
 # Built application files
@@ -131,3 +132,4 @@ fabric.properties
 google-services.json
 
 !/gradle/wrapper/gradle-wrapper.jar
+
