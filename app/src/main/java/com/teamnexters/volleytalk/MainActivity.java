@@ -1,6 +1,7 @@
 package com.teamnexters.volleytalk;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -9,9 +10,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.teamnexters.volleytalk.news.NewsFragment;
-import com.teamnexters.volleytalk.ui_pages.FollowFragment;
+import com.teamnexters.volleytalk.follow.FollowFragment;
 import com.teamnexters.volleytalk.ui_pages.PlayerFragment;
 import com.teamnexters.volleytalk.ui_pages.TeamFragment;
 import com.tsengvn.typekit.TypekitContextWrapper;
@@ -40,6 +43,15 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("24242");
         setSupportActionBar(toolbar);
+
+        ImageView iv_to_my_page = (ImageView) toolbar.findViewById(R.id.iv_to_my_page);
+        iv_to_my_page.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), MyPageActivity.class);
+                startActivity(intent);
+            }
+        });
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
