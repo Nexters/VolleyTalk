@@ -23,7 +23,7 @@ import java.util.List;
 
 public class PhotoNewsAdapter extends PagerAdapter {
 
-    private final int SIZE_PHOTO_NEWS = 3;
+    public final int SIZE_PHOTO_NEWS = 3;
 
     private List<News> photoNewsList;
 
