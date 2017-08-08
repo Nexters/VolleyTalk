@@ -2,16 +2,12 @@ package com.teamnexters.volleytalk.news;
 
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.teamnexters.volleytalk.tool.NetworkModel;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.Response;
 
 /**
  * Created by MIN on 2017. 7. 29..
@@ -38,7 +34,7 @@ public class NewsPresenter implements NewsContract.Presenter{
             @Override
             protected NewsList doInBackground(Void... voids) {
                 NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
-                Call<NewsList> call = networkModel.getNews();
+                Call<NewsList> call = networkModel.getNewsList();
                 NewsList newsList = null;
 
                 try {
