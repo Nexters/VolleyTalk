@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.teamnexters.volleytalk.R;
+import com.teamnexters.volleytalk.config.Config;
 import com.teamnexters.volleytalk.news.News;
 import com.teamnexters.volleytalk.ui_pages.DetailNewsActivity;
 
@@ -22,8 +23,6 @@ import java.util.List;
  */
 
 public class PhotoNewsAdapter extends PagerAdapter {
-
-    public final int SIZE_PHOTO_NEWS = 3;
 
     private List<News> photoNewsList;
 
@@ -45,7 +44,7 @@ public class PhotoNewsAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return SIZE_PHOTO_NEWS;
+        return Config.PHOTO_NEWS_SIZE;
     }
 
     @Override

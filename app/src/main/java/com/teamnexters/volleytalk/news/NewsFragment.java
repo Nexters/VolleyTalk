@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.teamnexters.volleytalk.R;
+import com.teamnexters.volleytalk.config.Config;
 import com.teamnexters.volleytalk.news.adapter.PhotoNewsAdapter;
 import com.teamnexters.volleytalk.news.adapter.TextNewsAdapter;
 import com.teamnexters.volleytalk.news.adapter.ThumbnailNewsAdapter;
@@ -101,14 +102,14 @@ public class NewsFragment extends Fragment implements NewsContract.View{
 
     @Override
     public void setDataOnAdapter(NewsList newsList) {
-        adapter_photo_news.setPhotoNewsList(newsList.getNewsList().subList(0, adapter_photo_news.SIZE_PHOTO_NEWS));
+        adapter_photo_news.setPhotoNewsList(newsList.getNewsList().subList(0, Config.PHOTO_NEWS_SIZE));
         vp_photo_news.setAdapter(adapter_photo_news);
         indicator_photo_news.setViewPager(vp_photo_news);
 
-        adapter_thumbnail_news.setThumbnailNewsItemList(newsList.getNewsList().subList(adapter_photo_news.SIZE_PHOTO_NEWS, adapter_photo_news.SIZE_PHOTO_NEWS + 3));
+        adapter_thumbnail_news.setThumbnailNewsItemList(newsList.getNewsList().subList(Config.PHOTO_NEWS_SIZE, Config.PHOTO_NEWS_SIZE * 2));
         lv_thumbnail_news.setAdapter(adapter_thumbnail_news);
 
-        adapter_text_news.setTextNewsItemList(newsList.getNewsList().subList(adapter_photo_news.SIZE_PHOTO_NEWS + 3, newsList.getNewsList().size()));
+        adapter_text_news.setTextNewsItemList(newsList.getNewsList().subList(Config.PHOTO_NEWS_SIZE * 2, newsList.getNewsList().size()));
         lv_text_news.setAdapter(adapter_text_news);
 
         dialog.dismiss();
