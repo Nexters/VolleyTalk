@@ -15,7 +15,7 @@ import android.widget.ImageView;
 
 import com.teamnexters.volleytalk.news.NewsFragment;
 import com.teamnexters.volleytalk.follow.FollowFragment;
-import com.teamnexters.volleytalk.ui_pages.PlayerFragment;
+import com.teamnexters.volleytalk.player.PlayerFragment;
 import com.teamnexters.volleytalk.ui_pages.TeamFragment;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
