@@ -2,6 +2,7 @@ package com.teamnexters.volleytalk;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -11,7 +12,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.teamnexters.volleytalk.news.NewsFragment;
 import com.teamnexters.volleytalk.follow.FollowFragment;
@@ -26,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private Context context;
+
+    private TabLayout tabLayout;
 
 
     @Override
@@ -58,8 +63,9 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+        changeTabsFont();
     }
 
 
@@ -112,6 +118,22 @@ public class MainActivity extends AppCompatActivity {
                     return "Follow";
             }
             return null;
+        }
+    }
+
+    private void changeTabsFont() {
+
+        ViewGroup vg = (ViewGroup) tabLayout.getChildAt(0);
+        int tabsCount = vg.getChildCount();
+        for (int j = 0; j < tabsCount; j++) {
+            ViewGroup vgTab = (ViewGroup) vg.getChildAt(j);
+            int tabChildsCount = vgTab.getChildCount();
+            for (int i = 0; i < tabChildsCount; i++) {
+                View tabViewChild = vgTab.getChildAt(i);
+                if (tabViewChild instanceof TextView) {
+                    ((TextView) tabViewChild).setTypeface(Typeface.createFromAsset(context.getAssets(), "Roboto-Regular.ttf"));
+                }
+            }
         }
     }
 }

@@ -6,28 +6,58 @@
     android:layout_gravity="center_vertical"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
-    android:background="@android:color/transparent">
+    android:background="@android:color/white">
 
     <ImageView
-        android:id="@+id/iv_yellow_star_follow"
+        android:id="@+id/iv_star_player"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginStart="8dp"
-        android:src="@mipmap/ico_star_on"/>
+        android:layout_marginStart="8dp"/>
 
-    <TextView
-        android:id="@+id/tv_team_name_follow"
+
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="5"
         android:layout_marginStart="15dp"
-        android:layout_gravity="center_vertical"
-        android:textSize="14sp"
-        android:textStyle="normal"
-        android:textColor="@android:color/black"
-        android:letterSpacing="-0.01"
-        android:lineSpacingExtra="16sp"/>
+        android:layout_gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_back_num_player"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:textColor="@android:color/black"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="16sp"
+            android:textAlignment="textStart"/>
+
+        <TextView
+            android:id="@+id/tv_name_player"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:textColor="@android:color/black"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="16sp"
+            android:textAlignment="textStart"/>
+
+        <TextView
+            android:id="@+id/tv_position_player"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:textColor="#9b9b9b"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="16sp"
+            android:textAlignment="textStart"/>
+
+    </LinearLayout>
 
 
     <LinearLayout
@@ -37,7 +67,7 @@
         android:layout_weight="1">
 
         <TextView
-            android:id="@+id/tv_num_like_follow"
+            android:id="@+id/tv_num_like_player"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
@@ -71,7 +101,7 @@
         android:layout_weight="1">
 
         <TextView
-            android:id="@+id/tv_num_post_follow"
+            android:id="@+id/tv_num_post_player"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
