@@ -1,6 +1,7 @@
 package com.teamnexters.volleytalk;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -12,8 +13,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.teamnexters.volleytalk.AllPost.AllPostFragment;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 /**
@@ -28,6 +32,8 @@ public class MyPageActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private Context context;
+
+    private TabLayout tabLayout;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -53,9 +59,11 @@ public class MyPageActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container_mypage);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs_mypage);
+        tabLayout = (TabLayout) findViewById(R.id.tabs_mypage);
         tabLayout.setupWithViewPager(mViewPager);
+        changeTabsFont();
 
+        //화면 올릴 경우 user_content_in_ctl_mypage안의 내용 안 보이게.
         appbarlayout_mypage.addOnOffsetChangedListener(new AppBarStateChangeListener() {
             @Override
             public void onStateChanged(AppBarLayout appBarLayout, State state) {
@@ -106,6 +114,22 @@ public class MyPageActivity extends AppCompatActivity {
                     return "앨범";
             }
             return null;
+        }
+    }
+
+    private void changeTabsFont() {
+
+        ViewGroup vg = (ViewGroup) tabLayout.getChildAt(0);
+        int tabsCount = vg.getChildCount();
+        for (int j = 0; j < tabsCount; j++) {
+            ViewGroup vgTab = (ViewGroup) vg.getChildAt(j);
+            int tabChildsCount = vgTab.getChildCount();
+            for (int i = 0; i < tabChildsCount; i++) {
+                View tabViewChild = vgTab.getChildAt(i);
+                if (tabViewChild instanceof TextView) {
+                    ((TextView) tabViewChild).setTypeface(Typeface.createFromAsset(context.getAssets(), "NotoSans-Regular.ttf"));
+                }
+            }
         }
     }
 }

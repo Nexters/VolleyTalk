@@ -6,24 +6,33 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/vtalk_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/vtalk_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".GlobalApplication">
         <activity
-            android:name=".MainActivity">
-            <intent-filter>
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
+         <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui_pages.DetailNewsActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".MyPageActivity" />
+        <activity
+            android:name=".ui_pages.DetailNewsActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".SignupActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".MyPageActivity"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
