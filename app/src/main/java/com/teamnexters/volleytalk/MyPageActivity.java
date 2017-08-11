@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -72,6 +73,14 @@ public class MyPageActivity extends AppCompatActivity {
                 } else if (state == State.EXPANDED) {
                     user_content_in_ctl_mypage.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+
+        ImageView iv_back_mypage = (ImageView) toolbar.findViewById(R.id.iv_back_mypage);
+        iv_back_mypage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }

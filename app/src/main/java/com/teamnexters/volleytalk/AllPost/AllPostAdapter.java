@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.teamnexters.volleytalk.R;
 
 import java.util.List;
@@ -72,6 +73,7 @@ public class AllPostAdapter extends BaseAdapter {
         //테스트
         Glide.with(context)
                 .load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYuOvt6wBrcmOygN2bzKbs2T1BcDJiWIS_HSqd4aWqqSmQ53OPrQ")
+                .apply(RequestOptions.centerCropTransform())
                 .into(iv_post_picture);
 
         tv_post_title.setText(selectedPost.getTitle());

@@ -7,4 +7,22 @@
 
     <color name="colorToolBarStart">#0d3157</color>
     <color name="colorToolBarEnd">#1b4d83</color>
+
+
+    <color name="color_team_male_1">#231f20</color>
+    <color name="color_team_male_2">#007dbd</color>
+    <color name="color_team_male_3">#ef1515</color>
+    <color name="color_team_male_4">#034aa4</color>
+    <color name="color_team_male_5">#0094e3</color>
+    <color name="color_team_male_6">#ffb000</color>
+    <color name="color_team_male_7">#f5d21a</color>
+
+    <color name="color_team_female_1">#003985</color>
+    <color name="color_team_female_2">#0099dd</color>
+    <color name="color_team_female_3">#fd0090</color>
+    <color name="color_team_female_4">#01708e</color>
+    <color name="color_team_female_5">#1f388b</color>
+    <color name="color_team_female_6">#e81230</color>
+    <color name="color_team_female_7">#9a0000</color>
+
 </resources>

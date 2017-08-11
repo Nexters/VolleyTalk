@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="team_male_list">
+        <item>@string/team_male_1</item>
+        <item>@string/team_male_2</item>
+        <item>@string/team_male_3</item>
+        <item>@string/team_male_4</item>
+        <item>@string/team_male_5</item>
+        <item>@string/team_male_6</item>
+        <item>@string/team_male_7</item>
+    </string-array>
+
+
+    <string-array name="team_female_list">
+        <item>@string/team_female_1</item>
+        <item>@string/team_female_2</item>
+        <item>@string/team_female_3</item>
+        <item>@string/team_female_4</item>
+        <item>@string/team_female_5</item>
+        <item>@string/team_female_6</item>
+        <item>@string/team_female_7</item>
+    </string-array>
+
+
+    <string-array name="team_male_color_list">
+        <item>@color/color_team_male_1</item>
+        <item>@color/color_team_male_2</item>
+        <item>@color/color_team_male_3</item>
+        <item>@color/color_team_male_4</item>
+        <item>@color/color_team_male_5</item>
+        <item>@color/color_team_male_6</item>
+        <item>@color/color_team_male_7</item>
+    </string-array>
+
+    <string-array name="team_female_color_list">
+        <item>@color/color_team_female_1</item>
+        <item>@color/color_team_female_2</item>
+        <item>@color/color_team_female_3</item>
+        <item>@color/color_team_female_4</item>
+        <item>@color/color_team_female_5</item>
+        <item>@color/color_team_female_6</item>
+        <item>@color/color_team_female_7</item>
+    </string-array>
+
+</resources>

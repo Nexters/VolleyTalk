@@ -7,5 +7,27 @@ import java.util.List;
  */
 
 public class PlayerList {
-    List<Player> playerList;
+    private String team;
+    private List<Player> player;
+
+    public PlayerList(String team, List<Player> player) {
+        this.team = team;
+        this.player = player;
+    }
+
+    public String getTeam() {
+        return team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
+    }
+
+    public List<Player> getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(List<Player> player) {
+        this.player = player;
+    }
 }

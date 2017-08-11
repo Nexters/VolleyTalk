@@ -12,4 +12,11 @@ public class Config {
      */
     public static String SERVER_IP = "-";
 
+
+    /**
+     * ListView Adapter Configuration
+     */
+
+    public static final int PHOTO_NEWS_SIZE = 3;
+    public static final int FOLDED_LIST_SIZE = 5;
 }

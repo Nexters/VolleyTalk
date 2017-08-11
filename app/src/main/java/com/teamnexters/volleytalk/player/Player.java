@@ -1,10 +1,12 @@
 package com.teamnexters.volleytalk.player;
 
-/**
- * Created by MIN on 2017. 8. 8..
- */
-public class Player {
+import java.util.List;
 
+/**
+ * Created by MIN on 2017. 8. 10..
+ */
+
+public class Player {
     private String seq;
     private String teamseq;
     private String backnumber;
@@ -12,8 +14,8 @@ public class Player {
     private String physical;
     private String likecount;
     private String postcount;
-    private String like;
-    private String follow;
+    private List<String> like;
+    private List<String> follow;
 
     public Player(String seq, String teamseq, String backnumber, String name, String physical, String likecount, String postcount) {
         this.seq = seq;
@@ -88,19 +90,34 @@ public class Player {
         this.postcount = postcount;
     }
 
-    public String getLike() {
+    public List<String> getLike() {
         return like;
     }
 
-    public void setLike(String like) {
+    public void setLike(List<String> like) {
         this.like = like;
     }
 
-    public String getFollow() {
+    public List<String> getFollow() {
         return follow;
     }
 
-    public void setFollow(String follow) {
+    public void setFollow(List<String> follow) {
         this.follow = follow;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "seq='" + seq + '\'' +
+                ", teamseq='" + teamseq + '\'' +
+                ", backnumber='" + backnumber + '\'' +
+                ", name='" + name + '\'' +
+                ", physical='" + physical + '\'' +
+                ", likecount='" + likecount + '\'' +
+                ", postcount='" + postcount + '\'' +
+                ", like=" + like +
+                ", follow=" + follow +
+                '}';
     }
 }

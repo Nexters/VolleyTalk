@@ -2,4 +2,23 @@
     <string name="app_name">VolleyTalk</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+
+
+    <string name="team_male_1">현대캐피탈 SKY WALKERS</string>
+    <string name="team_male_2">대한항공 JUMBOS</string>
+    <string name="team_male_3">한국전력 VIXTORM</string>
+    <string name="team_male_4">삼성화재 BLUEFANGS</string>
+    <string name="team_male_5">우리카드 WIBEE</string>
+    <string name="team_male_6">KB 손해보험 STARS</string>
+    <string name="team_male_7">OK저축은행 RUSH&amp;CASH</string>
+
+    <string name="team_female_1">현대건설 여자배구단</string>
+    <string name="team_female_2">IBK기업은행 ALTOS</string>
+    <string name="team_female_3">흥국생명 PINKSPIDERS</string>
+    <string name="team_female_4">GS칼텍스 KIXX</string>
+    <string name="team_female_5">한국도로공사 HI-PASS</string>
+    <string name="team_female_6">KGC인삼공사 프로배구단</string>
+    <string name="team_female_7">중국 상하이 Guohua Life</string>
+
+
 </resources>

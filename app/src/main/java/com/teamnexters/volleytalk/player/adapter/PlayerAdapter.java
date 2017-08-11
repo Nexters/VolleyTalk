@@ -70,7 +70,7 @@ public class PlayerAdapter extends BaseAdapter {
         //like 여부 판단해서 리소스 다르게.
         iv_star_player.setImageResource(R.mipmap.ico_star_on);
 
-        tv_back_num_player.setText(selectedPlayer.getBacknumber());
+        tv_back_num_player.setText("No." + selectedPlayer.getBacknumber());
         tv_name_player.setText(selectedPlayer.getName());
 
         //API에 포지션 정보 없음

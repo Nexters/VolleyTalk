@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.teamnexters.volleytalk.R;
 import com.teamnexters.volleytalk.config.Config;
 import com.teamnexters.volleytalk.news.News;
@@ -63,6 +64,7 @@ public class PhotoNewsAdapter extends PagerAdapter {
 
         Glide.with(context)
                 .load(selectedItem.getImgurl())
+                .apply(RequestOptions.centerCropTransform())
                 .into(iv_main_news);
 
         tv_title_main_news.setText(Html.fromHtml(selectedItem.getTitle()).toString());

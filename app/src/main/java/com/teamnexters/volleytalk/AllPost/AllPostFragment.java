@@ -24,6 +24,7 @@ public class AllPostFragment extends Fragment {
         View rootView_allpost = inflater.inflate(R.layout.fragment_allpost, container, false);
 
         ListView lv_allpost_mypage = (ListView) rootView_allpost.findViewById(R.id.lv_allpost_mypage);
+        lv_allpost_mypage.setNestedScrollingEnabled(true);
 
         //테스트용
         List<Post> testList = new ArrayList<>();
