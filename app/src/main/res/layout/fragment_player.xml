@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#f5f5f5">
 
     <info.hoang8f.android.segmented.SegmentedGroup
         xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/segmented_control"
+        android:id="@+id/segmented_control_player"
         android:layout_width="match_parent"
         android:layout_height="32dp"
         android:layout_marginTop="16dp"
@@ -45,14 +45,20 @@
             android:lineSpacingExtra="12sp"
             style="@style/RadioButton" />
 
-        </info.hoang8f.android.segmented.SegmentedGroup>
+    </info.hoang8f.android.segmented.SegmentedGroup>
 
-    <LinearLayout
-        android:id="@+id/wall_player"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@android:color/transparent"
-        android:clipToPadding="false"/>
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/wall_player"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/transparent"
+            android:clipToPadding="false"/>
+
+    </ScrollView>
 
 </LinearLayout>

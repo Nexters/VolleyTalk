@@ -141,7 +141,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:textSize="14sp"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/white"
+                        android:text="3129"/>
 
                     <ImageView
                         android:id="@+id/iv_follower_mypage"
@@ -157,7 +158,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:textSize="14sp"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/white"
+                        android:text="37"/>
 
                     <ImageView
                         android:id="@+id/iv_feed_mypage"
@@ -173,7 +175,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:textSize="14sp"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/white"
+                        android:text="235"/>
 
                 </LinearLayout>
 
@@ -209,6 +212,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/fab_margin"
         android:src="@mipmap/floating_btn"
+        android:background="#474d5e"
         app:layout_anchor="@id/container_mypage"
         app:layout_anchorGravity="bottom|right|end" />
 
