@@ -1,12 +1,13 @@
 package com.teamnexters.volleytalk.player;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by MIN on 2017. 8. 10..
  */
 
-public class Player {
+public class Player implements Serializable {
     private String seq;
     private String teamseq;
     private String backnumber;

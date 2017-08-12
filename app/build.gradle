@@ -41,7 +41,6 @@ dependencies {
     compile 'com.github.d-max:spots-dialog:0.7@aar'
 
     compile 'info.hoang8f:android-segmented:1.0.6'
-    compile 'de.hdodenhof:circleimageview:2.1.0'
 
     compile group: 'com.kakao.sdk', name: 'usermgmt', version: project.KAKAO_SDK_VERSION
 }

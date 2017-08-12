@@ -115,7 +115,7 @@ public class PlayerFragment extends Fragment {
         NonScrollListView lv_player = new NonScrollListView(context);
         lv_player.setBackgroundColor(Color.WHITE);
         lv_player.setDivider(getResources().getDrawable(R.drawable.lv_days_match_divider));
-
+        lv_player.setDrawSelectorOnTop(true);
 
         PlayerAdapter adapter_team_player = new PlayerAdapter(playerList.getPlayer().subList(0, Config.FOLDED_LIST_SIZE));
         adapterList_team_player.add(adapter_team_player);
@@ -137,6 +137,7 @@ public class PlayerFragment extends Fragment {
         foldOnOff.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         foldOnOff.setTypeface(Typeface.createFromAsset(context.getAssets(), "NotoSans-Regular.ttf"));
         foldOnOff.setText("펼치기");
+
         lv_footer.addView(foldOnOff);
         RelativeLayout.LayoutParams layoutParams_btn_fold = (RelativeLayout.LayoutParams)foldOnOff.getLayoutParams();
         layoutParams_btn_fold.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);

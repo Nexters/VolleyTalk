@@ -121,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //확인해볼 것
     private void changeTabsFont() {
 
         ViewGroup vg = (ViewGroup) tabLayout.getChildAt(0);

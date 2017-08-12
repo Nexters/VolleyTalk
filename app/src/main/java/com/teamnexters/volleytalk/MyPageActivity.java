@@ -1,6 +1,7 @@
 package com.teamnexters.volleytalk;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,12 +13,15 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.teamnexters.volleytalk.AllPost.AllPostFragment;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
@@ -83,6 +87,28 @@ public class MyPageActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        ImageView iv_setting_mypage = (ImageView) toolbar.findViewById(R.id.iv_setting_mypage);
+        iv_setting_mypage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.addCategory(Intent.CATEGORY_DEFAULT);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "VolleyTalk\n" +
+                        "https://play.google.com/store/apps/details?id=" + getPackageName());
+                Log.e("PACKAGE", getPackageName());
+                shareIntent.setType("text/plain");
+                startActivity(Intent.createChooser(shareIntent, "공유"));
+            }
+        });
+
+        ImageView iv_round_profile_mypage = (ImageView) appbarlayout_mypage.findViewById(R.id.iv_round_profile_mypage);
+        Glide.with(context)
+                .load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYuOvt6wBrcmOygN2bzKbs2T1BcDJiWIS_HSqd4aWqqSmQ53OPrQ")
+                .apply(RequestOptions.circleCropTransform())
+                .into(iv_round_profile_mypage);
+
+
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {

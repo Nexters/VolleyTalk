@@ -4,7 +4,7 @@
     <item android:drawable="@mipmap/bg_splash" />
 
     <item>
-        <bitmap android:src="@mipmap/vtalk_logo"
+        <bitmap android:src="@mipmap/vtalk_logo_splash"
             android:gravity="center" />
     </item>
 
