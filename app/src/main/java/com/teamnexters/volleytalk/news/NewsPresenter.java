@@ -8,6 +8,8 @@ import com.teamnexters.volleytalk.tool.NetworkModel;
 import java.io.IOException;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by MIN on 2017. 7. 29..
@@ -29,28 +31,19 @@ public class NewsPresenter implements NewsContract.Presenter{
 
     @Override
     public void getNewsList() {
-
-        new AsyncTask<Void, Void, NewsList>() {
+        NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
+        Call<NewsList> call = networkModel.getNewsList();
+        call.enqueue(new Callback<NewsList>() {
             @Override
-            protected NewsList doInBackground(Void... voids) {
-                NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
-                Call<NewsList> call = networkModel.getNewsList();
-                NewsList newsList = null;
-
-                try {
-                    newsList = call.execute().body();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                return newsList;
+            public void onResponse(Call<NewsList> call, Response<NewsList> response) {
+                NewsList newsList = response.body();
+                newsView.setDataOnAdapter(newsList);
             }
 
             @Override
-            protected void onPostExecute(NewsList s) {
-                super.onPostExecute(s);
-                newsView.setDataOnAdapter(s);
+            public void onFailure(Call<NewsList> call, Throwable t) {
+
             }
-        }.execute();
+        });
     }
 }

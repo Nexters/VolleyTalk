@@ -23,7 +23,7 @@ public interface NetworkModel {
     Call<NewsList> getNewsList();
 
     @GET("player/list/{gender}")
-    Call<String> getPlayerList(@Path("gender") String gender);
+    Call<List<PlayerList>> getPlayerList(@Path("gender") String gender);
 
 
     public static final Retrofit retrofit = new Retrofit.Builder()
@@ -31,7 +31,5 @@ public interface NetworkModel {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    public static final Retrofit test = new Retrofit.Builder()
-            .baseUrl(Config.SERVER_IP)
-            .build();
+
 }

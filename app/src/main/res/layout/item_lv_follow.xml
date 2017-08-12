@@ -6,7 +6,7 @@
     android:layout_gravity="center_vertical"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
-    android:background="@android:color/white">
+    android:background="@android:color/transparent">
 
     <ImageView
         android:id="@+id/iv_yellow_star_follow"
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_marginStart="8dp"
-        android:src="@mipmap/oval"/>
+        android:src="@mipmap/ico_star_on"/>
 
     <TextView
         android:id="@+id/tv_team_name_follow"
