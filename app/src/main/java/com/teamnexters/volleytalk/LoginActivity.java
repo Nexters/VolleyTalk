@@ -124,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     if(user.getStatus().equals("new")) {
                         //나중에 수정.
-                        redirectMainActivity();
+                        redirectSetNicknameActivity();
                     } else if (user.getStatus().equals("exist")) {
                         redirectMainActivity();
                     } else if (user.getStatus().equals("false")) {
@@ -148,7 +148,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     protected void redirectSetNicknameActivity() {
-
+        Intent intent = new Intent(this, SetNewPropertyActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }

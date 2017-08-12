@@ -16,8 +16,10 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.teamnexters.volleytalk.R;
+import com.teamnexters.volleytalk.ResForm;
 import com.teamnexters.volleytalk.config.Config;
 import com.teamnexters.volleytalk.player.adapter.PlayerAdapter;
 import com.teamnexters.volleytalk.tool.NetworkModel;
@@ -211,16 +213,21 @@ public class PlayerFragment extends Fragment {
     public void getplayerList(String sex) {
 
         NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
-        Call<List<PlayerList>> call = networkModel.getPlayerList(sex);
-        call.enqueue(new Callback<List<PlayerList>>() {
+        Call<ResForm<List<PlayerList>>> call = networkModel.getPlayerList(sex);
+        call.enqueue(new Callback<ResForm<List<PlayerList>>>() {
             @Override
-            public void onResponse(Call<List<PlayerList>> call, Response<List<PlayerList>> response) {
-                allPlayerList = response.body();
-                createListViewInTeam();
+            public void onResponse(Call<ResForm<List<PlayerList>>> call, Response<ResForm<List<PlayerList>>> response) {
+                ResForm<List<PlayerList>> list = response.body();
+                if(list.getStatus().equals("true")) {
+                    allPlayerList = list.getResData();
+                    createListViewInTeam();
+                } else {
+                    Toast.makeText(getContext(), list.getErrMsg(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
-            public void onFailure(Call<List<PlayerList>> call, Throwable t) {
+            public void onFailure(Call<ResForm<List<PlayerList>>> call, Throwable t) {
 
             }
         });

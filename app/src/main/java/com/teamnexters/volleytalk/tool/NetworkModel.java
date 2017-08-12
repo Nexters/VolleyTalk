@@ -1,5 +1,7 @@
 package com.teamnexters.volleytalk.tool;
 
+import com.teamnexters.volleytalk.ExistNickname;
+import com.teamnexters.volleytalk.ResForm;
 import com.teamnexters.volleytalk.config.Config;
 import com.teamnexters.volleytalk.isAlreadyUser;
 import com.teamnexters.volleytalk.news.News;
@@ -23,11 +25,14 @@ import retrofit2.http.Path;
 
 public interface NetworkModel {
 
+    @GET("/user/existNickname")
+    Call<ResForm<ExistNickname>> existNickname(@Field("nickname") String nickname);
+
     @GET("news/list")
-    Call<NewsList> getNewsList();
+    Call<ResForm<NewsList>> getNewsList();
 
     @GET("player/list/{gender}")
-    Call<List<PlayerList>> getPlayerList(@Path("gender") String gender);
+    Call<ResForm<List<PlayerList>>> getPlayerList(@Path("gender") String gender);
 
     @FormUrlEncoded
     @POST("user/login")

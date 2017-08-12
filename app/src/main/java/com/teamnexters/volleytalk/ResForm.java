@@ -1,15 +1,25 @@
 package com.teamnexters.volleytalk;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by MIN on 2017. 8. 13..
  */
 
-public class ResForm {
+public class ResForm<T> {
     private String status;
-    private ResData resData;
+    private String errMsg;
+    private T resData;
+
+    public ResForm(String status, String errMsg) {
+        this.status = status;
+        this.errMsg = errMsg;
+    }
+
+    public ResForm(String status, T resData) {
+        this.status = status;
+        this.resData = resData;
+    }
 
     public String getStatus() {
         return status;
@@ -19,47 +29,19 @@ public class ResForm {
         this.status = status;
     }
 
-    public ResData getResData() {
+    public String getErrMsg() {
+        return errMsg;
+    }
+
+    public void setErrMsg(String errMsg) {
+        this.errMsg = errMsg;
+    }
+
+    public T getResData() {
         return resData;
     }
 
-    public void setResData(ResData resData) {
+    public void setResData(T resData) {
         this.resData = resData;
-    }
-
-    public class ResData<T> {
-        private int start;
-        private int display;
-        private List<T> items;
-
-        public ResData(int start, int display, List<T> items) {
-            this.start = start;
-            this.display = display;
-            this.items = items;
-        }
-
-        public int getStart() {
-            return start;
-        }
-
-        public void setStart(int start) {
-            this.start = start;
-        }
-
-        public int getDisplay() {
-            return display;
-        }
-
-        public void setDisplay(int display) {
-            this.display = display;
-        }
-
-        public List<T> getItems() {
-            return items;
-        }
-
-        public void setItems(List<T> items) {
-            this.items = items;
-        }
     }
 }

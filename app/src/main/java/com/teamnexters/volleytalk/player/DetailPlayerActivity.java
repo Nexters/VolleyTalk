@@ -18,9 +18,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.teamnexters.volleytalk.CheeringFragment;
 import com.teamnexters.volleytalk.R;
 import com.teamnexters.volleytalk.album.AlbumFragment;
-import com.teamnexters.volleytalk.post.PostContentActivity;
 import com.teamnexters.volleytalk.post.PostFragment;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
@@ -114,6 +114,9 @@ public class DetailPlayerActivity extends AppCompatActivity {
                 case 1:
                     fragment = Fragment.instantiate(context, AlbumFragment.class.getName());
                     break;
+                case 2:
+                    fragment = Fragment.instantiate(context, CheeringFragment.class.getName());
+                    break;
             }
 
             return fragment;
@@ -121,7 +124,7 @@ public class DetailPlayerActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
 
         @Override
@@ -131,6 +134,8 @@ public class DetailPlayerActivity extends AppCompatActivity {
                     return "전체글";
                 case 1:
                     return "앨범";
+                case 2:
+                    return "응원하기";
             }
             return null;
         }

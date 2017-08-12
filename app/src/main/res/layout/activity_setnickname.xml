@@ -4,18 +4,21 @@
     android:layout_height="match_parent">
 
     <EditText
+        android:id="@+id/et_nickname_welcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="nickname"/>
 
 
     <Button
+        android:id="@+id/btn_not_duplicated_welcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="ID 중복체크"/>
 
 
     <Button
+        android:id="@+id/btn_go_to_next_page_welcome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="닉네임 저장"
