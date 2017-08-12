@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_postcontent"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/black">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_back_postcontent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:src="@mipmap/ico_arrow_back"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:lineSpacingExtra="8sp"
+                android:text="문성민"/>
+
+
+            <!--
+            <ImageView
+                android:id="@+id/iv_setting_mypage"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:src="@mipmap/ico_setting"/> -->
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:padding="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="#4a4a4a"
+                    android:letterSpacing="-0.01"
+                    android:text="문성민, 대표팀 합류…김호철호 날개 달았다" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#9b9b9b"
+                    android:letterSpacing="-0.01"
+                    android:paddingTop="6dp"
+                    android:text="김나나   2017.07.10"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#e4e4e4"/>
+
+
+            <ImageView
+                android:id="@+id/iv_photo_postcontent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="150dp"
+                android:maxHeight="200dp"
+                android:visibility="gone"
+                android:layout_margin="15dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="15dp"
+                android:text="승부욕이 강하기로 둘째가라면 서러운 문성민이 경기장에서 가장 행복한 순간은 역시 팀이 이겼을 때다. 문성민은
+“이기고 내 플레이에 팬들이 환해해줄 때가 아무래도 힘이
+많이 난다. 우리가 팬들의 기대치에 만족하는 플레이를 했다
+는 생각이 들기 때문”이라고 설명했다. 이어 “우리 팀이
+매년 여름 1박 2일 정도로 해서 팬들과 캠프를 연다. 그런
+시간을 통해 가까워지는 것 같다. 그 뒤 경기장에서 보면
+한 번 인사라도 하는 계기가 돼서 좋은 것 같다”고 각별한
+팬들과 행복했던 시간을 떠올리기도 했다.
+
+배구 선수 생활을 하면서 가장 행복했던 시기는 지난 시즌
+챔피언결정전에서 5차전까지 가는 대접전 끝에 대한항공을
+ 3승 2패로 꺾고 정상에 섰던 날이다. 문성민은 “우승했을
+때 마지막 경기가 기억에 남는다. 현대캐피탈에 와서 첫 우승
+이었고 1차전 완패 후 2차전에서 지다가 역전승하는 그 과정
+에서 선수들끼리 단단해지는 걸 느꼈다. 시리즈를 하는 동안
+ 모든 선수들이 잠도 못자고 정신적으로 육체적으로 많이
+힘든 상태였다. 서로가 고생한 걸 알고 있기 때문에 끝나는
+순간 너무 좋았었다. 생전 처음 느껴보는 감정이었다”고
+회상했다.
+
+감격적인 우승도 맛보고 아들도 얻은 요즘은 그의 31년
+인생에서 가장 행복한 시절일 수밖에 없다. 문성민은 “내 삶
+에서 가장 행복했던 순간은 지금인 것 같다”며 “지나간 과거
+ 일에는 별로 신경을 안 쓰는 편이기도 하지만 지금 사는 게
+행복하다. 배구도 우승하고 애도 귀엽다”고 미소를 지었다."/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

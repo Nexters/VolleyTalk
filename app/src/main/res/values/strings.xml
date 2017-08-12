@@ -1,7 +1,10 @@
 <resources>
+
     <string name="app_name">VolleyTalk</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="qna_email">nexters.volleytalk@gmail.com</string>
 
 
     <string name="team_male_1">현대캐피탈 SKY WALKERS</string>

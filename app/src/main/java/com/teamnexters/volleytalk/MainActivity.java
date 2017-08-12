@@ -18,10 +18,9 @@ import android.widget.TextView;
 
 import com.teamnexters.volleytalk.follow.FollowFragment;
 import com.teamnexters.volleytalk.news.NewsFragment;
+import com.teamnexters.volleytalk.team.TeamFragment;
 import com.teamnexters.volleytalk.player.PlayerFragment;
 import com.tsengvn.typekit.TypekitContextWrapper;
-
-import Team.TeamFragment;
 
 public class MainActivity extends AppCompatActivity {
 

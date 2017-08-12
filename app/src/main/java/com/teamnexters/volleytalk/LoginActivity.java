@@ -7,8 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 import com.kakao.auth.ErrorCode;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -18,7 +16,6 @@ import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
-import com.teamnexters.volleytalk.news.NewsList;
 import com.teamnexters.volleytalk.tool.NetworkModel;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
@@ -109,31 +106,30 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(UserProfile userProfile) {
                 userProfile.saveUserToCache();
-                toGoSelectOrMain(userProfile);
-                redirectMainActivity();
+                toSetPageOrMain(userProfile);
             }
         });
     }
 
-    protected void redirectMainActivity() {
-        final Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivity(intent);
-        finish();
-    }
-
-    public void toGoSelectOrMain(final UserProfile userProfile) {
+    public void toSetPageOrMain(final UserProfile userProfile) {
         NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
         Call<isAlreadyUser> call = networkModel.isAlreadySignedUpUser(userProfile.getId(), userProfile.getNickname(), userProfile.getEmail(), userProfile.getProfileImagePath());
         call.enqueue(new Callback<isAlreadyUser>() {
             @Override
             public void onResponse(Call<isAlreadyUser> call, Response<isAlreadyUser> response) {
-                isAlreadyUser user = response.body();
-                Log.e("STATUS", "status : " + user.getStatus().toString());
-                Log.e("User", "user : " + userProfile.toString());
+                if(response.body() != null ) {
+                    isAlreadyUser user = response.body();
 
-                //status -> false면 망한 거
-                if(user.getStatus().equals("true")) {
+                    Log.e("USER", user.getStatus());
+
+                    if(user.getStatus().equals("new")) {
+                        //나중에 수정.
+                        redirectMainActivity();
+                    } else if (user.getStatus().equals("exist")) {
+                        redirectMainActivity();
+                    } else if (user.getStatus().equals("false")) {
+                        //status -> false면 망한 거
+                    }
                 }
             }
 
@@ -142,6 +138,17 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    protected void redirectMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
+        finish();
+    }
+
+    protected void redirectSetNicknameActivity() {
+
     }
 
 }
