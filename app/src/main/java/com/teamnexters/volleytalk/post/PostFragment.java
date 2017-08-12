@@ -1,4 +1,4 @@
-package com.teamnexters.volleytalk.AllPost;
+package com.teamnexters.volleytalk.post;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,7 +17,7 @@ import java.util.List;
  * Created by MIN on 2017. 8. 2..
  */
 
-public class AllPostFragment extends Fragment {
+public class PostFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class AllPostFragment extends Fragment {
         testList.add(new Post("오늘 경기 꿀잼! 핵잼! 대한항공 짱짱짱!", "오늘 경기 꿀잼이였습니다. 직접관람하신 분들 계시나요?", "17.07.09", "김나나", 999, 13));
         testList.add(new Post("오늘 경기 꿀잼! 핵잼! 대한항공 짱짱짱!", "오늘 경기 꿀잼이였습니다. 직접관람하신 분들 계시나요?", "17.07.09", "김나나", 999, 13));
 
-        AllPostAdapter adapter_allpost = new AllPostAdapter(testList);
+        PostAdapter adapter_allpost = new PostAdapter(testList);
         lv_allpost_mypage.setAdapter(adapter_allpost);
 
         return rootView_allpost;

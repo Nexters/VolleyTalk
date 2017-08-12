@@ -1,4 +1,4 @@
-package com.teamnexters.volleytalk.AllPost;
+package com.teamnexters.volleytalk.post;
 
 /**
  * Created by MIN on 2017. 8. 9..

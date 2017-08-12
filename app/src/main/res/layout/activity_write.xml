@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/actionbar_background">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:src="@mipmap/ico_close"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:lineSpacingExtra="8sp"
+                android:text="글 작성"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:lineSpacingExtra="8sp"
+                android:text="완료"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="제목을 입력하세요"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@null"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#d9d9d9"/>
+
+
+    <ImageView
+        android:id="@+id/iv_selected_photo_write"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="150dp"
+        android:maxHeight="200dp"
+        android:visibility="gone"
+        android:layout_margin="15dp"/>
+
+    <EditText
+        android:id ="@+id/edtInput"
+        android:layout_width ="match_parent"
+        android:layout_height ="0dp"
+        android:layout_weight ="1"
+        android:inputType="textCapSentences|textMultiLine"
+        android:maxLines ="20"
+        android:maxLength ="2000"
+        android:hint ="지나친 욕설과 비방, 광고성 글은 사용자의 동의없이 삭제되며, 반복적인 글 작성시 이용 제한이 있을 수 있습니다."
+        android:gravity="top"
+        android:scrollHorizontally="false"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:paddingTop="15dp"
+        android:background="@null"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:elevation="4dp"
+        android:outlineProvider="bounds">
+
+        <ImageView
+            android:id="@+id/iv_get_photo_write"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:src="@mipmap/ico_camera"
+            android:layout_gravity="center_vertical" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

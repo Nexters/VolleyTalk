@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.kakao.auth.ErrorCode;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -16,7 +18,13 @@ import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
+import com.teamnexters.volleytalk.news.NewsList;
+import com.teamnexters.volleytalk.tool.NetworkModel;
 import com.tsengvn.typekit.TypekitContextWrapper;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by MIN on 2017. 8. 1..
@@ -101,8 +109,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(UserProfile userProfile) {
                 userProfile.saveUserToCache();
+                toGoSelectOrMain(userProfile);
                 redirectMainActivity();
-
             }
         });
     }
@@ -112,6 +120,28 @@ public class LoginActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
         finish();
+    }
+
+    public void toGoSelectOrMain(final UserProfile userProfile) {
+        NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
+        Call<isAlreadyUser> call = networkModel.isAlreadySignedUpUser(userProfile.getId(), userProfile.getNickname(), userProfile.getEmail(), userProfile.getProfileImagePath());
+        call.enqueue(new Callback<isAlreadyUser>() {
+            @Override
+            public void onResponse(Call<isAlreadyUser> call, Response<isAlreadyUser> response) {
+                isAlreadyUser user = response.body();
+                Log.e("STATUS", "status : " + user.getStatus().toString());
+                Log.e("User", "user : " + userProfile.toString());
+
+                //status -> false면 망한 거
+                if(user.getStatus().equals("true")) {
+                }
+            }
+
+            @Override
+            public void onFailure(Call<isAlreadyUser> call, Throwable t) {
+
+            }
+        });
     }
 
 }

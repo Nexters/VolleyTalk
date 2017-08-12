@@ -1,4 +1,4 @@
-package com.teamnexters.volleytalk.AllPost;
+package com.teamnexters.volleytalk.post;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -18,11 +18,11 @@ import java.util.List;
  * Created by MIN on 2017. 8. 9..
  */
 
-public class AllPostAdapter extends BaseAdapter {
+public class PostAdapter extends BaseAdapter {
 
     private List<Post> postList;
 
-    public AllPostAdapter(List<Post> postList) {
+    public PostAdapter(List<Post> postList) {
         this.postList = postList;
     }
 

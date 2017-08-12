@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,7 +14,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -22,7 +22,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.teamnexters.volleytalk.AllPost.AllPostFragment;
+import com.teamnexters.volleytalk.album.AlbumFragment;
+import com.teamnexters.volleytalk.post.PostFragment;
+import com.teamnexters.volleytalk.setting.SettingFragment;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 /**
@@ -92,13 +94,7 @@ public class MyPageActivity extends AppCompatActivity {
         iv_setting_mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                shareIntent.addCategory(Intent.CATEGORY_DEFAULT);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "VolleyTalk\n" +
-                        "https://play.google.com/store/apps/details?id=" + getPackageName());
-                Log.e("PACKAGE", getPackageName());
-                shareIntent.setType("text/plain");
-                startActivity(Intent.createChooser(shareIntent, "공유"));
+               //세팅 페이지 없애고 어떻게?
             }
         });
 
@@ -108,6 +104,15 @@ public class MyPageActivity extends AppCompatActivity {
                 .apply(RequestOptions.circleCropTransform())
                 .into(iv_round_profile_mypage);
 
+
+        FloatingActionButton fab_allpost = (FloatingActionButton) findViewById(R.id.fab_allpost);
+        fab_allpost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, WriteActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -125,10 +130,13 @@ public class MyPageActivity extends AppCompatActivity {
 
             switch (position) {
                 case 0:
-                    fragment = Fragment.instantiate(context, AllPostFragment.class.getName());
+                    fragment = Fragment.instantiate(context, PostFragment.class.getName());
                     break;
                 case 1:
-                    fragment = Fragment.instantiate(context, AllPostFragment.class.getName());
+                    fragment = Fragment.instantiate(context, AlbumFragment.class.getName());
+                    break;
+                case 2:
+                    fragment = Fragment.instantiate(context, SettingFragment.class.getName());
                     break;
             }
 
@@ -137,7 +145,7 @@ public class MyPageActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
 
         @Override
@@ -147,6 +155,8 @@ public class MyPageActivity extends AppCompatActivity {
                     return "전체글";
                 case 1:
                     return "앨범";
+                case 2:
+                    return "설정";
             }
             return null;
         }
