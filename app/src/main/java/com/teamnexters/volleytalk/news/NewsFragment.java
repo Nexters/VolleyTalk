@@ -51,7 +51,7 @@ public class NewsFragment extends Fragment implements NewsContract.View{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView_news = inflater.inflate(R.layout.fragment_news, container, false);
+            View rootView_news = inflater.inflate(R.layout.fragment_news, container, false);
 
         //photo news
         vp_photo_news = (ViewPager) rootView_news.findViewById(R.id.vp_photo_news);

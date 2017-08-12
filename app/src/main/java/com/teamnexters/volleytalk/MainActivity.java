@@ -11,23 +11,17 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.kakao.auth.ApiResponseCallback;
-import com.kakao.auth.AuthService;
-import com.kakao.auth.network.response.AccessTokenInfoResponse;
-import com.kakao.network.ErrorResult;
-import com.kakao.usermgmt.response.model.UserProfile;
-import com.kakao.util.helper.log.Logger;
-import com.teamnexters.volleytalk.news.NewsFragment;
 import com.teamnexters.volleytalk.follow.FollowFragment;
+import com.teamnexters.volleytalk.news.NewsFragment;
 import com.teamnexters.volleytalk.player.PlayerFragment;
-import com.teamnexters.volleytalk.ui_pages.TeamFragment;
 import com.tsengvn.typekit.TypekitContextWrapper;
+
+import Team.TeamFragment;
 
 public class MainActivity extends AppCompatActivity {
 
