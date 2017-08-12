@@ -76,10 +76,17 @@ public class PlayerAdapter extends BaseAdapter {
         TextView tv_num_post_player = (TextView) view.findViewById(R.id.tv_num_post_player);
 
         //like 여부 판단해서 리소스 다르게.
-        iv_star_player.setImageResource(R.mipmap.ico_star_on);
+        if(selectedPlayer.getFollow().isEmpty()) {
+            iv_star_player.setImageResource(R.mipmap.ico_star_off);
+        } else {
+            iv_star_player.setImageResource(R.mipmap.ico_star_on);
+        }
 
         tv_back_num_player.setText("No." + selectedPlayer.getBacknumber());
         tv_name_player.setText(selectedPlayer.getName());
+
+        tv_num_like_player.setText(selectedPlayer.getLikecount());
+        tv_num_post_player.setText(selectedPlayer.getPostcount());
 
         //API에 포지션 정보 없음
         //tv_position_player.setText();
