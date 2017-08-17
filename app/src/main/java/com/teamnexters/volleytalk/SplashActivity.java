@@ -10,6 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
 
+import com.kakao.auth.Session;
+import com.kakao.usermgmt.response.model.UserProfile;
+
 import java.security.MessageDigest;
 
 /**
@@ -18,14 +21,13 @@ import java.security.MessageDigest;
 
 public class SplashActivity extends AppCompatActivity {
 
-    Intent intent;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getAppKeyHash();
 
         /*
+        // 퍼미션 관련
+
         if ( Build.VERSION.SDK_INT >= 23 ) {
             int hasInternetPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET);
 
@@ -37,12 +39,13 @@ public class SplashActivity extends AppCompatActivity {
         }
         */
 
+        Intent intent;
 
-       // if (Session.getCurrentSession().isClosed()) {
-          //  intent = new Intent(this, LoginActivity.class);
-       // } else {
+        if (Session.getCurrentSession().isClosed() || UserProfile.loadFromCache().getId() == 0) {
+            intent = new Intent(this, LoginActivity.class);
+        } else {
             intent = new Intent(this, MainActivity.class);
-       // }
+        }
 
         startActivity(intent);
 
@@ -57,19 +60,4 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-    private void getAppKeyHash() {
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md;
-                md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                String something = new String(Base64.encode(md.digest(), 0));
-                Log.d("Hash key", something);
-            }
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            Log.e("name not found", e.toString());
-        }
-    }
 }

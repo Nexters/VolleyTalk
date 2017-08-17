@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="16dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:background="@android:color/transparent">
+
+
+    <ImageView
+        android:id="@+id/iv_profileImg_cheering"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"/>
+    
+    
+    <LinearLayout
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/iv_profileImg_cheering"
+        android:layout_alignTop="@id/iv_profileImg_cheering"
+        android:orientation="vertical"
+        android:background="@drawable/talk_white"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="15dp">
+
+        <TextView
+            android:id="@+id/tv_content_cheering"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#4a4a4a"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="4sp"
+            android:gravity="center_vertical"
+            android:text="배구 명가 현대 스카이워커스!! 오늘도 이기자!! 화이팅!!"/>
+        
+        
+        <TextView
+            android:id="@+id/tv_writer_cheering"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="#9b9b9b"
+            android:letterSpacing="-0.01"
+            android:text="김영현 | 12분전    신고"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

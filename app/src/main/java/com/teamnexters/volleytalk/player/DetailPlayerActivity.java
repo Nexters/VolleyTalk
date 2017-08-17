@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,7 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.teamnexters.volleytalk.CheeringFragment;
+import com.teamnexters.volleytalk.WriteActivity;
+import com.teamnexters.volleytalk.cheering.CheeringFragment;
 import com.teamnexters.volleytalk.R;
 import com.teamnexters.volleytalk.album.AlbumFragment;
 import com.teamnexters.volleytalk.post.PostFragment;
@@ -48,7 +50,7 @@ public class DetailPlayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detailplayer);
 
         Intent intent = getIntent();
-        Player who = (Player) intent.getSerializableExtra("who");
+        final Player who = (Player) intent.getSerializableExtra("who");
 
         context = getApplicationContext();
 
@@ -92,6 +94,17 @@ public class DetailPlayerActivity extends AppCompatActivity {
             }
         });
 
+        FloatingActionButton fab_allpost = (FloatingActionButton) findViewById(R.id.fab_detail_player);
+        fab_allpost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), WriteActivity.class);
+                intent.putExtra("type", "player");
+                intent.putExtra("seq", who.getSeq());
+                startActivity(intent);
+            }
+        });
+
     }
 
 
@@ -109,11 +122,9 @@ public class DetailPlayerActivity extends AppCompatActivity {
 
             switch (position) {
                 case 0:
-                    fragment = Fragment.instantiate(context, PostFragment.class.getName());
-                    break;
+                    return PostFragment.newInstance("player");
                 case 1:
-                    fragment = Fragment.instantiate(context, AlbumFragment.class.getName());
-                    break;
+                    return AlbumFragment.newInstance("player");
                 case 2:
                     fragment = Fragment.instantiate(context, CheeringFragment.class.getName());
                     break;

@@ -3,7 +3,6 @@
     package="com.teamnexters.volleytalk">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -44,6 +43,9 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".post.PostContentActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".SetNewPropertyActivity"
             android:screenOrientation="portrait"/>
 
         <meta-data

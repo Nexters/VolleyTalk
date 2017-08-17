@@ -13,6 +13,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
+            android:focusable="false"
             android:hint="응원해주세요!"/>
 
         <Button
@@ -48,8 +49,10 @@
     </LinearLayout>
 
     <ListView
+        android:id="@+id/lv_cheering"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:divider="@null"/>
 
 
 </LinearLayout>

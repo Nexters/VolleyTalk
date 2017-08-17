@@ -25,6 +25,14 @@ public class AlbumFragment extends Fragment {
 
     Context context;
 
+    public static AlbumFragment newInstance(String type) {
+        AlbumFragment instance = new AlbumFragment();
+        Bundle args = new Bundle();
+        args.putString("Type", type);
+        instance.setArguments(args);
+        return instance;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

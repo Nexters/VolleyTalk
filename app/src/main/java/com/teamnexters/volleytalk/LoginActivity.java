@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.widget.Toast;
 
 import com.kakao.auth.ErrorCode;
 import com.kakao.auth.ISessionCallback;
@@ -113,28 +113,29 @@ public class LoginActivity extends AppCompatActivity {
 
     public void toSetPageOrMain(final UserProfile userProfile) {
         NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
-        Call<isAlreadyUser> call = networkModel.isAlreadySignedUpUser(userProfile.getId(), userProfile.getNickname(), userProfile.getEmail(), userProfile.getProfileImagePath());
-        call.enqueue(new Callback<isAlreadyUser>() {
+
+        Call<ResForm<DefaultData>> call = networkModel.isAlreadySignedUpUser(String.valueOf(userProfile.getId()), userProfile.getNickname(), userProfile.getEmail(), userProfile.getProfileImagePath());
+        call.enqueue(new Callback<ResForm<DefaultData>>() {
             @Override
-            public void onResponse(Call<isAlreadyUser> call, Response<isAlreadyUser> response) {
+            public void onResponse(Call<ResForm<DefaultData>> call, Response<ResForm<DefaultData>> response) {
                 if(response.body() != null ) {
-                    isAlreadyUser user = response.body();
+                    ResForm<DefaultData> result = response.body();
 
-                    Log.e("USER", user.getStatus());
-
-                    if(user.getStatus().equals("new")) {
-                        //나중에 수정.
-                        redirectSetNicknameActivity();
-                    } else if (user.getStatus().equals("exist")) {
-                        redirectMainActivity();
-                    } else if (user.getStatus().equals("false")) {
-                        //status -> false면 망한 거
+                    if(result.getStatus().equals("true")) {
+                        if(result.getResData().getStatus().equals("exist")) {
+                            redirectMainActivity();
+                        } else {
+                            redirectSetNicknameActivity();
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), result.getErrMsg(), Toast.LENGTH_LONG).show();
+                        Session.getCurrentSession().close();
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<isAlreadyUser> call, Throwable t) {
+            public void onFailure(Call<ResForm<DefaultData>> call, Throwable t) {
 
             }
         });
@@ -142,7 +143,6 @@ public class LoginActivity extends AppCompatActivity {
 
     protected void redirectMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intent);
         finish();
     }
