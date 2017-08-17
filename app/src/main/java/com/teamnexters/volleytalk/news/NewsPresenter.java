@@ -1,8 +1,13 @@
 package com.teamnexters.volleytalk.news;
 
+import android.app.Application;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.util.Log;
+import android.widget.Toast;
 
+import com.teamnexters.volleytalk.ResForm;
+import com.teamnexters.volleytalk.tool.ApplicationBase;
 import com.teamnexters.volleytalk.tool.NetworkModel;
 
 import java.io.IOException;
@@ -31,17 +36,21 @@ public class NewsPresenter implements NewsContract.Presenter{
 
     @Override
     public void getNewsList() {
-        NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
-        Call<NewsList> call = networkModel.getNewsList();
-        call.enqueue(new Callback<NewsList>() {
+        final NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
+        Call<ResForm<NewsList>> call = networkModel.getNewsList();
+        call.enqueue(new Callback<ResForm<NewsList>>() {
             @Override
-            public void onResponse(Call<NewsList> call, Response<NewsList> response) {
-                NewsList newsList = response.body();
-                newsView.setDataOnAdapter(newsList);
+            public void onResponse(Call<ResForm<NewsList>> call, Response<ResForm<NewsList>> response) {
+                ResForm<NewsList> newsList = response.body();
+                if(newsList.getStatus().equals("true")) {
+                    newsView.setDataOnAdapter(newsList.getResData().getItems());
+                } else {
+                    Log.e("TEST", newsList.getErrMsg());
+                }
             }
 
             @Override
-            public void onFailure(Call<NewsList> call, Throwable t) {
+            public void onFailure(Call<ResForm<NewsList>> call, Throwable t) {
 
             }
         });

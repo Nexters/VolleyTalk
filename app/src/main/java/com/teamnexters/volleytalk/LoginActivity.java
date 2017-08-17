@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.widget.Toast;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 import com.kakao.auth.ErrorCode;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
@@ -18,7 +16,6 @@ import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
 import com.kakao.util.helper.log.Logger;
-import com.teamnexters.volleytalk.news.NewsList;
 import com.teamnexters.volleytalk.tool.NetworkModel;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
@@ -109,39 +106,51 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(UserProfile userProfile) {
                 userProfile.saveUserToCache();
-                toGoSelectOrMain(userProfile);
-                redirectMainActivity();
+                toSetPageOrMain(userProfile);
+            }
+        });
+    }
+
+    public void toSetPageOrMain(final UserProfile userProfile) {
+        NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
+
+        Call<ResForm<DefaultData>> call = networkModel.isAlreadySignedUpUser(String.valueOf(userProfile.getId()), userProfile.getNickname(), userProfile.getEmail(), userProfile.getProfileImagePath());
+        call.enqueue(new Callback<ResForm<DefaultData>>() {
+            @Override
+            public void onResponse(Call<ResForm<DefaultData>> call, Response<ResForm<DefaultData>> response) {
+                if(response.body() != null ) {
+                    ResForm<DefaultData> result = response.body();
+
+                    if(result.getStatus().equals("true")) {
+                        if(result.getResData().getStatus().equals("exist")) {
+                            redirectMainActivity();
+                        } else {
+                            redirectSetNicknameActivity();
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), result.getErrMsg(), Toast.LENGTH_LONG).show();
+                        Session.getCurrentSession().close();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResForm<DefaultData>> call, Throwable t) {
+
             }
         });
     }
 
     protected void redirectMainActivity() {
-        final Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
 
-    public void toGoSelectOrMain(final UserProfile userProfile) {
-        NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
-        Call<isAlreadyUser> call = networkModel.isAlreadySignedUpUser(userProfile.getId(), userProfile.getNickname(), userProfile.getEmail(), userProfile.getProfileImagePath());
-        call.enqueue(new Callback<isAlreadyUser>() {
-            @Override
-            public void onResponse(Call<isAlreadyUser> call, Response<isAlreadyUser> response) {
-                isAlreadyUser user = response.body();
-                Log.e("STATUS", "status : " + user.getStatus().toString());
-                Log.e("User", "user : " + userProfile.toString());
-
-                //status -> false면 망한 거
-                if(user.getStatus().equals("true")) {
-                }
-            }
-
-            @Override
-            public void onFailure(Call<isAlreadyUser> call, Throwable t) {
-
-            }
-        });
+    protected void redirectSetNicknameActivity() {
+        Intent intent = new Intent(this, SetNewPropertyActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }

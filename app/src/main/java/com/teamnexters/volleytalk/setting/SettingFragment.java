@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.kakao.auth.Session;
 import com.kakao.usermgmt.UserManagement;
@@ -56,13 +58,29 @@ public class SettingFragment extends Fragment {
 
                         Intent mStartActivity = new Intent(getContext(), SplashActivity.class);
                         int mPendingIntentId = 123456;
-                        PendingIntent mPendingIntent = PendingIntent.getActivity(getContext(), mPendingIntentId,    mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+                        PendingIntent mPendingIntent = PendingIntent.getActivity(getContext(), mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
                         AlarmManager mgr = (AlarmManager)getContext().getSystemService(Context.ALARM_SERVICE);
                         mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
                         System.exit(0);
 
                     }
                 });
+            }
+        });
+
+        RelativeLayout item_qna_setting = (RelativeLayout) rootView_setting.findViewById(R.id.item_qna_setting);
+        item_qna_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setType("text/plain");
+                intent.setData(Uri.parse("mailto:" + getResources().getString(R.string.qna_email))); // or just "mailto:" for blank
+                intent.putExtra(Intent.EXTRA_SUBJECT, "[문의] : ");
+                try {
+                    startActivity(Intent.createChooser(intent, "문의 메일을 보냅니다."));
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(getContext(), "설치된 이메일 어플리케이션이 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

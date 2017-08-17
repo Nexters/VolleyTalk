@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.teamnexters.volleytalk.R;
+import com.teamnexters.volleytalk.album.AlbumFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,15 @@ import java.util.List;
  */
 
 public class PostFragment extends Fragment {
+
+    public static PostFragment newInstance(String type) {
+        PostFragment instance = new PostFragment();
+        Bundle args = new Bundle();
+        args.putString("Type", type);
+        instance.setArguments(args);
+        return instance;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

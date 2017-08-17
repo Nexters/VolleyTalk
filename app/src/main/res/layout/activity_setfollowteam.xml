@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/img_volleyball"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#000000"
+        android:letterSpacing="-0.01"
+        android:lineSpacingExtra="4sp"
+        android:gravity="center_horizontal"
+        android:text="좋아하는 팀을 선택해주세요"/>
+
+    <info.hoang8f.android.segmented.SegmentedGroup
+        xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/segmented_control_player"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@android:color/transparent"
+        segmentedgroup:sc_border_width="0dp"
+        segmentedgroup:sc_corner_radius="40dp"
+        segmentedgroup:sc_tint_color="@android:color/white"
+        segmentedgroup:sc_checked_text_color="#1b4d83">
+
+        <RadioButton
+            android:id="@+id/rb_male_player"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="남자 프로배구"
+            android:textSize="14sp"
+            android:textColor="#9b9b9b"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="12sp"
+            style="@style/RadioButton" />
+
+        <RadioButton
+            android:id="@+id/rb_female_player"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="여자 프로배구"
+            android:textSize="14sp"
+            android:textColor="#9b9b9b"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="12sp"
+            style="@style/RadioButton" />
+
+    </info.hoang8f.android.segmented.SegmentedGroup>
+
+
+    <!-- 여기 나중에 수정 -->
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+
+    </android.support.v7.widget.RecyclerView>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:background="@drawable/rounded_rectangle"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:text="건너뛰기"/>
+
+</LinearLayout>

@@ -1,4 +1,4 @@
-package Team;
+package com.teamnexters.volleytalk.team;
 
 
 import android.content.Context;

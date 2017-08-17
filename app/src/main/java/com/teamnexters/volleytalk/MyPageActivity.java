@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.teamnexters.volleytalk.album.AlbumFragment;
+import com.teamnexters.volleytalk.post.PostContentActivity;
 import com.teamnexters.volleytalk.post.PostFragment;
 import com.teamnexters.volleytalk.setting.SettingFragment;
 import com.tsengvn.typekit.TypekitContextWrapper;
@@ -95,6 +96,11 @@ public class MyPageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                //세팅 페이지 없애고 어떻게?
+
+
+               //임시로 여기서 작업 +  원래 글 보는 화면
+                Intent intent = new Intent(context, PostContentActivity.class);
+                startActivity(intent);
             }
         });
 

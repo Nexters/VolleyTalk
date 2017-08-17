@@ -43,12 +43,12 @@
 
 
                     <ImageView
-                        android:id="@+id/iv_setting_detail_playere"
+                        android:id="@+id/iv_follow_detail_player"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/ico_setting"/>
+                        android:src="@mipmap/ico_raw_star_off"/>
 
                 </RelativeLayout>
 
@@ -159,7 +159,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_allpost"
+        android:id="@+id/fab_detail_player"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

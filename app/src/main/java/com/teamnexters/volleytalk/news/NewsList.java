@@ -10,13 +10,37 @@ import java.util.List;
 
 public class NewsList {
 
+    private int start;
+    private int display;
     private List<News> items;
 
-    public List<News> getNewsList() {
+    public NewsList(int start, int display, List<News> items) {
+        this.start = start;
+        this.display = display;
+        this.items = items;
+    }
+
+    public int getStart() {
+        return start;
+    }
+
+    public void setStart(int start) {
+        this.start = start;
+    }
+
+    public int getDisplay() {
+        return display;
+    }
+
+    public void setDisplay(int display) {
+        this.display = display;
+    }
+
+    public List<News> getItems() {
         return items;
     }
 
-    public void setNewsList(List<News> newsList) {
-        this.items = newsList;
+    public void setItems(List<News> items) {
+        this.items = items;
     }
 }

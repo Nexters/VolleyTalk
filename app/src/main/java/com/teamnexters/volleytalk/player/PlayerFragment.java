@@ -16,8 +16,10 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.teamnexters.volleytalk.R;
+import com.teamnexters.volleytalk.ResForm;
 import com.teamnexters.volleytalk.config.Config;
 import com.teamnexters.volleytalk.player.adapter.PlayerAdapter;
 import com.teamnexters.volleytalk.tool.NetworkModel;
@@ -45,6 +47,8 @@ public class PlayerFragment extends Fragment {
     public String[] teamNameList;
     public int[] teamColorList;
 
+    public int start;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -63,6 +67,7 @@ public class PlayerFragment extends Fragment {
         rb_male_player.setChecked(true);
         getplayerList("M");
 
+        start = Config.MALE_TEAM_START_SEQ;
         teamNameList = getResources().getStringArray(R.array.team_male_list);
         teamColorList = getResources().getIntArray(R.array.team_male_color_list);
 
@@ -76,6 +81,7 @@ public class PlayerFragment extends Fragment {
     }
 
 
+    //여기 망함. 정신차리고나서 고치기.
     public View createPlayerList(PlayerList playerList, Context context) {
 
         LinearLayout ll_playerList = new LinearLayout(context);
@@ -94,7 +100,7 @@ public class PlayerFragment extends Fragment {
         lv_header.setLayoutParams(layoutParams_header);
         GradientDrawable header = (GradientDrawable) getResources().getDrawable(R.drawable.lv_header);
         //팀대표색으로 색상 변경
-        header.setColor(teamColorList[Integer.valueOf(playerList.getTeam())-1]);
+        header.setColor(teamColorList[Integer.valueOf(playerList.getTeam())-start]);
         lv_header.setBackground(header);
 
         //헤더에 텍스트뷰 추가
@@ -102,7 +108,7 @@ public class PlayerFragment extends Fragment {
         teamname.setTextColor(Color.WHITE);
         teamname.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         teamname.setTypeface(Typeface.createFromAsset(context.getAssets(), "NotoSans-Regular.ttf"));
-        teamname.setText(teamNameList[Integer.valueOf(playerList.getTeam())-1]);
+        teamname.setText(teamNameList[Integer.valueOf(playerList.getTeam())-start]);
         teamname.setMaxLines(1);
         //RelativeLayout.LayoutParams layoutParams_teamname =  new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         //layoutParams_teamname.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
@@ -125,31 +131,33 @@ public class PlayerFragment extends Fragment {
         divider.setBackgroundColor(Color.parseColor("#eeeeee"));
         divider.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics())));
 
-        //리스트뷰 푸터 추가
-        lv_footer = new RelativeLayout(context);
-        lv_footer.setBackground(getResources().getDrawable(R.drawable.lv_footer));
-        lv_footer.setLayoutParams(layoutParams_header);
-        lv_footer.setOnClickListener(clickFoldListener);
-
-        //푸터에 텍스트뷰 추가
-        foldOnOff = new TextView(context);
-        foldOnOff.setTextColor(Color.parseColor("#9b9b9b"));
-        foldOnOff.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-        foldOnOff.setTypeface(Typeface.createFromAsset(context.getAssets(), "NotoSans-Regular.ttf"));
-        foldOnOff.setText("펼치기");
-
-        lv_footer.addView(foldOnOff);
-        RelativeLayout.LayoutParams layoutParams_btn_fold = (RelativeLayout.LayoutParams)foldOnOff.getLayoutParams();
-        layoutParams_btn_fold.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-        foldOnOff.setLayoutParams(layoutParams_btn_fold);
-
         ll_playerList.addView(lv_header);
         ll_playerList.addView(lv_player);
         ll_playerList.addView(divider);
-        ll_playerList.addView(lv_footer);
 
-        lv_footer.setId(Integer.valueOf(playerList.getTeam()));
-        footerList.add(lv_footer.getId());
+        //리스트뷰 푸터 추가
+        if (playerList.getPlayer().size() > Config.FOLDED_LIST_SIZE) {
+            lv_footer = new RelativeLayout(context);
+            lv_footer.setBackground(getResources().getDrawable(R.drawable.lv_footer));
+            lv_footer.setLayoutParams(layoutParams_header);
+            lv_footer.setOnClickListener(clickFoldListener);
+
+            //푸터에 텍스트뷰 추가
+            foldOnOff = new TextView(context);
+            foldOnOff.setTextColor(Color.parseColor("#9b9b9b"));
+            foldOnOff.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            foldOnOff.setTypeface(Typeface.createFromAsset(context.getAssets(), "NotoSans-Regular.ttf"));
+            foldOnOff.setText("펼치기");
+
+            lv_footer.addView(foldOnOff);
+            RelativeLayout.LayoutParams layoutParams_btn_fold = (RelativeLayout.LayoutParams) foldOnOff.getLayoutParams();
+            layoutParams_btn_fold.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+            foldOnOff.setLayoutParams(layoutParams_btn_fold);
+
+            ll_playerList.addView(lv_footer);
+            lv_footer.setId(Integer.valueOf(playerList.getTeam()));
+            footerList.add(lv_footer.getId());
+        }
 
         ll_playerList.setClipToOutline(true);
         ll_playerList.setOutlineProvider(ViewOutlineProvider.BOUNDS);
@@ -180,14 +188,18 @@ public class PlayerFragment extends Fragment {
         @Override
         public void onClick(View view) {
             wall_player.removeAllViews();
+            footerList.clear();
+            adapterList_team_player.clear();
 
             switch (view.getId()) {
                 case R.id.rb_male_player:
+                    start = Config.MALE_TEAM_START_SEQ;
                     teamNameList = getResources().getStringArray(R.array.team_male_list);
                     teamColorList = getResources().getIntArray(R.array.team_male_color_list);
                     getplayerList("M");
                     break;
                 case R.id.rb_female_player:
+                    start  = Config.FEMALE_TEAM_START_SEQ;
                     teamNameList = getResources().getStringArray(R.array.team_female_list);
                     teamColorList = getResources().getIntArray(R.array.team_female_color_list);
                     getplayerList("F");
@@ -201,16 +213,21 @@ public class PlayerFragment extends Fragment {
     public void getplayerList(String sex) {
 
         NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
-        Call<List<PlayerList>> call = networkModel.getPlayerList(sex);
-        call.enqueue(new Callback<List<PlayerList>>() {
+        Call<ResForm<List<PlayerList>>> call = networkModel.getPlayerList(sex);
+        call.enqueue(new Callback<ResForm<List<PlayerList>>>() {
             @Override
-            public void onResponse(Call<List<PlayerList>> call, Response<List<PlayerList>> response) {
-                allPlayerList = response.body();
-                createListViewInTeam();
+            public void onResponse(Call<ResForm<List<PlayerList>>> call, Response<ResForm<List<PlayerList>>> response) {
+                ResForm<List<PlayerList>> list = response.body();
+                if(list.getStatus().equals("true")) {
+                    allPlayerList = list.getResData();
+                    createListViewInTeam();
+                } else {
+                    Toast.makeText(getContext(), list.getErrMsg(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
-            public void onFailure(Call<List<PlayerList>> call, Throwable t) {
+            public void onFailure(Call<ResForm<List<PlayerList>>> call, Throwable t) {
 
             }
         });

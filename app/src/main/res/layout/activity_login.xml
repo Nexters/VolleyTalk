@@ -10,12 +10,18 @@
         android:src="@mipmap/bg_login"
         android:scaleType="fitCenter"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:gravity="center">
+
     <ImageView
         android:id="@+id/iv_logo_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/vtalk_logo_login"
-        android:layout_centerInParent="true"/>
+        android:src="@mipmap/vtalk_logo_login"/>
 
 
     <com.kakao.usermgmt.LoginButton
@@ -25,8 +31,8 @@
         android:layout_marginBottom="30dp"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="70dp"
-        android:layout_marginRight="70dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/iv_logo_login"/>
+        android:layout_marginRight="70dp"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

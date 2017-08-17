@@ -1,4 +1,4 @@
-package Team;
+package com.teamnexters.volleytalk.team;
 
 /**
  * Created by smart on 2017-08-12.

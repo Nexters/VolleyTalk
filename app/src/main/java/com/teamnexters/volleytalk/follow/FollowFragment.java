@@ -26,15 +26,13 @@ public class FollowFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView_follow = inflater.inflate(R.layout.fragment_follow, container, false);
 
-        NonScrollListView lv_team_follow = (NonScrollListView) rootView_follow.findViewById(R.id.lv_team_follow);
+        //if 서버에서 follow 정보 받아와서 size 0 일 경우
+        // mipmap.img_like_none 화면 중앙에 넣을 것
+        // 이 때 배경 색은 #fdfdfd인듯
 
-            //header test  --> 안 예쁘게 나와서 수정 중..
-            /*
-            View header_lv_team_follow = inflater.inflate(R.layout.header_lv_follow, null, false);
-            TextView tv_title_for_lv_follow = (TextView) header_lv_team_follow.findViewById(R.id.tv_title_for_lv_follow);
-            tv_title_for_lv_follow.setText("TEAM");
-            lv_team_follow.addHeaderView(header_lv_team_follow);
-            */
+        // 팀, 선수, 유저는 밑에서 처리
+
+        NonScrollListView lv_team_follow = (NonScrollListView) rootView_follow.findViewById(R.id.lv_team_follow);
 
             //test list
             List<TeamFollow> testlist = new ArrayList<>();

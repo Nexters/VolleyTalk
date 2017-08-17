@@ -2,6 +2,9 @@ package com.teamnexters.volleytalk.news;
 
 import com.teamnexters.volleytalk.BasePresenter;
 import com.teamnexters.volleytalk.BaseView;
+import com.teamnexters.volleytalk.ResForm;
+
+import java.util.List;
 
 /**
  * Created by MIN on 2017. 7. 29..
@@ -9,7 +12,7 @@ import com.teamnexters.volleytalk.BaseView;
 
 public interface NewsContract {
     interface View extends BaseView<Presenter> {
-        void setDataOnAdapter(NewsList newsList);
+        void setDataOnAdapter(List<News> newsList);
     }
 
     interface Presenter extends BasePresenter {
