@@ -23,5 +23,9 @@
     <string name="team_female_6">KGC인삼공사 프로배구단</string>
     <string name="team_female_7">중국 상하이 Guohua Life</string>
 
+    <string name="nickname">닉네임</string>
+    <string name="nickname_check_duplicate">닉네임 중복 체크</string>
+    <string name="nickname_update">닉네임 저장</string>
+
 
 </resources>

@@ -5,21 +5,27 @@ import com.teamnexters.volleytalk.ExistNickname;
 import com.teamnexters.volleytalk.ResForm;
 import com.teamnexters.volleytalk.config.Config;
 import com.teamnexters.volleytalk.DefaultData;
+import com.teamnexters.volleytalk.follow.Follow;
+import com.teamnexters.volleytalk.follow.FollowList;
 import com.teamnexters.volleytalk.news.NewsList;
 import com.teamnexters.volleytalk.player.PlayerList;
+import com.teamnexters.volleytalk.post.Post;
 
 import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -64,20 +70,15 @@ public interface NetworkModel {
 
 
 
-    //@GET("post/list")
-
-    //@GET("post/img/list")
-
-
-    /*
-    @Multipart
-    @POST("post/apply")
-    Call<ResForm<DefaultData>> uploadPost(@Part MultipartBody.Part file,
-                                          @Part("type") String type,
-                                          @Part("seq") String seq,
-                                          @Part("title") String title,
-                                          @Part("contents") String contents);
-    */
+    @GET("post/list")
+    Call<ResForm<List<Post>>> getPostList(@Query("type") String type,
+                                    @Query("seq") String seq,
+                                    @Query("start") int start,
+                                    @Query("postCount") int postCount);
+    @GET("post/img/list")
+    Call<ResForm<List<Post>>> getPostThumbnailImageList(@Query("type") String type,
+                                                        @Query("start") int start,
+                                                        @Query("imgCount") int imgCount);
 
     @Multipart
     @POST("post/apply")
@@ -95,9 +96,12 @@ public interface NetworkModel {
 
 
 
-    //@GET("follow/list")
+    @GET("follow/list")
+    Call<ResForm<FollowList>> getFollowList();
 
-    //@POST("follow/apply")
+    @POST("follow/apply")
+    Call<ResForm<Follow>> applyFollow(@Query("followTypes") String followTypes,
+                                      @Query("followSeq") int followSeq);
 
 
     //@GET("cheering/apply")
@@ -108,6 +112,9 @@ public interface NetworkModel {
     //@GET("comment/apply")
 
     //@POST("comment/list")
+
+    @GET("img/{file}")
+    Call<ResponseBody> getImageFile(@Path("file") String filename);
 
 
 

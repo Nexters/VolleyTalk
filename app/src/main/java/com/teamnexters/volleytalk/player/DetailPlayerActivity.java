@@ -33,11 +33,12 @@ import com.tsengvn.typekit.TypekitContextWrapper;
 public class DetailPlayerActivity extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    private FloatingActionButton fab_player;
     private ViewPager mViewPager;
-    private  TabLayout tabLayout;
+    private TabLayout tabLayout;
 
     private Context context;
-
+    private Player who;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -50,12 +51,13 @@ public class DetailPlayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detailplayer);
 
         Intent intent = getIntent();
-        final Player who = (Player) intent.getSerializableExtra("who");
+        who = (Player) intent.getSerializableExtra("who");
 
         context = getApplicationContext();
 
 
         ImageView iv_follow_detail_player = (ImageView) findViewById(R.id.iv_follow_detail_player);
+        ImageView iv_heart_detail_player = (ImageView) findViewById(R.id.iv_heart_detail_player);
 
         TextView tv_name_detail_player = (TextView) findViewById(R.id.tv_name_detail_player);
         TextView tv_back_detail_player = (TextView) findViewById(R.id.tv_back_detail_player);
@@ -81,6 +83,7 @@ public class DetailPlayerActivity extends AppCompatActivity {
 
         mViewPager = (ViewPager) findViewById(R.id.container_detail_player);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.addOnPageChangeListener(onPageChangeListener);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs_detail_player);
         tabLayout.setupWithViewPager(mViewPager);
@@ -94,8 +97,22 @@ public class DetailPlayerActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton fab_allpost = (FloatingActionButton) findViewById(R.id.fab_detail_player);
-        fab_allpost.setOnClickListener(new View.OnClickListener() {
+        iv_follow_detail_player.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //follow 하기, 취소하기.
+            }
+        });
+
+        iv_heart_detail_player.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //like 하기, 취소하기
+            }
+        });
+
+        fab_player = (FloatingActionButton) findViewById(R.id.fab_detail_player);
+        fab_player.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), WriteActivity.class);
@@ -122,7 +139,7 @@ public class DetailPlayerActivity extends AppCompatActivity {
 
             switch (position) {
                 case 0:
-                    return PostFragment.newInstance("player");
+                    return PostFragment.newInstance("player", String.valueOf(who.getSeq()));
                 case 1:
                     return AlbumFragment.newInstance("player");
                 case 2:
@@ -151,6 +168,33 @@ public class DetailPlayerActivity extends AppCompatActivity {
             return null;
         }
     }
+
+    ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            switch (position) {
+                case 0:
+                case 1:
+                    fab_player.show();
+                    break;
+                case 2:
+                    fab_player.hide();
+                    break;
+            }
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
+
+
 
 
     private void changeTabsFont() {

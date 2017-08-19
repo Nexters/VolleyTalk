@@ -2,6 +2,7 @@ package com.teamnexters.volleytalk.player.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,20 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.teamnexters.volleytalk.R;
+import com.teamnexters.volleytalk.ResForm;
+import com.teamnexters.volleytalk.follow.Follow;
 import com.teamnexters.volleytalk.player.DetailPlayerActivity;
 import com.teamnexters.volleytalk.player.Player;
+import com.teamnexters.volleytalk.tool.NetworkModel;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by MIN on 2017. 8. 8..
@@ -68,7 +77,7 @@ public class PlayerAdapter extends BaseAdapter {
         final Player selectedPlayer = (Player) getItem(pos);
 
         LinearLayout item_lv_player = (LinearLayout) view.findViewById(R.id.item_lv_player);
-        ImageView iv_star_player = (ImageView) view.findViewById(R.id.iv_star_player);
+        final ImageView iv_star_player = (ImageView) view.findViewById(R.id.iv_star_player);
         TextView tv_back_num_player = (TextView) view.findViewById(R.id.tv_back_num_player);
         TextView tv_name_player = (TextView) view.findViewById(R.id.tv_name_player);
         TextView tv_position_player = (TextView) view.findViewById(R.id.tv_position_player);
@@ -78,8 +87,10 @@ public class PlayerAdapter extends BaseAdapter {
         //like 여부 판단해서 리소스 다르게.
         if(selectedPlayer.getFollow().isEmpty()) {
             iv_star_player.setImageResource(R.mipmap.ico_star_off);
+            iv_star_player.setTag("off");
         } else {
             iv_star_player.setImageResource(R.mipmap.ico_star_on);
+            iv_star_player.setTag("on");
         }
 
         tv_back_num_player.setText("No." + selectedPlayer.getBacknumber());
@@ -88,8 +99,6 @@ public class PlayerAdapter extends BaseAdapter {
         tv_num_like_player.setText(selectedPlayer.getLikecount());
         tv_num_post_player.setText(selectedPlayer.getPostcount());
 
-        //API에 포지션 정보 없음
-        //tv_position_player.setText();
         tv_num_like_player.setText(selectedPlayer.getLikecount());
         tv_num_post_player.setText(selectedPlayer.getPostcount());
 
@@ -104,6 +113,43 @@ public class PlayerAdapter extends BaseAdapter {
             }
         });
 
+        iv_star_player.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                followOnOFF(context, iv_star_player, Integer.valueOf(selectedPlayer.getSeq()));
+            }
+        });
+
         return view;
     }
+
+
+
+    private void followOnOFF(final Context context, final ImageView btn_follow, int followSeq) {
+        NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
+        Call<ResForm<Follow>> call = networkModel.applyFollow("player", followSeq);
+        call.enqueue(new Callback<ResForm<Follow>>() {
+            @Override
+            public void onResponse(Call<ResForm<Follow>> call, Response<ResForm<Follow>> response) {
+                ResForm<Follow> result = response.body();
+                if(result.getStatus().equals("true")) {
+                    if(btn_follow.getTag().equals("on")) {
+                        btn_follow.setImageResource(R.mipmap.ico_star_off);
+                        btn_follow.setTag("off");
+                    } else {
+                        btn_follow.setImageResource(R.mipmap.ico_star_on);
+                        btn_follow.setTag("on");
+                    }
+                } else {
+                    Toast.makeText(context, result.getErrMsg(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResForm<Follow>> call, Throwable t) {
+
+            }
+        });
+    }
+
 }

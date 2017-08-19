@@ -1,5 +1,7 @@
 package com.teamnexters.volleytalk.player;
 
+import com.teamnexters.volleytalk.User;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -8,24 +10,28 @@ import java.util.List;
  */
 
 public class Player implements Serializable {
-    private String seq;
-    private String teamseq;
+    private int seq;
+    private int teamseq;
     private String backnumber;
     private String name;
     private String physical;
+    private String position;
     private String likecount;
     private String postcount;
-    private List<String> like;
-    private List<String> follow;
+    private List<User> like;
+    private List<User> follow;
 
-    public Player(String seq, String teamseq, String backnumber, String name, String physical, String likecount, String postcount) {
+    public Player(int seq, int teamseq, String backnumber, String name, String physical, String position, String likecount, String postcount, List<User> like, List<User> follow) {
         this.seq = seq;
         this.teamseq = teamseq;
         this.backnumber = backnumber;
         this.name = name;
         this.physical = physical;
+        this.position = position;
         this.likecount = likecount;
         this.postcount = postcount;
+        this.like = like;
+        this.follow = follow;
     }
 
     public Player(String backnumber, String name, String likecount, String postcount) {
@@ -35,19 +41,19 @@ public class Player implements Serializable {
         this.postcount = postcount;
     }
 
-    public String getSeq() {
+    public int getSeq() {
         return seq;
     }
 
-    public void setSeq(String seq) {
+    public void setSeq(int seq) {
         this.seq = seq;
     }
 
-    public String getTeamseq() {
+    public int getTeamseq() {
         return teamseq;
     }
 
-    public void setTeamseq(String teamseq) {
+    public void setTeamseq(int teamseq) {
         this.teamseq = teamseq;
     }
 
@@ -75,6 +81,14 @@ public class Player implements Serializable {
         this.physical = physical;
     }
 
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
     public String getLikecount() {
         return likecount;
     }
@@ -91,34 +105,19 @@ public class Player implements Serializable {
         this.postcount = postcount;
     }
 
-    public List<String> getLike() {
+    public List<User> getLike() {
         return like;
     }
 
-    public void setLike(List<String> like) {
+    public void setLike(List<User> like) {
         this.like = like;
     }
 
-    public List<String> getFollow() {
+    public List<User> getFollow() {
         return follow;
     }
 
-    public void setFollow(List<String> follow) {
+    public void setFollow(List<User> follow) {
         this.follow = follow;
-    }
-
-    @Override
-    public String toString() {
-        return "Player{" +
-                "seq='" + seq + '\'' +
-                ", teamseq='" + teamseq + '\'' +
-                ", backnumber='" + backnumber + '\'' +
-                ", name='" + name + '\'' +
-                ", physical='" + physical + '\'' +
-                ", likecount='" + likecount + '\'' +
-                ", postcount='" + postcount + '\'' +
-                ", like=" + like +
-                ", follow=" + follow +
-                '}';
     }
 }

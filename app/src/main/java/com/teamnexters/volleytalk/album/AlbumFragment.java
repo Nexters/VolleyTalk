@@ -8,14 +8,22 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.teamnexters.volleytalk.R;
+import com.teamnexters.volleytalk.ResForm;
+import com.teamnexters.volleytalk.post.Post;
+import com.teamnexters.volleytalk.tool.NetworkModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by MIN on 2017. 8. 12..
@@ -23,7 +31,9 @@ import java.util.List;
 
 public class AlbumFragment extends Fragment {
 
-    Context context;
+    private Context context;
+    private AlbumAdapter albumAdapter;
+    private List<Post> postImgList;
 
     public static AlbumFragment newInstance(String type) {
         AlbumFragment instance = new AlbumFragment();
@@ -49,21 +59,42 @@ public class AlbumFragment extends Fragment {
         rl_album.addItemDecoration(itemDecoration);
 
         //리스트 만들어서 적당히 테스트 데이터 집어넣기.
-        List<Album> testList = new ArrayList<>();
-        testList.add(new Album("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYuOvt6wBrcmOygN2bzKbs2T1BcDJiWIS_HSqd4aWqqSmQ53OPrQ", 1));
-        testList.add(new Album("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYuOvt6wBrcmOygN2bzKbs2T1BcDJiWIS_HSqd4aWqqSmQ53OPrQ", 2));
-        testList.add(new Album("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYuOvt6wBrcmOygN2bzKbs2T1BcDJiWIS_HSqd4aWqqSmQ53OPrQ", 3));
-        testList.add(new Album("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYuOvt6wBrcmOygN2bzKbs2T1BcDJiWIS_HSqd4aWqqSmQ53OPrQ", 4));
-        testList.add(new Album("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYuOvt6wBrcmOygN2bzKbs2T1BcDJiWIS_HSqd4aWqqSmQ53OPrQ", 5));
-        testList.add(new Album("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYuOvt6wBrcmOygN2bzKbs2T1BcDJiWIS_HSqd4aWqqSmQ53OPrQ", 6));
-        testList.add(new Album("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYuOvt6wBrcmOygN2bzKbs2T1BcDJiWIS_HSqd4aWqqSmQ53OPrQ", 7));
-        testList.add(new Album("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYuOvt6wBrcmOygN2bzKbs2T1BcDJiWIS_HSqd4aWqqSmQ53OPrQ", 8));
+        postImgList = new ArrayList<>();
 
-        AlbumAdapter albumAdapter = new AlbumAdapter(testList, context);
+
+        albumAdapter = new AlbumAdapter(postImgList, context);
         rl_album.setAdapter(albumAdapter);
+
+        getPostImgList();
 
         return rootView_album;
     }
+
+    private void getPostImgList() {
+        Bundle args = getArguments();
+        String type = args.getString("Type");
+
+        NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
+        Call<ResForm<List<Post>>> call = networkModel.getPostThumbnailImageList(type, 1, 20);
+        call.enqueue(new Callback<ResForm<List<Post>>>() {
+            @Override
+            public void onResponse(Call<ResForm<List<Post>>> call, Response<ResForm<List<Post>>> response) {
+                ResForm<List<Post>> result = response.body();
+                Log.e("TEST", result.getStatus());
+                if ( result.getStatus().equals("true")) {
+                    Log.e("TEST", "size " + result.getResData().size());
+                    postImgList.addAll(result.getResData());
+                    albumAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResForm<List<Post>>> call, Throwable t) {
+
+            }
+        });
+    }
+
 
     public class ItemOffsetDecoration extends RecyclerView.ItemDecoration {
 
@@ -84,4 +115,6 @@ public class AlbumFragment extends Fragment {
             outRect.set(mItemOffset, mItemOffset, mItemOffset, mItemOffset);
         }
     }
+
+
 }

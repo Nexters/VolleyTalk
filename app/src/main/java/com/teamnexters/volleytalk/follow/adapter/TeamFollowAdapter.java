@@ -1,20 +1,15 @@
 package com.teamnexters.volleytalk.follow.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.teamnexters.volleytalk.R;
+import com.teamnexters.volleytalk.config.Config;
 import com.teamnexters.volleytalk.follow.TeamFollow;
-import com.teamnexters.volleytalk.news.News;
-import com.teamnexters.volleytalk.ui_pages.DetailNewsActivity;
 
 import java.util.List;
 
@@ -25,6 +20,8 @@ import java.util.List;
 public class TeamFollowAdapter extends BaseAdapter {
 
     List<TeamFollow> followingTeamList;
+    String[] teamNameList;
+    String teamName;
 
     public TeamFollowAdapter() {
     }
@@ -63,19 +60,27 @@ public class TeamFollowAdapter extends BaseAdapter {
 
         if( view == null ) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.item_lv_follow, viewGroup, false);
+            view = inflater.inflate(R.layout.item_lv_team_follow, viewGroup, false);
         }
 
         TextView tv_team_name_follow = (TextView) view.findViewById(R.id.tv_team_name_follow);
-        TextView tv_num_like_follow = (TextView) view.findViewById(R.id.tv_num_like_follow);
+        TextView tv_num_like_follow = (TextView) view.findViewById(R.id.tv_num_follower_follow);
         TextView tv_num_post_follow = (TextView) view.findViewById(R.id.tv_num_post_follow);
 
         TeamFollow selectedItem = (TeamFollow) getItem(pos);
 
+        if ( selectedItem.getTypeseq() < Config.FEMALE_TEAM_START_SEQ ) {
+            teamNameList = context.getResources().getStringArray(R.array.team_male_list);
+            teamName = teamNameList[selectedItem.getTypeseq() - Config.MALE_TEAM_START_SEQ];
+        }  else {
+            teamNameList = context.getResources().getStringArray(R.array.team_female_list);
+            teamName = teamNameList[selectedItem.getTypeseq() - Config.FEMALE_TEAM_START_SEQ];
+        }
 
-        tv_team_name_follow.setText(Html.fromHtml(selectedItem.getName()).toString());
-        tv_num_like_follow.setText(Html.fromHtml(selectedItem.getLike()).toString());
-        tv_num_post_follow.setText(selectedItem.getPost());
+        tv_team_name_follow.setText(teamName);
+        tv_num_like_follow.setText(String.valueOf(selectedItem.getTeamInfo().getLikecount()));
+        tv_num_post_follow.setText(String.valueOf(selectedItem.getTeamInfo().getLikecount()));
+
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override

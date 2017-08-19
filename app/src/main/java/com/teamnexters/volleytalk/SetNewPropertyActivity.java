@@ -1,5 +1,7 @@
 package com.teamnexters.volleytalk;
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -33,13 +35,20 @@ public class SetNewPropertyActivity extends AppCompatActivity {
         // 그 이후에 다시 editText 건드리면 저장버튼 클릭 불가능하게
         // 정상적으로 저장한 이후에는 팀 선택화면으로 넘어가기.
         // 팀 선택화면 -> R.layout.activity_setfollowteam
-        //
+
 
         final EditText et_nickname_welcome = (EditText) findViewById(R.id.et_nickname_welcome);
         Button btn_not_duplicated_welcome = (Button) findViewById(R.id.btn_not_duplicated_welcome);
         btn_go_to_next_page_welcome = (Button) findViewById(R.id.btn_go_to_next_page_welcome);
 
+        GradientDrawable btn_background = (GradientDrawable) getResources().getDrawable(R.drawable.rounded_rectangle);
+        btn_background.setColor(Color.parseColor("#4990e2"));
+        btn_not_duplicated_welcome.setBackground(btn_background);
+
+        btn_background.setColor(Color.parseColor("#ccff8800"));
+        btn_go_to_next_page_welcome.setBackground(btn_background);
         btn_go_to_next_page_welcome.setEnabled(false);
+
 
         //요청보낼 때 쿠키 포함하기
         btn_not_duplicated_welcome.setOnClickListener(new View.OnClickListener() {

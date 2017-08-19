@@ -111,6 +111,7 @@ public class MyPageActivity extends AppCompatActivity {
                 .into(iv_round_profile_mypage);
 
 
+        /*
         FloatingActionButton fab_allpost = (FloatingActionButton) findViewById(R.id.fab_allpost);
         fab_allpost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +120,7 @@ public class MyPageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        */
 
     }
 
@@ -136,8 +138,8 @@ public class MyPageActivity extends AppCompatActivity {
 
             switch (position) {
                 case 0:
-                    fragment = Fragment.instantiate(context, PostFragment.class.getName());
-                    break;
+                    //내 포스트 가져오기 생기면 수정하기.
+                    return PostFragment.newInstance("player", "1");
                 case 1:
                     fragment = Fragment.instantiate(context, AlbumFragment.class.getName());
                     break;

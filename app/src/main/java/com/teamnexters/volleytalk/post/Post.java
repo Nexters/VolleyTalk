@@ -1,27 +1,41 @@
 package com.teamnexters.volleytalk.post;
 
+import android.graphics.Bitmap;
+
+import java.io.Serializable;
+
 /**
  * Created by MIN on 2017. 8. 9..
  */
 
-public class Post {
+public class Post implements Serializable {
+    private int seq;
+    private String teamseq;
     private String title;
-    private String description;
-    private String date;
-    private String writer;
+    private String contents;
+    private String img_url;
+    private String img_url_thumb;
+    private String userid;
     private int like_count;
     private int reply_count;
-    private String picURL;
+    private String createdAt;
+    private String updatedAt;
 
 
-    //나중에 picURL 포함한 constructor 추가하기
-    public Post(String title, String description, String date, String writer, int like_count, int reply_count) {
-        this.title = title;
-        this.description = description;
-        this.date = date;
-        this.writer = writer;
-        this.like_count = like_count;
-        this.reply_count = reply_count;
+    public int getSeq() {
+        return seq;
+    }
+
+    public void setSeq(int seq) {
+        this.seq = seq;
+    }
+
+    public String getTeamseq() {
+        return teamseq;
+    }
+
+    public void setTeamseq(String teamseq) {
+        this.teamseq = teamseq;
     }
 
     public String getTitle() {
@@ -32,28 +46,36 @@ public class Post {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getContents() {
+        return contents;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setContents(String contents) {
+        this.contents = contents;
     }
 
-    public String getDate() {
-        return date;
+    public String getImg_url() {
+        return img_url;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setImg_url(String img_url) {
+        this.img_url = img_url;
     }
 
-    public String getWriter() {
-        return writer;
+    public String getImg_url_thumb() {
+        return img_url_thumb;
     }
 
-    public void setWriter(String writer) {
-        this.writer = writer;
+    public void setImg_url_thumb(String img_url_thumb) {
+        this.img_url_thumb = img_url_thumb;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
     public int getLike_count() {
@@ -72,11 +94,19 @@ public class Post {
         this.reply_count = reply_count;
     }
 
-    public String getPicURL() {
-        return picURL;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setPicURL(String picURL) {
-        this.picURL = picURL;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
