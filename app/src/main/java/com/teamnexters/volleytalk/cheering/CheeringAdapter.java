@@ -22,6 +22,9 @@ import java.util.List;
 
 public class CheeringAdapter extends BaseAdapter {
 
+    private static final int SELF_CHEERING = 0;
+    private static final int OTHERS_CHEERING = 1;
+
     List<Cheering> cheeringList;
 
     public CheeringAdapter(List<Cheering> cheeringList) {
@@ -52,6 +55,19 @@ public class CheeringAdapter extends BaseAdapter {
     }
 
     @Override
+    public int getItemViewType(int position) {
+        if (cheeringList.get(position).getUser().equals(UserProfile.loadFromCache().getNickname()))
+            return SELF_CHEERING;
+        else
+            return OTHERS_CHEERING;
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return 2;
+    }
+
+    @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
 
         final Cheering selectedCheering = (Cheering) getItem(position);
@@ -60,10 +76,13 @@ public class CheeringAdapter extends BaseAdapter {
         if( view == null ) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            if (selectedCheering.getUser().equals(UserProfile.loadFromCache().getNickname())) {
-                view = inflater.inflate(R.layout.item_cheering_self, viewGroup, false);
-            } else {
-                view = inflater.inflate(R.layout.item_cheering_others, viewGroup, false);
+            switch (getItemViewType(position)) {
+                case SELF_CHEERING :
+                    view = inflater.inflate(R.layout.item_cheering_self, viewGroup, false);
+                    break;
+                case OTHERS_CHEERING :
+                    view = inflater.inflate(R.layout.item_cheering_others, viewGroup, false);
+                    break;
             }
         }
 

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/iv_post_picture"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_post_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/iv_post_picture"
+        android:layout_alignTop="@id/iv_post_picture"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="16dp"
+        android:textSize="14sp"
+        android:textColor="#4a4a4a"
+        android:textStyle="normal"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+
+
+    <TextView
+        android:id="@+id/tv_post_foreword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/iv_post_picture"
+        android:layout_below="@id/tv_post_title"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="3dp"
+        android:textSize="14sp"
+        android:textColor="#9b9b9b"
+        android:textStyle="normal"
+        android:maxLines="1"
+        android:ellipsize="end"/>
+
+    <TextView
+        android:id="@+id/tv_post_date_writer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/iv_post_picture"
+        android:layout_alignBottom="@id/iv_post_picture"
+        android:layout_marginStart="10dp"
+        android:textSize="12sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="#9b9b9b"/>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@id/iv_post_picture"
+        android:layout_marginEnd="20dp"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ico_heart_gray"/>
+
+        <TextView
+            android:id="@+id/tv_num_like_post"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="#9b9b9b"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:src="@mipmap/ico_reply"/>
+
+        <TextView
+            android:id="@+id/tv_num_reply_post"
+            android:layout_width="18dp"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif"
+            android:textStyle="normal"
+            android:textColor="#9b9b9b"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

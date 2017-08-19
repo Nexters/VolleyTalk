@@ -1,34 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:fillViewport="true">
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/lv_header">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/lv_header">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:text="Team"/>
+
+        </RelativeLayout>
+
+        <com.teamnexters.volleytalk.ui_element.NonScrollListView
+            android:id="@+id/lv_team_follow"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textColor="@android:color/white"
-            android:textSize="14sp"
-            android:text="TEAM"/>
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/lv_days_match_bg"
+            android:divider="@drawable/lv_days_match_divider"
+            android:elevation="4dp" />
 
-    </RelativeLayout>
 
-    <com.teamnexters.volleytalk.ui_element.NonScrollListView
-        android:id="@+id/lv_team_follow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/lv_days_match_bg"
-        android:divider="@drawable/lv_days_match_divider"
-        android:elevation="4dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/lv_header">
 
-</LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:text="Player"/>
+        </RelativeLayout>
+
+        <com.teamnexters.volleytalk.ui_element.NonScrollExpandableListView
+            android:id="@+id/elv_player_follow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/lv_days_match_bg"
+            android:divider="@drawable/lv_days_match_divider"
+            android:groupIndicator="@null"
+            android:elevation="4dp" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/lv_header">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:text="Following"/>
+
+        </RelativeLayout>
+
+        <com.teamnexters.volleytalk.ui_element.NonScrollListView
+            android:id="@+id/lv_following_user_follow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/lv_days_match_bg"
+            android:divider="@drawable/lv_days_match_divider"
+            android:elevation="4dp" />
+
+    </LinearLayout>
+
+</ScrollView>

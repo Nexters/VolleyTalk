@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/item_lv_player"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="56dp"
@@ -10,55 +9,37 @@
     android:background="@android:color/transparent">
 
     <ImageView
-        android:id="@+id/iv_star_player"
+        android:id="@+id/iv_yellow_star_follow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_marginStart="8dp"/>
+        android:layout_marginStart="8dp"
+        android:src="@mipmap/ico_star_on"/>
 
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv_user_name_follow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="5"
+        android:layout_weight="2"
         android:layout_marginStart="15dp"
-        android:layout_gravity="center_vertical">
+        android:layout_gravity="center_vertical"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        android:textColor="@android:color/black"
+        android:letterSpacing="-0.01"
+        android:lineSpacingExtra="16sp"/>
 
-        <TextView
-            android:id="@+id/tv_back_num_player"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            android:textColor="@android:color/black"
-            android:letterSpacing="-0.01"
-            android:lineSpacingExtra="16sp"
-            android:textAlignment="textStart"/>
-
-        <TextView
-            android:id="@+id/tv_name_player"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            android:textColor="@android:color/black"
-            android:letterSpacing="-0.01"
-            android:lineSpacingExtra="16sp"
-            android:textAlignment="textStart"/>
-
-        <TextView
-            android:id="@+id/tv_position_player"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            android:textColor="#9b9b9b"
-            android:letterSpacing="-0.01"
-            android:lineSpacingExtra="16sp"
-            android:textAlignment="textStart"/>
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_user_description_follow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:layout_marginStart="15dp"
+        android:layout_gravity="center_vertical"
+        android:textSize="14sp"
+        android:textColor="#000000"
+        android:letterSpacing="-0.01"
+        android:lineSpacingExtra="16sp"/>
 
 
     <LinearLayout
@@ -68,7 +49,7 @@
         android:layout_weight="1">
 
         <TextView
-            android:id="@+id/tv_num_like_player"
+            android:id="@+id/tv_num_follower_follow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
@@ -77,8 +58,7 @@
             android:textColor="#093971"
             android:letterSpacing="-0.01"
             android:lineSpacingExtra="0sp"
-            android:gravity="center_horizontal"
-            android:text="9999+"/>
+            android:gravity="center_horizontal"/>
 
 
         <TextView
@@ -91,7 +71,7 @@
             android:letterSpacing="-0.01"
             android:lineSpacingExtra="0sp"
             android:gravity="center_horizontal"
-            android:text="Like"/>
+            android:text="Follow"/>
     </LinearLayout>
 
     <LinearLayout
@@ -102,7 +82,7 @@
         android:layout_weight="1">
 
         <TextView
-            android:id="@+id/tv_num_post_player"
+            android:id="@+id/tv_num_post_follow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
@@ -110,8 +90,7 @@
             android:textColor="#093971"
             android:letterSpacing="-0.01"
             android:lineSpacingExtra="0sp"
-            android:gravity="center_horizontal"
-            android:text="1799"/>
+            android:gravity="center_horizontal"/>
 
 
         <TextView

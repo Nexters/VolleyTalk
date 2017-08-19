@@ -110,9 +110,6 @@ public class PlayerFragment extends Fragment {
         teamname.setTypeface(Typeface.createFromAsset(context.getAssets(), "NotoSans-Regular.ttf"));
         teamname.setText(teamNameList[Integer.valueOf(playerList.getTeam())-start]);
         teamname.setMaxLines(1);
-        //RelativeLayout.LayoutParams layoutParams_teamname =  new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        //layoutParams_teamname.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        //teamname.setLayoutParams(layoutParams_teamname);
         lv_header.addView(teamname);
         RelativeLayout.LayoutParams layoutParams_teamname = (RelativeLayout.LayoutParams)teamname.getLayoutParams();
         layoutParams_teamname.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);

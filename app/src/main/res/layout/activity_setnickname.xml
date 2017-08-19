@@ -1,26 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/et_nickname_welcome"
+    <ImageView
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/bg_copy_3"
+        android:scaleType="fitXY"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="nickname"/>
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/vtalk_logo_login_copy"/>
+
+        <EditText
+            android:id="@+id/et_nickname_welcome"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/rounded_rectangle"
+            android:paddingStart="10dp"
+            android:drawablePadding="10dp"
+            android:drawableStart="@mipmap/clip_4"
+            android:hint="@string/nickname"/>
 
 
-    <Button
-        android:id="@+id/btn_not_duplicated_welcome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="ID 중복체크"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
 
 
-    <Button
-        android:id="@+id/btn_go_to_next_page_welcome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="닉네임 저장"/>
+            <Button
+                android:id="@+id/btn_not_duplicated_welcome"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginEnd="2dp"
+                android:background="@drawable/rounded_rectangle"
+                android:text="@string/nickname_check_duplicate"
+                android:textColor="@android:color/white"/>
 
-</LinearLayout>
+
+            <Button
+                android:id="@+id/btn_go_to_next_page_welcome"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="2dp"
+                android:background="@drawable/rounded_rectangle"
+                android:text="@string/nickname_update"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

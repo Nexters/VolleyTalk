@@ -79,6 +79,7 @@ public class WriteActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //선택한 이미지 없애기
+                //uri 없애고.... 이미지뷰 숨기기
             }
         });
 
@@ -101,10 +102,6 @@ public class WriteActivity extends AppCompatActivity {
             if (requestCode == SELECT_PICTURE) {
                 selectedImageUri = data.getData();
                 selectedImagePath = selectedImageUri.getPath();
-
-                Log.e("PATH TEST", selectedImageUri.getPath());
-                Log.e("PATH TEST", selectedImageUri.getEncodedPath());
-
 
                 iv_selected_photo_write.setVisibility(View.VISIBLE);
                 Glide.with(this)
