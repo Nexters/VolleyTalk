@@ -1,108 +1,295 @@
 package com.teamnexters.volleytalk.team;
 
-import android.content.Context;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
+import android.widget.AbsListView;
+import android.widget.GridView;
 
 import com.teamnexters.volleytalk.R;
+import com.teamnexters.volleytalk.common.ApiService;
+import com.teamnexters.volleytalk.team.adapter.TeamAdapter;
+import com.teamnexters.volleytalk.team.model.TeamModel;
+import com.teamnexters.volleytalk.team.model.TeamModelRetro;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.teamnexters.volleytalk.common.ApiService.API_URL;
 
 /**
- * Created by smart on 2017-08-13.
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link TeamFragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link TeamFragment#newInstance} factory method to
+ * create an instance of this fragment.∂
  */
-
-
 public class TeamFragment extends Fragment {
-    public LinearLayout wall_team;
-    private View rootView;
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
-    private Context context;
+    // TODO: Rename parameter arguments, choose names that match
+    private Retrofit retrofit;
+    private ApiService apiService;
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+//    private VideoGridAdapter adapter;
 
-        context = getContext();
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String CATEGORY_TYPE = "CATEGORY_TYPE";
+    private static final String LANGUAGE = "LANGUAGE";
+    private static final String POSITION = "POSITION";
 
-        //layout inflate
+    // TODO: Rename and change types of parameters
+    private String category_type;
+    private String language;
+    private int position;
 
-        View rootView = inflater.inflate(R.layout.fragment_team, container, false);
-        wall_team = (LinearLayout) rootView.findViewById(R.id.wall_team);
-        RecyclerView ro_view = (RecyclerView) rootView.findViewById(R.id.recyview);
+    private OnFragmentInteractionListener mListener;
 
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 3);
-        ro_view.setLayoutManager(layoutManager);
+    private TeamModelRetro teamModelRetro;
+    private TeamAdapter teamAdapter;
+    GridView gridView;
 
-        RadioButton rb_male_team = (RadioButton) ro_view.findViewById(R.id.rb_male_team);
-        RadioButton rb_female_team = (RadioButton) ro_view.findViewById(R.id.rb_female_team);
-
-        //     rb_male_team.setOnClickListener(clickSegmentedControl);
-        //   rb_female_team.setOnClickListener(clickSegmentedControl);
-
-
-        List<Team_man> teamList = new ArrayList<>();
-        teamList.add(new Team_man("http://postfiles9.naver.net/MjAxNzA4MTNfMjg1/MDAxNTAyNTYwMDI3Nzc3.Tq4E2lxC_YdBUC6Muxv0UBJvep6Rpm0zDz2crolx_7kg.kQfsDLLezRKfHjMFyjMjnnpbinzYdZfwmMQxp7B0MvAg.PNG.shypang/img_team_bluefans.png?type=w966", 1));
-        teamList.add(new Team_man("http://postfiles6.naver.net/MjAxNzA4MTNfNzIg/MDAxNTAyNTYwMDI3Nzgw.tJC2T1LWA1yIPcjW-3Vofo6hlqsQQ3GJ4ySukiejTRwg.bVkkVLZNMT0KB2jMw5yroyBIobAyEj1EQbCN4Rdc3Nog.JPEG.shypang/img_team_jumbos.jpg?type=w966", 2));
-        teamList.add(new Team_man("http://postfiles7.naver.net/MjAxNzA4MTNfMjU1/MDAxNTAyNTYwMDI3Nzgy.Pic71ci6YItLSodfq5skU6Whwqlj35VefzQjeSV0Racg.Hgk1SEbEpKSqGLYMPwAOQO4cOysouSBbKy44sC51Hj8g.PNG.shypang/img_team_jumbos.png?type=w966", 3));
-        teamList.add(new Team_man("http://postfiles16.naver.net/MjAxNzA4MTNfMjI3/MDAxNTAyNTYwMDI3Nzg0.-wto9w3kPd-Aygxu8K3IfwspvmLkv1Z-Lnq9f-3ECXEg.o4v58nqUKDkcX6Tiep1QqoR0-hpI2k5GzSG1s-kh7dEg.PNG.shypang/img_team_rushcash.png?type=w966", 4));
-        teamList.add(new Team_man("http://postfiles9.naver.net/MjAxNzA4MTNfMzgg/MDAxNTAyNTYwMDI3Nzgz.BkN3CMiSqK60FsVFWk2kX8SZiOqqRXAo2_J1sd_EnQsg.mJTjjBlrJDhDX8L4u0xBK6J5QhbSzwlmxVi1AxqA9e0g.PNG.shypang/img_team_skywakers.png?type=w966", 5));
-        teamList.add(new Team_man("http://postfiles3.naver.net/MjAxNzA4MTNfMTc1/MDAxNTAyNTYwMDI3Nzg0.tJbMldELRnVDxmUfPxBjMbdchK6aKUuPfiB0GQZfphEg.FbQcl5LI3PlicWX9rOzBp241DDG1TWsTn4oOlB_cu-og.PNG.shypang/img_team_stars.png?type=w966", 6));
-        teamList.add(new Team_man("http://postfiles1.naver.net/MjAxNzA4MTNfNzYg/MDAxNTAyNTYwMDI3ODU3.BSy6keCl4foLsc80Sq01rpgWm646gOY3aMLojdDTnQQg.EMMg69eriI56NCfTeZIEmjBHN9GkLil7NU_hxorHLCgg.PNG.shypang/img_team_vixtorm.png?type=w966", 7));
-        teamList.add(new Team_man("http://postfiles7.naver.net/MjAxNzA4MTNfMjI3/MDAxNTAyNTYwMDI3ODY1.dW_GEweUgOoCZ_3Ngq1Q-TK5ha5dWLRZOscOMq9GAU8g.A9auyr52gcvUhuGsyivpY8gowVoMhiSOmWYts-3PcV8g.PNG.shypang/img_team_wibee.png?type=w966", 8));
-
-        TeamAdapter teamAdapter = new TeamAdapter(teamList, context);
-        ro_view.setAdapter(teamAdapter);
+    private ArrayList<String> categoryList;
+    private ArrayList<String> languageList;
+    private boolean mLockListView = false;
+    private int list_count = 0;
 
 
-        return rootView;
+    private Call<TeamModelRetro> mainModelCall;
+
+    public TeamFragment() {
+        // Required empty public constructor
     }
 
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param category_type Parameter 1.
+     * @return A new instance of fragment SurveyItemFragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static TeamFragment newInstance(String category_type, String language, int position) {
+        TeamFragment fragment = new TeamFragment();
+        Bundle args = new Bundle();
+        args.putString(CATEGORY_TYPE, category_type);
+        args.putString(LANGUAGE, language);
+        args.putInt(POSITION, position);
+        fragment.setArguments(args);
 
+        Log.e("JHC_DEBUG", "RECENT FRAGMENT newInstance");
 
-    /* View.OnClickListener clickSegmentedControl = new View.OnClickListener() {
+        return fragment;
+    }
 
-        @Override
-        public void onClick(View view) {
-
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            category_type = getArguments().getString(CATEGORY_TYPE);
+            language = getArguments().getString(LANGUAGE);
+            position = getArguments().getInt(POSITION);
         }
-    };*/
 
+        Log.e("JHC_DEBUG", "RECENT FRAGMENT onCreate");
+    }
 
-}
+    @Override
+    public void onResume() {
+        super.onResume();
 
-/*
- 팀상태로 나눠서 진행 하는거
+        if (teamAdapter != null) {
+            teamAdapter.notifyDataSetChanged();
+        }
+    }
 
- View.OnClickListener clickSegmentedControl = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            wall_team.removeAllViews();
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_team, container, false);
 
-            switch (view.getId()) {
-                case R.id.rb_male_team:
-                   // teamNameList = getResources().getStringArray(R.array.team_male_list);
-                  //  teamColorList = getResources().getIntArray(R.array.team_male_color_list);
-                  //  getplayerList("M");
-                    break;
-                case R.id.rb_female_team:
-                 //   teamNameList = getResources().getStringArray(R.array.team_female_list);
-                //    teamColorList = getResources().getIntArray(R.array.team_female_color_list);
-                //    getplayerList("F");
-                    break;
+        initResources(view);
+
+        test();
+
+        return view;
+    }
+
+    private void test() {
+
+        String[] manTeamList = getContext().getResources().getStringArray(R.array.team_male_list);
+        int[] manTeamColor = getContext().getResources().getIntArray(R.array.team_male_color_list);
+        String[] manTeamImage = getContext().getResources().getStringArray(R.array.team_img_male_list);
+
+        for(int i=0; i<7; i++) {
+            testItem(i+1, manTeamColor[i], manTeamImage[i], manTeamList[i]);
+        }
+
+        teamAdapter.notifyDataSetChanged();
+    }
+
+    private void testItem(int seq, int teamColor, String imgUrl, String txtTeam) {
+        TeamModel teamModel = new TeamModel();
+        teamModel.setSeq(seq);
+        teamModel.setTeamColor(teamColor);
+        teamModel.setTeamImg(imgUrl);
+        teamModel.setTeamText(txtTeam);
+        teamModelRetro.getList().add(teamModel);
+    }
+
+    private void initResources(View view) {
+        initRetrofit();
+
+        initGridView(view);
+    }
+
+    private void initRetrofit() {
+        /** Retrofit **/
+        retrofit = new Retrofit.Builder()
+                .baseUrl(API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        apiService = retrofit.create(ApiService.class);
+
+        teamModelRetro = new TeamModelRetro();
+    }
+
+    private void initGridView(View view) {
+        gridView = (GridView) view.findViewById(R.id.gridView);
+        gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+
             }
+
+            @Override
+            public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                // 현재 가장 처음에 보이는 셀번호와 보여지는 셀번호를 더한값이
+                // 전체의 숫자와 동일해지면 가장 아래로 스크롤 되었다고 가정합니다.
+                int count = totalItemCount - visibleItemCount;
+
+                if (firstVisibleItem >= count && totalItemCount != 0 && mLockListView == false) {
+                    mLockListView = true;
+
+                    if (teamModelRetro.getList().isEmpty()) {
+                        mLockListView = false;
+                        // nothing
+                    } else {
+                        //getList(String.valueOf(list_count));
+                    }
+                }
+            }
+        });
+
+        teamAdapter = new TeamAdapter(getContext(), teamModelRetro);
+        gridView.setAdapter(teamAdapter);
+
+    }
+
+//    private void getList(String start) {
+//        String category = "'" + category_type + "'";
+//        Log.e(JHC_DEBUG, "<<<<< CATEGORY : " + category);
+//        Log.e(JHC_DEBUG, "<<<<< SORT FLAG : " + getSortType());
+//        Log.e(JHC_DEBUG, "<<<<< START : " + start);
+//
+//        mainModelCall = apiService.getVideoList(category, null, getSortType(), "D", start, String.valueOf(MAX_LIST_COUNT), null);
+//        mainModelCall.enqueue(new Callback<TeamModelRetro>() {
+//            @Override
+//            public void onResponse(Call<TeamModelRetro> call, Response<TeamModelRetro> response) {
+//
+//                if (response == null) {
+//                    Log.e("JHC_DEBUG", "RESPONSE IS NULL");
+//                    return;
+//                }
+//
+//                if (!response.isSuccessful()) {
+//                    Log.e("JHC_DEBUG", response.body().getCode());
+//                    return;
+//                }
+//
+//                if (!response.body().isSuccessful()) {
+//                    Log.e("JHC_DEBUG", response.body().getVideoList().toString());
+//                    return;
+//                }
+//
+//                Log.e("JHC_DEBUG", "데이터 가져오기에 성공했습니다. " + response.body().getCode() + " / " + response.body().getMessage());
+//
+//                if (list_count == 0) {
+//                    teamModelRetro = response.body();
+//                    teamAdapter = new TeamAdapter2(getActivity(), teamModelRetro);
+//                    gridView.setAdapter(teamAdapter);
+//                } else {
+//                    for (int i = 0; i < response.body().getVideoList().size(); i++) {
+//                        teamModelRetro.getVideoList().add(response.body().getVideoList().get(i));
+//                    }
+//                }
+//
+//                list_count += MAX_LIST_COUNT;
+//                mLockListView = false;
+//
+//                teamAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<TeamModelRetro> call, Throwable t) {
+//                Log.e("JHC_DEBUG", "데이터 가져오기에 실패했습니다. " + t.getMessage());
+//            }
+//        });
+//    }
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
         }
-    };*/
+    }
 
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        if (context instanceof OnFragmentInteractionListener) {
+//            mListener = (OnFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
+//    }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        if (mainModelCall.isExecuted()) {
+            mainModelCall.cancel();
+        }
+    }
+}

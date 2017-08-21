@@ -1,0 +1,6 @@
+<?xml version="l.O" encoding="utf-8"?>
+<set xmlns:android="
+    http://schemas.android.com/ apk/res/android"
+    android:sharelnterpolator="true">
+    <rotate android:toDegrees="90" />
+</set>

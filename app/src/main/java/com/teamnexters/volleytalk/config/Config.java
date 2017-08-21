@@ -22,4 +22,9 @@ public class Config {
 
     public static final int MALE_TEAM_START_SEQ = 1;
     public static final int FEMALE_TEAM_START_SEQ = 2;
+
+    /**
+     * JHC Config
+     */
+    public static final String JHC_DEBUG = "JHC_DEBUG";
 }
