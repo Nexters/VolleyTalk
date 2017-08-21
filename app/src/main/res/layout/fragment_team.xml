@@ -1,67 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#f5f5f5"
     android:orientation="vertical">
 
-        <info.hoang8f.android.segmented.SegmentedGroup
-            android:id="@+id/segmented_control_team"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:background="@android:color/transparent"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:sc_border_width="0dp"
-            app:sc_checked_text_color="#1b4d83"
-            app:sc_corner_radius="40dp"
-            app:sc_tint_color="@android:color/white">
+    <info.hoang8f.android.segmented.SegmentedGroup
+        android:id="@+id/segmented_control_team"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:sc_border_width="0dp"
+        app:sc_checked_text_color="#1b4d83"
+        app:sc_corner_radius="40dp"
+        app:sc_tint_color="@android:color/white">
 
 
-            <RadioButton
-                android:id="@+id/rb_male_team"
-                style="@style/RadioButton"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:letterSpacing="-0.01"
-                android:lineSpacingExtra="12sp"
-                android:text="남자 프로배구"
-                android:textColor="#9b9b9b"
-                android:textSize="14sp" />
+        <RadioButton
+            android:id="@+id/rb_male_team"
+            style="@style/RadioButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:checked="true"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="12sp"
+            android:text="남자 프로배구"
+            android:textColor="#9b9b9b"
+            android:textSize="14sp" />
 
-            <RadioButton
-                android:id="@+id/rb_female_team"
-                style="@style/RadioButton"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:letterSpacing="-0.01"
-                android:lineSpacingExtra="12sp"
-                android:text="여자 프로배구"
-                android:textColor="#9b9b9b"
-                android:textSize="14sp" />
+        <RadioButton
+            android:id="@+id/rb_female_team"
+            style="@style/RadioButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:layout_weight="1"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="12sp"
+            android:text="여자 프로배구"
+            android:textColor="#9b9b9b"
+            android:textSize="14sp" />
 
 
+    </info.hoang8f.android.segmented.SegmentedGroup>
 
-
-
-        </info.hoang8f.android.segmented.SegmentedGroup>
-
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/img_volleyball"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyview"
         android:layout_width="match_parent"
         android:layout_height="500dp" />
-
-
-
-
 
 
 </LinearLayout>

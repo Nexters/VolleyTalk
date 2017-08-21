@@ -10,7 +10,7 @@ public class Config {
     /**
      * Server Info ----------------------------------------------------------------------------------------------------
      */
-    public static String SERVER_IP = "-";
+    public static String SERVER_IP = "http://13.124.105.110:3000/";
 
 
     /**
@@ -19,4 +19,7 @@ public class Config {
 
     public static final int PHOTO_NEWS_SIZE = 3;
     public static final int FOLDED_LIST_SIZE = 5;
+
+    public static final int MALE_TEAM_START_SEQ = 1;
+    public static final int FEMALE_TEAM_START_SEQ = 2;
 }

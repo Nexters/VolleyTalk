@@ -22,7 +22,7 @@ import java.util.List;
  */
 
 
-public  class TeamFragment extends Fragment {
+public class TeamFragment extends Fragment {
     public LinearLayout wall_team;
     private View rootView;
     private RecyclerView recyclerView;
@@ -48,8 +48,8 @@ public  class TeamFragment extends Fragment {
         RadioButton rb_male_team = (RadioButton) ro_view.findViewById(R.id.rb_male_team);
         RadioButton rb_female_team = (RadioButton) ro_view.findViewById(R.id.rb_female_team);
 
-   //     rb_male_team.setOnClickListener(clickSegmentedControl);
-     //   rb_female_team.setOnClickListener(clickSegmentedControl);
+        //     rb_male_team.setOnClickListener(clickSegmentedControl);
+        //   rb_female_team.setOnClickListener(clickSegmentedControl);
 
 
         List<Team_man> teamList = new ArrayList<>();
