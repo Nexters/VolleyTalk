@@ -1,46 +1,44 @@
-package com.teamnexters.volleytalk.team;
+package com.teamnexters.volleytalk.team.fragment;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.teamnexters.volleytalk.R;
 import com.teamnexters.volleytalk.common.ApiService;
+import com.teamnexters.volleytalk.team.DetailTeamActivity;
+import com.teamnexters.volleytalk.team.adapter.DetailTeamAllAdapter;
 import com.teamnexters.volleytalk.team.adapter.TeamAdapter;
+import com.teamnexters.volleytalk.team.model.PostAllModelRetro;
 import com.teamnexters.volleytalk.team.model.TeamModel;
 import com.teamnexters.volleytalk.team.model.TeamModelRetro;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.teamnexters.volleytalk.common.ApiService.API_URL;
-import static com.teamnexters.volleytalk.config.Config.JHC_DEBUG;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link TeamFragment.OnFragmentInteractionListener} interface
+ * {@link TeamDetailAllFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link TeamFragment#newInstance} factory method to
+ * Use the {@link TeamDetailAllFragment#newInstance} factory method to
  * create an instance of this fragment.∂
  */
-public class TeamFragment extends Fragment {
+public class TeamDetailAllFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     private Retrofit retrofit;
     private ApiService apiService;
@@ -68,10 +66,14 @@ public class TeamFragment extends Fragment {
     private RadioButton rb_female_team;
     private int list_count = 0;
 
+    private ListView lv_allpost_mypage;
+    private DetailTeamAllAdapter detailTeamAllAdapter;
+    private PostAllModelRetro postAllModelRetro;
+
 
     private Call<TeamModelRetro> mainModelCall;
 
-    public TeamFragment() {
+    public TeamDetailAllFragment() {
         // Required empty public constructor
     }
 
@@ -83,8 +85,8 @@ public class TeamFragment extends Fragment {
      * @return A new instance of fragment SurveyItemFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static TeamFragment newInstance(String category_type, String language, int position) {
-        TeamFragment fragment = new TeamFragment();
+    public static TeamDetailAllFragment newInstance(String category_type, String language, int position) {
+        TeamDetailAllFragment fragment = new TeamDetailAllFragment();
         Bundle args = new Bundle();
         args.putString(CATEGORY_TYPE, category_type);
         args.putString(LANGUAGE, language);
@@ -121,11 +123,11 @@ public class TeamFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_team, container, false);
+        View view = inflater.inflate(R.layout.fragment_allpost, container, false);
 
         initResources(view);
 
-        test();
+//        test();
 
         return view;
     }
@@ -174,10 +176,18 @@ public class TeamFragment extends Fragment {
 
     private void initResources(View view) {
         initRetrofit();
+        initListView(view);
+//
+//        initRadioButtons(view);
+//
+//        initGridView(view);
+    }
 
-        initRadioButtons(view);
+    private void initListView(View view) {
+        lv_allpost_mypage = (ListView) view.findViewById(R.id.lv_allpost_mypage);
 
-        initGridView(view);
+        detailTeamAllAdapter = new DetailTeamAllAdapter(getContext(), postAllModelRetro);
+        lv_allpost_mypage.setAdapter(detailTeamAllAdapter);
     }
 
     private void initRetrofit() {
@@ -188,8 +198,7 @@ public class TeamFragment extends Fragment {
                 .build();
         apiService = retrofit.create(ApiService.class);
 
-        manTeamModelRetro = new TeamModelRetro();
-        womanTeamModelRetro = new TeamModelRetro();
+        postAllModelRetro = new PostAllModelRetro();
     }
 
     private void initRadioButtons(View view) {

@@ -42,6 +42,9 @@
             android:name=".MyPageActivity"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".team.DetailTeamActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".player.DetailPlayerActivity"
             android:screenOrientation="portrait"/>
         <activity

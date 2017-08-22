@@ -25,18 +25,42 @@ import com.teamnexters.volleytalk.album.AlbumFragment;
 import com.teamnexters.volleytalk.cheering.CheeringFragment;
 import com.teamnexters.volleytalk.player.Player;
 import com.teamnexters.volleytalk.post.PostFragment;
+import com.teamnexters.volleytalk.team.fragment.TeamDetailAllFragment;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 /**
  * Created by MIN on 2017. 8. 11..
  */
 
-public class DetailTeamActivity extends AppCompatActivity {
+public class DetailTeamActivity extends AppCompatActivity implements View.OnClickListener {
+    /**
+     * Toolbar
+     **/
+    private Toolbar toolbar_detail_team;
 
-    private SectionsPagerAdapter mSectionsPagerAdapter;
-    private FloatingActionButton fab_player;
-    private ViewPager mViewPager;
+    /**
+     * Resources
+     **/
+    private ImageView iv_back_detail_team;
+    private ImageView iv_follow_detail_team;
+    private ImageView iv_heart_detail_team;
+    private TextView tv_name_detail_team;
+    private TextView tv_back_detail_team;
+    private TextView tv_physical_detail_team;
+    private TextView tv_num_heart_detail_team;
+    private TextView tv_num_feed_detail_team;
+
+    /**
+     * TabLayout, ViewPager
+     **/
     private TabLayout tabLayout;
+    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private ViewPager mViewPager;
+
+    /**
+     * Floating
+     **/
+    private FloatingActionButton fab_team;
 
     private Context context;
     private Player who;
@@ -49,80 +73,98 @@ public class DetailTeamActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detailplayer);
+        setContentView(R.layout.activity_detailteam);
 
-        Intent intent = getIntent();
-        who = (Player) intent.getSerializableExtra("who");
+//        Intent intent = getIntent();
+//        who = (Player) intent.getSerializableExtra("who");
+//
+//        context = getApplicationContext();
 
-        context = getApplicationContext();
+        initResources();
 
 
-        ImageView iv_follow_detail_player = (ImageView) findViewById(R.id.iv_follow_detail_player);
-        ImageView iv_heart_detail_player = (ImageView) findViewById(R.id.iv_heart_detail_player);
-
-        TextView tv_name_detail_player = (TextView) findViewById(R.id.tv_name_detail_player);
-        TextView tv_back_detail_player = (TextView) findViewById(R.id.tv_back_detail_player);
-        TextView tv_physical_detail_player = (TextView) findViewById(R.id.tv_physical_detail_player);
-        TextView tv_num_heart_detail_player = (TextView) findViewById(R.id.tv_num_heart_detail_player);
-        TextView tv_num_feed_detail_player = (TextView) findViewById(R.id.tv_num_feed_detail_player);
-
-        tv_name_detail_player.setText(who.getName());
-        tv_back_detail_player.setText("No." + who.getBacknumber());
-        tv_physical_detail_player.setText(who.getPhysical());
-        tv_num_heart_detail_player.setText(who.getLikecount());
-        tv_num_feed_detail_player.setText(who.getPostcount());
-
-        if (!who.getFollow().isEmpty()) {
-            Glide.with(this)
-                    .load(R.mipmap.ico_raw_star_on)
-                    .into(iv_follow_detail_player);
-        }
-
-        Toolbar toolbar_detail_player = (Toolbar) findViewById(R.id.toolbar_detail_player);
-
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-        mViewPager = (ViewPager) findViewById(R.id.container_detail_player);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.addOnPageChangeListener(onPageChangeListener);
-
-        tabLayout = (TabLayout) findViewById(R.id.tabs_detail_player);
-        tabLayout.setupWithViewPager(mViewPager);
         changeTabsFont();
 
-        ImageView iv_back_detail_player = (ImageView) toolbar_detail_player.findViewById(R.id.iv_back_detail_player);
-        iv_back_detail_player.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    }
+
+    private void initResources() {
+        initToolbar();
+        initTopLayout();
+        initViewPager();
+        initTabLayout();
+    }
+
+    private void initToolbar() {
+        toolbar_detail_team = (Toolbar) findViewById(R.id.toolbar_detail_team);
+    }
+
+    private void initTopLayout() {
+        /** 뒤로가기 버튼 **/
+        iv_back_detail_team = (ImageView) toolbar_detail_team.findViewById(R.id.iv_back_detail_team);
+        iv_back_detail_team.setOnClickListener(this);
+
+        iv_follow_detail_team = (ImageView) findViewById(R.id.iv_follow_detail_team);
+        iv_heart_detail_team = (ImageView) findViewById(R.id.iv_heart_detail_team);
+
+        tv_name_detail_team = (TextView) findViewById(R.id.tv_name_detail_team);
+        tv_back_detail_team = (TextView) findViewById(R.id.tv_back_detail_team);
+        tv_physical_detail_team = (TextView) findViewById(R.id.tv_physical_detail_team);
+        tv_num_heart_detail_team = (TextView) findViewById(R.id.tv_num_heart_detail_team);
+        tv_num_feed_detail_team = (TextView) findViewById(R.id.tv_num_feed_detail_team);
+
+        /** Floating 버튼 **/
+        fab_team = (FloatingActionButton) findViewById(R.id.fab_detail_team);
+        fab_team.setOnClickListener(this);
+
+//        tv_name_detail_team.setText(who.getName());
+//        tv_back_detail_team.setText("No." + who.getBacknumber());
+//        tv_physical_detail_team.setText(who.getPhysical());
+//        tv_num_heart_detail_team.setText(who.getLikecount());
+//        tv_num_feed_detail_team.setText(who.getPostcount());
+//
+//        if (!who.getFollow().isEmpty()) {
+//            Glide.with(this)
+//                    .load(R.mipmap.ico_raw_star_on)
+//                    .into(iv_follow_detail_team);
+//        }
+
+    }
+
+    private void initViewPager() {
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mViewPager = (ViewPager) findViewById(R.id.container_detail_team);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.addOnPageChangeListener(onPageChangeListener);
+    }
+
+    private void initTabLayout() {
+        tabLayout = (TabLayout) findViewById(R.id.tabs_detail_team);
+        tabLayout.setupWithViewPager(mViewPager);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+
+        switch (v.getId()) {
+            case R.id.iv_back_detail_team:
                 finish();
-            }
-        });
-
-        iv_follow_detail_player.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                break;
+            case R.id.iv_follow_detail_team:
                 //follow 하기, 취소하기.
-            }
-        });
+                break;
 
-        iv_heart_detail_player.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            case R.id.iv_heart_detail_team:
                 //like 하기, 취소하기
-            }
-        });
+                break;
 
-        fab_player = (FloatingActionButton) findViewById(R.id.fab_detail_player);
-        fab_player.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), WriteActivity.class);
+            case R.id.fab_detail_team:
+                intent = new Intent(getApplicationContext(), WriteActivity.class);
                 intent.putExtra("type", "player");
                 intent.putExtra("seq", who.getSeq());
                 startActivity(intent);
-            }
-        });
-
+                break;
+        }
     }
 
 
@@ -140,12 +182,14 @@ public class DetailTeamActivity extends AppCompatActivity {
 
             switch (position) {
                 case 0:
-                    return PostFragment.newInstance("player", String.valueOf(who.getSeq()));
+//                    return PostFragment.newInstance("player", String.valueOf(who.getSeq()));
+                    return new TeamDetailAllFragment();
                 case 1:
                     return AlbumFragment.newInstance("player");
                 case 2:
-                    fragment = Fragment.instantiate(context, CheeringFragment.class.getName());
-                    break;
+                case 3:
+                case 4:
+                    return AlbumFragment.newInstance("player");
             }
 
             return fragment;
@@ -153,7 +197,7 @@ public class DetailTeamActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 3;
+            return 5;
         }
 
         @Override
@@ -164,7 +208,11 @@ public class DetailTeamActivity extends AppCompatActivity {
                 case 1:
                     return "앨범";
                 case 2:
-                    return "응원하기";
+                    return "뉴스";
+                case 3:
+                    return "일정 및 결과";
+                case 4:
+                    return "선수";
             }
             return null;
         }
@@ -181,10 +229,12 @@ public class DetailTeamActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                 case 1:
-                    fab_player.show();
+                    fab_team.show();
                     break;
                 case 2:
-                    fab_player.hide();
+                case 3:
+                case 4:
+                    fab_team.hide();
                     break;
             }
         }
@@ -194,9 +244,6 @@ public class DetailTeamActivity extends AppCompatActivity {
 
         }
     };
-
-
-
 
     private void changeTabsFont() {
 
@@ -213,4 +260,6 @@ public class DetailTeamActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }
