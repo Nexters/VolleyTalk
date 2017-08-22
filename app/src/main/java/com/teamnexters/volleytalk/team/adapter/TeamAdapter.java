@@ -88,7 +88,7 @@ public class TeamAdapter extends BaseAdapter {
         viewHolder.view_team.setBackgroundColor(teamModel.getTeamColor());
         Log.e(JHC_DEBUG, "COLOR : " + teamModel.getTeamColor());
 
-        if (teamModel.getTeamImg() != null && !teamModel.getTeamImg().equals("") && !teamModel.getTeamImg().equals("null")) {
+        if (teamModel.getTeamImg() != 0) {
             Log.e(JHC_DEBUG, "IMG : " + teamModel.getTeamImg());
             Glide.with(context)
                     .load(teamModel.getTeamImg())

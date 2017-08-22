@@ -13,6 +13,10 @@ import java.util.List;
 public class TeamModel implements Serializable {
 
     public TeamModel() {
+        seq = 0;
+        team_color = 0;
+        team_img = 0;
+        team_text = "";
     }
 
     @SerializedName("seq")
@@ -20,7 +24,7 @@ public class TeamModel implements Serializable {
     @SerializedName("team_color")
     int team_color;
     @SerializedName("team_img")
-    String team_img;
+    int team_img;
     @SerializedName("team_text")
     String team_text;
 
@@ -40,11 +44,11 @@ public class TeamModel implements Serializable {
         this.team_color = team_color;
     }
 
-    public String getTeamImg() {
+    public int getTeamImg() {
         return team_img;
     }
 
-    public void setTeamImg(String team_img) {
+    public void setTeamImg(int team_img) {
         this.team_img = team_img;
     }
 

@@ -33,6 +33,14 @@
     <string name="team_img_male_6">http://postfiles3.naver.net/MjAxNzA4MTNfMTc1/MDAxNTAyNTYwMDI3Nzg0.tJbMldELRnVDxmUfPxBjMbdchK6aKUuPfiB0GQZfphEg.FbQcl5LI3PlicWX9rOzBp241DDG1TWsTn4oOlB_cu-og.PNG.shypang/img_team_stars.png?type=w966</string>
     <string name="team_img_male_7">http://postfiles16.naver.net/MjAxNzA4MTNfMjI3/MDAxNTAyNTYwMDI3Nzg0.-wto9w3kPd-Aygxu8K3IfwspvmLkv1Z-Lnq9f-3ECXEg.o4v58nqUKDkcX6Tiep1QqoR0-hpI2k5GzSG1s-kh7dEg.PNG.shypang/img_team_rushcash.png?type=w966</string>
 
+    <!--<string name="team_img_female_1">@drawable/img_team_hyundai</string>-->
+    <!--<string name="team_img_female_2">http://postfiles6.naver.net/MjAxNzA4MTNfNzIg/MDAxNTAyNTYwMDI3Nzgw.tJC2T1LWA1yIPcjW-3Vofo6hlqsQQ3GJ4ySukiejTRwg.bVkkVLZNMT0KB2jMw5yroyBIobAyEj1EQbCN4Rdc3Nog.JPEG.shypang/img_team_jumbos.jpg?type=w966</string>-->
+    <!--<string name="team_img_female_3">http://postfiles1.naver.net/MjAxNzA4MTNfNzYg/MDAxNTAyNTYwMDI3ODU3.BSy6keCl4foLsc80Sq01rpgWm646gOY3aMLojdDTnQQg.EMMg69eriI56NCfTeZIEmjBHN9GkLil7NU_hxorHLCgg.PNG.shypang/img_team_vixtorm.png?type=w966</string>-->
+    <!--<string name="team_img_female_4">http://postfiles9.naver.net/MjAxNzA4MTNfMjg1/MDAxNTAyNTYwMDI3Nzc3.Tq4E2lxC_YdBUC6Muxv0UBJvep6Rpm0zDz2crolx_7kg.kQfsDLLezRKfHjMFyjMjnnpbinzYdZfwmMQxp7B0MvAg.PNG.shypang/img_team_bluefans.png?type=w966</string>-->
+    <!--<string name="team_img_female_5">http://postfiles7.naver.net/MjAxNzA4MTNfMjI3/MDAxNTAyNTYwMDI3ODY1.dW_GEweUgOoCZ_3Ngq1Q-TK5ha5dWLRZOscOMq9GAU8g.A9auyr52gcvUhuGsyivpY8gowVoMhiSOmWYts-3PcV8g.PNG.shypang/img_team_wibee.png?type=w966</string>-->
+    <!--<string name="team_img_female_6">http://postfiles3.naver.net/MjAxNzA4MTNfMTc1/MDAxNTAyNTYwMDI3Nzg0.tJbMldELRnVDxmUfPxBjMbdchK6aKUuPfiB0GQZfphEg.FbQcl5LI3PlicWX9rOzBp241DDG1TWsTn4oOlB_cu-og.PNG.shypang/img_team_stars.png?type=w966</string>-->
+    <!--<string name="team_img_female_7">http://postfiles16.naver.net/MjAxNzA4MTNfMjI3/MDAxNTAyNTYwMDI3Nzg0.-wto9w3kPd-Aygxu8K3IfwspvmLkv1Z-Lnq9f-3ECXEg.o4v58nqUKDkcX6Tiep1QqoR0-hpI2k5GzSG1s-kh7dEg.PNG.shypang/img_team_rushcash.png?type=w966</string>-->
+
     <string name="nickname">닉네임</string>
     <string name="nickname_check_duplicate">닉네임 중복 체크</string>
     <string name="nickname_update">닉네임 저장</string>

@@ -1,5 +1,6 @@
 package com.teamnexters.volleytalk.team;
 
+import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -27,6 +28,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.teamnexters.volleytalk.common.ApiService.API_URL;
+import static com.teamnexters.volleytalk.config.Config.JHC_DEBUG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -135,10 +137,10 @@ public class TeamFragment extends Fragment {
 
         String[] manTeamList = getContext().getResources().getStringArray(R.array.team_male_list);
         int[] manTeamColor = getContext().getResources().getIntArray(R.array.team_male_color_list);
-        String[] manTeamImage = getContext().getResources().getStringArray(R.array.team_img_male_list);
+        TypedArray imgs = getContext().getResources().obtainTypedArray(R.array.team_img_male_list);
 
         for (int i = 0; i < 7; i++) {
-            TeamModel teamModel = testItem(i + 1, manTeamColor[i], manTeamImage[i], manTeamList[i]);
+            TeamModel teamModel = testItem(i + 1, manTeamColor[i], imgs.getResourceId(i, -1), manTeamList[i]);
             manTeamModelRetro.getList().add(teamModel);
         }
 
@@ -149,17 +151,17 @@ public class TeamFragment extends Fragment {
 
         String[] womanTeamList = getContext().getResources().getStringArray(R.array.team_female_list);
         int[] womanTeamColor = getContext().getResources().getIntArray(R.array.team_female_color_list);
-        String[] womanTeamImage = getContext().getResources().getStringArray(R.array.team_img_female_list);
+        TypedArray imgs = getContext().getResources().obtainTypedArray(R.array.team_img_female_list);
 
         for (int i = 0; i < 7; i++) {
-            TeamModel teamModel = testItem(i + 1, womanTeamColor[i], womanTeamImage[i], womanTeamList[i]);
+            TeamModel teamModel = testItem(i + 1, womanTeamColor[i], imgs.getResourceId(i, -1), womanTeamList[i]);
             womanTeamModelRetro.getList().add(teamModel);
         }
 
         teamAdapter.notifyDataSetChanged();
     }
 
-    private TeamModel testItem(int seq, int teamColor, String imgUrl, String txtTeam) {
+    private TeamModel testItem(int seq, int teamColor, int imgUrl, String txtTeam) {
         TeamModel teamModel = new TeamModel();
         teamModel.setSeq(seq);
         teamModel.setTeamColor(teamColor);
