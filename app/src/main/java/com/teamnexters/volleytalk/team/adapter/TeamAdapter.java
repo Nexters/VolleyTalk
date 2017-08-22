@@ -76,7 +76,7 @@ public class TeamAdapter extends BaseAdapter implements View.OnClickListener {
             viewHolder.view_team = (View) convertView.findViewById(R.id.view_team);
             viewHolder.img_team = (ImageView) convertView.findViewById(R.id.img_team);
             viewHolder.txt_team = (TextView) convertView.findViewById(R.id.txt_team);
-            viewHolder.btn_follow = (Button) convertView.findViewById(R.id.btn_follow);
+            viewHolder.btn_follow = (TextView) convertView.findViewById(R.id.btn_follow);
 
             convertView.setTag(viewHolder);
 
@@ -123,6 +123,6 @@ public class TeamAdapter extends BaseAdapter implements View.OnClickListener {
         View view_team;
         ImageView img_team;
         TextView txt_team;
-        Button btn_follow;
+        TextView btn_follow;
     }
 }

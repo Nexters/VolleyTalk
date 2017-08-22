@@ -34,12 +34,18 @@
             android:text="현대캐피탈 SKYWALKERS"
             android:textStyle="bold" />
 
-        <Button
+        <TextView
             android:id="@+id/btn_follow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="+ Follow"
-            android:textAllCaps="false" />
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_follow_rounded_gray"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="+ Follow" />
     </LinearLayout>
 
 
