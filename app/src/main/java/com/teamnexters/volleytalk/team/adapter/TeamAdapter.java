@@ -26,7 +26,7 @@ import static com.teamnexters.volleytalk.config.Config.JHC_DEBUG;
 /**
  * Created by urchin on 04/09/16.
  */
-public class TeamAdapter extends BaseAdapter implements View.OnClickListener {
+public class TeamAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
     private int layout;
@@ -38,8 +38,6 @@ public class TeamAdapter extends BaseAdapter implements View.OnClickListener {
         this.context = context;
         this.teamModelRetro = teamModelRetro;
         this.layout = R.layout.team_man;
-
-//        Log.e(JHC_DEBUG, "SIZE : " + teamModelRetro.getList().size());
 
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -102,21 +100,11 @@ public class TeamAdapter extends BaseAdapter implements View.OnClickListener {
 
         if (position > last_position) {
             Animation animation = AnimationUtils.loadAnimation(context, R.anim.fade_in);
-//            convertView.startAnimation(animation);
         }
 
         last_position = position;
 
         return convertView;
-    }
-
-    @Override
-    public void onClick(View view) {
-        Intent intent;
-        int position;
-
-        switch (view.getId()) {
-        }
     }
 
     public class ViewHolder {

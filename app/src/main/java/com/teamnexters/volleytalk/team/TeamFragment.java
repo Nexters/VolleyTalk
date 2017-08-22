@@ -1,15 +1,18 @@
 package com.teamnexters.volleytalk.team;
 
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.CompoundButton;
 import android.widget.GridView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.teamnexters.volleytalk.R;
 import com.teamnexters.volleytalk.common.ApiService;
@@ -52,13 +55,13 @@ public class TeamFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private TeamModelRetro teamModelRetro;
+    private TeamModelRetro manTeamModelRetro;
+    private TeamModelRetro womanTeamModelRetro;
     private TeamAdapter teamAdapter;
-    GridView gridView;
+    private GridView gridView;
 
-    private ArrayList<String> categoryList;
-    private ArrayList<String> languageList;
-    private boolean mLockListView = false;
+    private RadioButton rb_male_team;
+    private RadioButton rb_female_team;
     private int list_count = 0;
 
 
@@ -124,29 +127,51 @@ public class TeamFragment extends Fragment {
     }
 
     private void test() {
+        testMan();
+        testWoman();
+    }
+
+    private void testMan() {
 
         String[] manTeamList = getContext().getResources().getStringArray(R.array.team_male_list);
         int[] manTeamColor = getContext().getResources().getIntArray(R.array.team_male_color_list);
         String[] manTeamImage = getContext().getResources().getStringArray(R.array.team_img_male_list);
 
-        for(int i=0; i<7; i++) {
-            testItem(i+1, manTeamColor[i], manTeamImage[i], manTeamList[i]);
+        for (int i = 0; i < 7; i++) {
+            TeamModel teamModel = testItem(i + 1, manTeamColor[i], manTeamImage[i], manTeamList[i]);
+            manTeamModelRetro.getList().add(teamModel);
         }
 
         teamAdapter.notifyDataSetChanged();
     }
 
-    private void testItem(int seq, int teamColor, String imgUrl, String txtTeam) {
+    private void testWoman() {
+
+        String[] womanTeamList = getContext().getResources().getStringArray(R.array.team_female_list);
+        int[] womanTeamColor = getContext().getResources().getIntArray(R.array.team_female_color_list);
+        String[] womanTeamImage = getContext().getResources().getStringArray(R.array.team_img_female_list);
+
+        for (int i = 0; i < 7; i++) {
+            TeamModel teamModel = testItem(i + 1, womanTeamColor[i], womanTeamImage[i], womanTeamList[i]);
+            womanTeamModelRetro.getList().add(teamModel);
+        }
+
+        teamAdapter.notifyDataSetChanged();
+    }
+
+    private TeamModel testItem(int seq, int teamColor, String imgUrl, String txtTeam) {
         TeamModel teamModel = new TeamModel();
         teamModel.setSeq(seq);
         teamModel.setTeamColor(teamColor);
         teamModel.setTeamImg(imgUrl);
         teamModel.setTeamText(txtTeam);
-        teamModelRetro.getList().add(teamModel);
+        return teamModel;
     }
 
     private void initResources(View view) {
         initRetrofit();
+
+        initRadioButtons(view);
 
         initGridView(view);
     }
@@ -159,39 +184,43 @@ public class TeamFragment extends Fragment {
                 .build();
         apiService = retrofit.create(ApiService.class);
 
-        teamModelRetro = new TeamModelRetro();
+        manTeamModelRetro = new TeamModelRetro();
+        womanTeamModelRetro = new TeamModelRetro();
     }
+
+    private void initRadioButtons(View view) {
+        rb_male_team = (RadioButton) view.findViewById(R.id.rb_male_team);
+        rb_female_team = (RadioButton) view.findViewById(R.id.rb_female_team);
+
+        rb_male_team.setOnCheckedChangeListener(checkedChangeListener);
+        rb_female_team.setOnCheckedChangeListener(checkedChangeListener);
+    }
+
+    CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            switch (buttonView.getId()) {
+                case R.id.rb_male_team:
+                    if (isChecked) {
+                        teamAdapter = new TeamAdapter(getContext(), manTeamModelRetro);
+                        gridView.setAdapter(teamAdapter);
+                    }
+                    break;
+
+                case R.id.rb_female_team:
+                    if (isChecked) {
+                        teamAdapter = new TeamAdapter(getContext(), womanTeamModelRetro);
+                        gridView.setAdapter(teamAdapter);
+                    }
+                    break;
+            }
+        }
+    };
 
     private void initGridView(View view) {
         gridView = (GridView) view.findViewById(R.id.gridView);
-        gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView absListView, int i) {
-
-            }
-
-            @Override
-            public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                // 현재 가장 처음에 보이는 셀번호와 보여지는 셀번호를 더한값이
-                // 전체의 숫자와 동일해지면 가장 아래로 스크롤 되었다고 가정합니다.
-                int count = totalItemCount - visibleItemCount;
-
-                if (firstVisibleItem >= count && totalItemCount != 0 && mLockListView == false) {
-                    mLockListView = true;
-
-                    if (teamModelRetro.getList().isEmpty()) {
-                        mLockListView = false;
-                        // nothing
-                    } else {
-                        //getList(String.valueOf(list_count));
-                    }
-                }
-            }
-        });
-
-        teamAdapter = new TeamAdapter(getContext(), teamModelRetro);
+        teamAdapter = new TeamAdapter(getContext(), manTeamModelRetro);
         gridView.setAdapter(teamAdapter);
-
     }
 
 //    private void getList(String start) {
@@ -223,12 +252,12 @@ public class TeamFragment extends Fragment {
 //                Log.e("JHC_DEBUG", "데이터 가져오기에 성공했습니다. " + response.body().getCode() + " / " + response.body().getMessage());
 //
 //                if (list_count == 0) {
-//                    teamModelRetro = response.body();
-//                    teamAdapter = new TeamAdapter2(getActivity(), teamModelRetro);
+//                    manTeamModelRetro = response.body();
+//                    teamAdapter = new TeamAdapter2(getActivity(), manTeamModelRetro);
 //                    gridView.setAdapter(teamAdapter);
 //                } else {
 //                    for (int i = 0; i < response.body().getVideoList().size(); i++) {
-//                        teamModelRetro.getVideoList().add(response.body().getVideoList().get(i));
+//                        manTeamModelRetro.getVideoList().add(response.body().getVideoList().get(i));
 //                    }
 //                }
 //
