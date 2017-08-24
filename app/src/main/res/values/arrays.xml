@@ -10,7 +10,6 @@
         <item>@string/team_male_7</item>
     </string-array>
 
-
     <string-array name="team_female_list">
         <item>@string/team_female_1</item>
         <item>@string/team_female_2</item>
@@ -21,8 +20,38 @@
         <item>@string/team_female_7</item>
     </string-array>
 
+    <!--<string-array name="team_img_male_list">-->
+        <!--<item>@string/team_img_male_1</item>-->
+        <!--<item>@string/team_img_male_2</item>-->
+        <!--<item>@string/team_img_male_3</item>-->
+        <!--<item>@string/team_img_male_4</item>-->
+        <!--<item>@string/team_img_male_5</item>-->
+        <!--<item>@string/team_img_male_6</item>-->
+        <!--<item>@string/team_img_male_7</item>-->
+    <!--</string-array>-->
 
-    <string-array name="team_male_color_list">
+
+    <integer-array name="team_img_male_list">
+        <item>@drawable/img_team_skywakers</item>
+        <item>@drawable/img_team_jumbos</item>
+        <item>@drawable/img_team_vixtorm</item>
+        <item>@drawable/img_team_bluefans</item>
+        <item>@drawable/img_team_wibee</item>
+        <item>@drawable/img_team_stars</item>
+        <item>@drawable/img_team_rushcash</item>
+    </integer-array>
+
+    <integer-array name="team_img_female_list">
+        <item>@drawable/img_team_hyundai</item>
+        <item>@drawable/img_team_altos</item>
+        <item>@drawable/img_team_pinkspiders</item>
+        <item>@drawable/img_team_kixx</item>
+        <item>@drawable/img_team_hipass</item>
+        <item>@drawable/img_team_kgc</item>
+        <item>@drawable/img_team_guohualife</item>
+    </integer-array>
+
+    <array name="team_male_color_list">
         <item>@color/color_team_male_1</item>
         <item>@color/color_team_male_2</item>
         <item>@color/color_team_male_3</item>
@@ -30,9 +59,9 @@
         <item>@color/color_team_male_5</item>
         <item>@color/color_team_male_6</item>
         <item>@color/color_team_male_7</item>
-    </string-array>
+    </array>
 
-    <string-array name="team_female_color_list">
+    <array name="team_female_color_list">
         <item>@color/color_team_female_1</item>
         <item>@color/color_team_female_2</item>
         <item>@color/color_team_female_3</item>
@@ -40,6 +69,6 @@
         <item>@color/color_team_female_5</item>
         <item>@color/color_team_female_6</item>
         <item>@color/color_team_female_7</item>
-    </string-array>
+    </array>
 
 </resources>

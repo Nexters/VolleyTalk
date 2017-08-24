@@ -20,12 +20,12 @@ import java.util.List;
  * Created by smart on 2017-08-12.
  */
 
-public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
+public class TeamAdapter2 extends RecyclerView.Adapter<TeamAdapter2.ViewHolder> {
 
     private List<Team_man> teamList;
     private Context context;
 
-    public TeamAdapter(List<Team_man> teamList, Context context)
+    public TeamAdapter2(List<Team_man> teamList, Context context)
     {
         this.teamList = teamList;
         this.context = context;
@@ -42,8 +42,6 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
-
         Glide.with(context)
                 .load(teamList.get(position).getImgURL())
                 .apply(RequestOptions.centerCropTransform())

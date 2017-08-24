@@ -6,22 +6,40 @@
 
     <string name="qna_email">nexters.volleytalk@gmail.com</string>
 
+    <string name="kakao_app_key">test</string>
 
-    <string name="team_male_1">현대캐피탈 SKY WALKERS</string>
-    <string name="team_male_2">대한항공 JUMBOS</string>
-    <string name="team_male_3">한국전력 VIXTORM</string>
-    <string name="team_male_4">삼성화재 BLUEFANGS</string>
-    <string name="team_male_5">우리카드 WIBEE</string>
-    <string name="team_male_6">KB 손해보험 STARS</string>
-    <string name="team_male_7">OK저축은행 RUSH&amp;CASH</string>
 
-    <string name="team_female_1">현대건설 여자배구단</string>
-    <string name="team_female_2">IBK기업은행 ALTOS</string>
-    <string name="team_female_3">흥국생명 PINKSPIDERS</string>
+    <string name="team_male_1">현대캐피탈\nSKY WALKERS</string>
+    <string name="team_male_2">대한항공\nJUMBOS</string>
+    <string name="team_male_3">한국전력\nVIXTORM</string>
+    <string name="team_male_4">삼성화재\nBLUEFANGS</string>
+    <string name="team_male_5">우리카드\nWIBEE</string>
+    <string name="team_male_6">KB손해보험\nSTARS</string>
+    <string name="team_male_7">OK저축은행\nRUSH&amp;CASH</string>
+
+    <string name="team_female_1">현대건설\n여자배구단</string>
+    <string name="team_female_2">IBK기업은행\nALTOS</string>
+    <string name="team_female_3">흥국생명\nPINKSPIDERS</string>
     <string name="team_female_4">GS칼텍스 KIXX</string>
-    <string name="team_female_5">한국도로공사 HI-PASS</string>
-    <string name="team_female_6">KGC인삼공사 프로배구단</string>
-    <string name="team_female_7">중국 상하이 Guohua Life</string>
+    <string name="team_female_5">한국도로공사\nHI-PASS</string>
+    <string name="team_female_6">KGC인삼공사\n프로배구단</string>
+    <string name="team_female_7">중국 상하이\nGuohua Life</string>
+
+    <string name="team_img_male_1">http://postfiles16.naver.net/MjAxNzA4MTNfMjI3/MDAxNTAyNTYwMDI3Nzg0.-wto9w3kPd-Aygxu8K3IfwspvmLkv1Z-Lnq9f-3ECXEg.o4v58nqUKDkcX6Tiep1QqoR0-hpI2k5GzSG1s-kh7dEg.PNG.shypang/img_team_rushcash.png?type=w966</string>
+    <string name="team_img_male_2">http://postfiles6.naver.net/MjAxNzA4MTNfNzIg/MDAxNTAyNTYwMDI3Nzgw.tJC2T1LWA1yIPcjW-3Vofo6hlqsQQ3GJ4ySukiejTRwg.bVkkVLZNMT0KB2jMw5yroyBIobAyEj1EQbCN4Rdc3Nog.JPEG.shypang/img_team_jumbos.jpg?type=w966</string>
+    <string name="team_img_male_3">http://postfiles1.naver.net/MjAxNzA4MTNfNzYg/MDAxNTAyNTYwMDI3ODU3.BSy6keCl4foLsc80Sq01rpgWm646gOY3aMLojdDTnQQg.EMMg69eriI56NCfTeZIEmjBHN9GkLil7NU_hxorHLCgg.PNG.shypang/img_team_vixtorm.png?type=w966</string>
+    <string name="team_img_male_4">http://postfiles9.naver.net/MjAxNzA4MTNfMjg1/MDAxNTAyNTYwMDI3Nzc3.Tq4E2lxC_YdBUC6Muxv0UBJvep6Rpm0zDz2crolx_7kg.kQfsDLLezRKfHjMFyjMjnnpbinzYdZfwmMQxp7B0MvAg.PNG.shypang/img_team_bluefans.png?type=w966</string>
+    <string name="team_img_male_5">http://postfiles7.naver.net/MjAxNzA4MTNfMjI3/MDAxNTAyNTYwMDI3ODY1.dW_GEweUgOoCZ_3Ngq1Q-TK5ha5dWLRZOscOMq9GAU8g.A9auyr52gcvUhuGsyivpY8gowVoMhiSOmWYts-3PcV8g.PNG.shypang/img_team_wibee.png?type=w966</string>
+    <string name="team_img_male_6">http://postfiles3.naver.net/MjAxNzA4MTNfMTc1/MDAxNTAyNTYwMDI3Nzg0.tJbMldELRnVDxmUfPxBjMbdchK6aKUuPfiB0GQZfphEg.FbQcl5LI3PlicWX9rOzBp241DDG1TWsTn4oOlB_cu-og.PNG.shypang/img_team_stars.png?type=w966</string>
+    <string name="team_img_male_7">http://postfiles16.naver.net/MjAxNzA4MTNfMjI3/MDAxNTAyNTYwMDI3Nzg0.-wto9w3kPd-Aygxu8K3IfwspvmLkv1Z-Lnq9f-3ECXEg.o4v58nqUKDkcX6Tiep1QqoR0-hpI2k5GzSG1s-kh7dEg.PNG.shypang/img_team_rushcash.png?type=w966</string>
+
+    <!--<string name="team_img_female_1">@drawable/img_team_hyundai</string>-->
+    <!--<string name="team_img_female_2">http://postfiles6.naver.net/MjAxNzA4MTNfNzIg/MDAxNTAyNTYwMDI3Nzgw.tJC2T1LWA1yIPcjW-3Vofo6hlqsQQ3GJ4ySukiejTRwg.bVkkVLZNMT0KB2jMw5yroyBIobAyEj1EQbCN4Rdc3Nog.JPEG.shypang/img_team_jumbos.jpg?type=w966</string>-->
+    <!--<string name="team_img_female_3">http://postfiles1.naver.net/MjAxNzA4MTNfNzYg/MDAxNTAyNTYwMDI3ODU3.BSy6keCl4foLsc80Sq01rpgWm646gOY3aMLojdDTnQQg.EMMg69eriI56NCfTeZIEmjBHN9GkLil7NU_hxorHLCgg.PNG.shypang/img_team_vixtorm.png?type=w966</string>-->
+    <!--<string name="team_img_female_4">http://postfiles9.naver.net/MjAxNzA4MTNfMjg1/MDAxNTAyNTYwMDI3Nzc3.Tq4E2lxC_YdBUC6Muxv0UBJvep6Rpm0zDz2crolx_7kg.kQfsDLLezRKfHjMFyjMjnnpbinzYdZfwmMQxp7B0MvAg.PNG.shypang/img_team_bluefans.png?type=w966</string>-->
+    <!--<string name="team_img_female_5">http://postfiles7.naver.net/MjAxNzA4MTNfMjI3/MDAxNTAyNTYwMDI3ODY1.dW_GEweUgOoCZ_3Ngq1Q-TK5ha5dWLRZOscOMq9GAU8g.A9auyr52gcvUhuGsyivpY8gowVoMhiSOmWYts-3PcV8g.PNG.shypang/img_team_wibee.png?type=w966</string>-->
+    <!--<string name="team_img_female_6">http://postfiles3.naver.net/MjAxNzA4MTNfMTc1/MDAxNTAyNTYwMDI3Nzg0.tJbMldELRnVDxmUfPxBjMbdchK6aKUuPfiB0GQZfphEg.FbQcl5LI3PlicWX9rOzBp241DDG1TWsTn4oOlB_cu-og.PNG.shypang/img_team_stars.png?type=w966</string>-->
+    <!--<string name="team_img_female_7">http://postfiles16.naver.net/MjAxNzA4MTNfMjI3/MDAxNTAyNTYwMDI3Nzg0.-wto9w3kPd-Aygxu8K3IfwspvmLkv1Z-Lnq9f-3ECXEg.o4v58nqUKDkcX6Tiep1QqoR0-hpI2k5GzSG1s-kh7dEg.PNG.shypang/img_team_rushcash.png?type=w966</string>-->
 
     <string name="nickname">닉네임</string>
     <string name="nickname_check_duplicate">닉네임 중복 체크</string>
