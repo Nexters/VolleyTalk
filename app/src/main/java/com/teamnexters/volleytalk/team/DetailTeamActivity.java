@@ -10,6 +10,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -160,8 +161,8 @@ public class DetailTeamActivity extends AppCompatActivity implements View.OnClic
 
             case R.id.fab_detail_team:
                 intent = new Intent(getApplicationContext(), WriteActivity.class);
-                intent.putExtra("type", "player");
-                intent.putExtra("seq", who.getSeq());
+//                intent.putExtra("type", "player");
+//                intent.putExtra("seq", who.getSeq());
                 startActivity(intent);
                 break;
         }
@@ -183,13 +184,11 @@ public class DetailTeamActivity extends AppCompatActivity implements View.OnClic
             switch (position) {
                 case 0:
 //                    return PostFragment.newInstance("player", String.valueOf(who.getSeq()));
-                    return new TeamDetailAllFragment();
                 case 1:
-                    return AlbumFragment.newInstance("player");
                 case 2:
                 case 3:
                 case 4:
-                    return AlbumFragment.newInstance("player");
+                    return new TeamDetailAllFragment();
             }
 
             return fragment;
@@ -216,6 +215,8 @@ public class DetailTeamActivity extends AppCompatActivity implements View.OnClic
             }
             return null;
         }
+
+
     }
 
     ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
@@ -243,6 +244,8 @@ public class DetailTeamActivity extends AppCompatActivity implements View.OnClic
         public void onPageScrollStateChanged(int state) {
 
         }
+
+
     };
 
     private void changeTabsFont() {
@@ -260,6 +263,4 @@ public class DetailTeamActivity extends AppCompatActivity implements View.OnClic
             }
         }
     }
-
-
 }

@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -177,7 +178,7 @@ public class TeamDetailAllFragment extends Fragment {
     private void initResources(View view) {
         initRetrofit();
         initListView(view);
-//
+
 //        initRadioButtons(view);
 //
 //        initGridView(view);
@@ -188,6 +189,7 @@ public class TeamDetailAllFragment extends Fragment {
 
         detailTeamAllAdapter = new DetailTeamAllAdapter(getContext(), postAllModelRetro);
         lv_allpost_mypage.setAdapter(detailTeamAllAdapter);
+        lv_allpost_mypage.setNestedScrollingEnabled(true);
     }
 
     private void initRetrofit() {
@@ -337,8 +339,10 @@ public class TeamDetailAllFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
 
-        if (mainModelCall.isExecuted()) {
-            mainModelCall.cancel();
-        }
+//        if (mainModelCall.isExecuted()) {
+//            mainModelCall.cancel();
+//        }
     }
+
+
 }
