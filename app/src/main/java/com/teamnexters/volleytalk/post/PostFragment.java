@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,7 @@ import android.widget.Toast;
 
 import com.teamnexters.volleytalk.R;
 import com.teamnexters.volleytalk.ResForm;
-import com.teamnexters.volleytalk.album.AlbumFragment;
-import com.teamnexters.volleytalk.config.Config;
+import com.teamnexters.volleytalk.post.adapter.PostAdapter;
 import com.teamnexters.volleytalk.tool.NetworkModel;
 
 import java.util.ArrayList;
@@ -60,6 +58,7 @@ public class PostFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getContext(), PostContentActivity.class);
+                intent.putExtra("type", getArguments().getString("type"));
                 intent.putExtra("post", (Post) adapterView.getItemAtPosition(i));
                 startActivity(intent);
             }
@@ -71,7 +70,7 @@ public class PostFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        postStart = 1;
+        postStart = 0;
         getPostList();
     }
 
@@ -81,8 +80,7 @@ public class PostFragment extends Fragment {
         String type = args.getString("type");
         String seq = args.getString("seq");
 
-        //현재 team밖에 안 됨... type값으로 나중에 수정
-        Call<ResForm<List<Post>>> call = networkModel.getPostList("team", seq,  1, 20);
+        Call<ResForm<List<Post>>> call = networkModel.getPostList(type, seq, 0, 20);
         call.enqueue(new Callback<ResForm<List<Post>>>() {
             @Override
             public void onResponse(Call<ResForm<List<Post>>> call, Response<ResForm<List<Post>>> response) {

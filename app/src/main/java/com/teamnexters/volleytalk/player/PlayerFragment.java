@@ -7,6 +7,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,7 @@ public class PlayerFragment extends Fragment {
     public List<PlayerList> allPlayerList;
     public RelativeLayout lv_footer;
     public List<Integer> footerList;
+    public SparseArray<TextView> foldOnOFFList;
     public String[] teamNameList;
     public int[] teamColorList;
 
@@ -70,6 +72,7 @@ public class PlayerFragment extends Fragment {
         start = Config.MALE_TEAM_START_SEQ;
         teamNameList = getResources().getStringArray(R.array.team_male_list);
         teamColorList = getResources().getIntArray(R.array.team_male_color_list);
+        foldOnOFFList = new SparseArray<TextView>();
 
         return rootView_player;
     }
@@ -86,7 +89,7 @@ public class PlayerFragment extends Fragment {
 
         LinearLayout ll_playerList = new LinearLayout(context);
         ll_playerList.setOrientation(LinearLayout.VERTICAL);
-        ll_playerList.setBackgroundColor(Color.TRANSPARENT);
+        ll_playerList.setBackground(getResources().getDrawable(R.drawable.lv_background));
         LinearLayout.LayoutParams layoutParams_list = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         int margin_default = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8, getResources().getDisplayMetrics());
@@ -108,7 +111,7 @@ public class PlayerFragment extends Fragment {
         teamname.setTextColor(Color.WHITE);
         teamname.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
         teamname.setTypeface(Typeface.createFromAsset(context.getAssets(), "NotoSans-Regular.ttf"));
-        teamname.setText(teamNameList[Integer.valueOf(playerList.getTeam())-start]);
+        teamname.setText(teamNameList[Integer.valueOf(playerList.getTeam())-start].replace("\n", " "));
         teamname.setMaxLines(1);
         lv_header.addView(teamname);
         RelativeLayout.LayoutParams layoutParams_teamname = (RelativeLayout.LayoutParams)teamname.getLayoutParams();
@@ -116,7 +119,7 @@ public class PlayerFragment extends Fragment {
 
         //리스트뷰
         NonScrollListView lv_player = new NonScrollListView(context);
-        lv_player.setBackgroundColor(Color.WHITE);
+        lv_player.setBackgroundColor(Color.TRANSPARENT);
         lv_player.setDivider(getResources().getDrawable(R.drawable.lv_days_match_divider));
         lv_player.setDrawSelectorOnTop(true);
 
@@ -135,7 +138,7 @@ public class PlayerFragment extends Fragment {
         //리스트뷰 푸터 추가
         if (playerList.getPlayer().size() > Config.FOLDED_LIST_SIZE) {
             lv_footer = new RelativeLayout(context);
-            lv_footer.setBackground(getResources().getDrawable(R.drawable.lv_footer));
+            lv_footer.setBackgroundColor(Color.TRANSPARENT);
             lv_footer.setLayoutParams(layoutParams_header);
             lv_footer.setOnClickListener(clickFoldListener);
 
@@ -154,6 +157,7 @@ public class PlayerFragment extends Fragment {
             ll_playerList.addView(lv_footer);
             lv_footer.setId(Integer.valueOf(playerList.getTeam()));
             footerList.add(lv_footer.getId());
+            foldOnOFFList.append(lv_footer.getId(), foldOnOff);
         }
 
         ll_playerList.setClipToOutline(true);
@@ -168,13 +172,12 @@ public class PlayerFragment extends Fragment {
         @Override
         public void onClick(View view) {
             int pos = footerList.indexOf(view.getId());
-
             if (adapterList_team_player.get(pos).getCount() == Config.FOLDED_LIST_SIZE) {
-                foldOnOff.setText("펼치기");
+                foldOnOFFList.get(view.getId()).setText("접기");
                 adapterList_team_player.get(pos).setPlayerList(allPlayerList.get(pos).getPlayer());
                 adapterList_team_player.get(pos).notifyDataSetChanged();
             } else {
-                foldOnOff.setText("접기");
+                foldOnOFFList.get(view.getId()).setText("펼치기");
                 adapterList_team_player.get(pos).setPlayerList(allPlayerList.get(pos).getPlayer().subList(0, Config.FOLDED_LIST_SIZE));
                 adapterList_team_player.get(pos).notifyDataSetChanged();
             }

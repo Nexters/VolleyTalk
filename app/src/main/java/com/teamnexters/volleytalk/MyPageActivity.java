@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.kakao.usermgmt.response.model.UserProfile;
 import com.teamnexters.volleytalk.album.AlbumFragment;
 import com.teamnexters.volleytalk.post.PostContentActivity;
 import com.teamnexters.volleytalk.post.PostFragment;
@@ -197,7 +198,7 @@ public class MyPageActivity extends AppCompatActivity {
 
     private void getMyInfo() {
         NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
-        Call<ResForm<User>> call = networkModel.getUserInfo();
+        Call<ResForm<User>> call = networkModel.getUserInfo(String.valueOf(UserProfile.loadFromCache().getId()));
         call.enqueue(new Callback<ResForm<User>>() {
             @Override
             public void onResponse(Call<ResForm<User>> call, Response<ResForm<User>> response) {
@@ -207,10 +208,12 @@ public class MyPageActivity extends AppCompatActivity {
                     if (result.getStatus().equals("true")) {
                         User myInfo = result.getResData();
 
-                        Glide.with(context)
-                                .load(myInfo.getProfileimg_thumb())
-                                .apply(RequestOptions.circleCropTransform())
-                                .into(iv_round_profile_mypage);
+                        if( myInfo.getProfileimg_thumb() != null ) {
+                            Glide.with(context)
+                                    .load(myInfo.getProfileimg_thumb())
+                                    .apply(RequestOptions.circleCropTransform())
+                                    .into(iv_round_profile_mypage);
+                        }
 
                         tv_user_name_mypage.setText(myInfo.getNickname());
                         tv_num_heart_mypage.setText(String.valueOf(myInfo.getLikecount()));

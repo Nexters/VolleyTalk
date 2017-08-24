@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.teamnexters.volleytalk.DefaultData;
 import com.teamnexters.volleytalk.R;
 import com.teamnexters.volleytalk.ResForm;
 import com.teamnexters.volleytalk.album.AlbumFragment;
@@ -35,6 +37,7 @@ public class CheeringFragment extends Fragment {
 
     private EditText et_cheering;
     private Button btn_apply_cheering;
+    private TextView tv_num_cheering;
 
     public static CheeringFragment newInstance(int seq) {
         CheeringFragment instance = new CheeringFragment();
@@ -54,10 +57,11 @@ public class CheeringFragment extends Fragment {
         btn_apply_cheering.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("Click", "click");
                 applyCheering();
             }
         });
+
+        tv_num_cheering = (TextView) rootView_cheering.findViewById(R.id.tv_num_cheering);
 
         ListView lv_cheering = (ListView) rootView_cheering.findViewById(R.id.lv_cheering);
 
@@ -85,6 +89,7 @@ public class CheeringFragment extends Fragment {
 
                     if(result.getStatus().equals("true")) {
                         cheerings.addAll(result.getResData());
+                        tv_num_cheering.setText(String.valueOf(cheerings.size()));
                         adapter_cheering.notifyDataSetChanged();
                     } else {
                         Toast.makeText(getContext(), result.getErrMsg(), Toast.LENGTH_SHORT).show();
@@ -104,17 +109,22 @@ public class CheeringFragment extends Fragment {
         int seq = args.getInt("seq");
 
         NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
-        Call<String> call = networkModel.applyCheering(seq, et_cheering.getText().toString());
-        call.enqueue(new Callback<String>() {
+        Call<ResForm<DefaultData>> call = networkModel.applyCheering(seq, et_cheering.getText().toString());
+        call.enqueue(new Callback<ResForm<DefaultData>>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<ResForm<DefaultData>> call, Response<ResForm<DefaultData>> response) {
                 if ( response.body() != null ) {
+                    ResForm<DefaultData> result = response.body();
+                    if ( result.getStatus().equals("true")) {
+                        et_cheering.setText("");
+                        Toast.makeText(getContext(), "정상적으로 등록되었습니다.", Toast.LENGTH_SHORT).show();
                         requestCheeringList();
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<ResForm<DefaultData>> call, Throwable t) {
 
             }
         });

@@ -12,6 +12,7 @@ import com.teamnexters.volleytalk.follow.FollowList;
 import com.teamnexters.volleytalk.news.NewsList;
 import com.teamnexters.volleytalk.player.Player;
 import com.teamnexters.volleytalk.player.PlayerList;
+import com.teamnexters.volleytalk.post.Comment;
 import com.teamnexters.volleytalk.post.Post;
 
 import java.util.List;
@@ -51,10 +52,11 @@ public interface NetworkModel {
                                                      @Query("email") String email,
                                                      @Query("profileImg") String profileImg);
 
-    //@POST("user/delete")
+    @POST("user/delete")
+    Call<ResForm<String>> dropOut(@Query("userid") String userid);
 
     @GET("user/info")
-    Call<ResForm<User>> getUserInfo();
+    Call<ResForm<User>> getUserInfo(@Query("userid") String userid);
 
 
 
@@ -99,8 +101,9 @@ public interface NetworkModel {
 
     //@GET("like/list")
 
-    //@POST("like/apply")
-
+    @POST("like/apply")
+    Call<ResForm<DefaultData>> applyLike(@Query("likeTypes") String likeTypes,
+                                         @Query("likeSeq") int likeSeq);
 
 
     @GET("follow/list")
@@ -112,16 +115,21 @@ public interface NetworkModel {
 
     @FormUrlEncoded
     @POST("cheering/apply")
-    Call<String> applyCheering(@Field("playerseq") int playerseq,
+    Call<ResForm<DefaultData>> applyCheering(@Field("playerseq") int playerseq,
                                @Field("comment") String comment);
 
     @GET("cheering/list")
     Call<ResForm<List<Cheering>>> getCheeringList(@Query("playerseq") int playerseq);
 
+    @FormUrlEncoded
+    @POST("comment/apply")
+    Call<ResForm<DefaultData>> applyComment(@Field("type") String type,
+                                            @Field("postseq") int postseq,
+                                            @Field("comment") String comment);
 
-    //@GET("comment/apply")
-
-    //@POST("comment/list")
+    @GET("comment/list")
+    Call<ResForm<List<Comment>>> getCommentList(@Query("type") String type,
+                                                @Query("seq") int seq);
 
     @GET("img/{file}")
     Call<ResponseBody> getImageFile(@Path("file") String filename);
