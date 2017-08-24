@@ -3,11 +3,14 @@ package com.teamnexters.volleytalk.tool;
 import com.bumptech.glide.request.Request;
 import com.teamnexters.volleytalk.ExistNickname;
 import com.teamnexters.volleytalk.ResForm;
+import com.teamnexters.volleytalk.User;
+import com.teamnexters.volleytalk.cheering.Cheering;
 import com.teamnexters.volleytalk.config.Config;
 import com.teamnexters.volleytalk.DefaultData;
 import com.teamnexters.volleytalk.follow.Follow;
 import com.teamnexters.volleytalk.follow.FollowList;
 import com.teamnexters.volleytalk.news.NewsList;
+import com.teamnexters.volleytalk.player.Player;
 import com.teamnexters.volleytalk.player.PlayerList;
 import com.teamnexters.volleytalk.post.Post;
 
@@ -21,6 +24,8 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -48,6 +53,9 @@ public interface NetworkModel {
 
     //@POST("user/delete")
 
+    @GET("user/info")
+    Call<ResForm<User>> getUserInfo();
+
 
 
 
@@ -64,9 +72,8 @@ public interface NetworkModel {
     @GET("player/list")
     Call<ResForm<List<PlayerList>>> getPlayerList(@Query("gender") String gender);
 
-    //@GET("player/info")
-
-
+    @GET("player/info")
+    Call<ResForm<Player>> getPlayerInfo(@Query("playerseq") int playerseq);
 
 
 
@@ -103,10 +110,13 @@ public interface NetworkModel {
     Call<ResForm<Follow>> applyFollow(@Query("followTypes") String followTypes,
                                       @Query("followSeq") int followSeq);
 
+    @FormUrlEncoded
+    @POST("cheering/apply")
+    Call<String> applyCheering(@Field("playerseq") int playerseq,
+                               @Field("comment") String comment);
 
-    //@GET("cheering/apply")
-
-    //@POST("cheering/list")
+    @GET("cheering/list")
+    Call<ResForm<List<Cheering>>> getCheeringList(@Query("playerseq") int playerseq);
 
 
     //@GET("comment/apply")
@@ -115,8 +125,6 @@ public interface NetworkModel {
 
     @GET("img/{file}")
     Call<ResponseBody> getImageFile(@Path("file") String filename);
-
-
 
 
     AddCookiesInterceptor in1 = new AddCookiesInterceptor();

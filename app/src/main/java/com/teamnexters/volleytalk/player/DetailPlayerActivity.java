@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.teamnexters.volleytalk.WriteActivity;
+import com.teamnexters.volleytalk.cheering.Cheering;
 import com.teamnexters.volleytalk.cheering.CheeringFragment;
 import com.teamnexters.volleytalk.R;
 import com.teamnexters.volleytalk.album.AlbumFragment;
@@ -54,7 +55,6 @@ public class DetailPlayerActivity extends AppCompatActivity {
         who = (Player) intent.getSerializableExtra("who");
 
         context = getApplicationContext();
-
 
         ImageView iv_follow_detail_player = (ImageView) findViewById(R.id.iv_follow_detail_player);
         ImageView iv_heart_detail_player = (ImageView) findViewById(R.id.iv_heart_detail_player);
@@ -143,8 +143,7 @@ public class DetailPlayerActivity extends AppCompatActivity {
                 case 1:
                     return AlbumFragment.newInstance("player");
                 case 2:
-                    fragment = Fragment.instantiate(context, CheeringFragment.class.getName());
-                    break;
+                    return CheeringFragment.newInstance(who.getSeq());
             }
 
             return fragment;

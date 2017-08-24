@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -26,7 +27,13 @@ import com.teamnexters.volleytalk.album.AlbumFragment;
 import com.teamnexters.volleytalk.post.PostContentActivity;
 import com.teamnexters.volleytalk.post.PostFragment;
 import com.teamnexters.volleytalk.setting.SettingFragment;
+import com.teamnexters.volleytalk.tool.NetworkModel;
 import com.tsengvn.typekit.TypekitContextWrapper;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by MIN on 2017. 8. 2..
@@ -42,6 +49,9 @@ public class MyPageActivity extends AppCompatActivity {
     private Context context;
 
     private TabLayout tabLayout;
+
+    private ImageView iv_round_profile_mypage;
+    private TextView tv_user_name_mypage, tv_num_heart_mypage, tv_num_follower_mypage;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -91,24 +101,22 @@ public class MyPageActivity extends AppCompatActivity {
             }
         });
 
+        /*
         ImageView iv_setting_mypage = (ImageView) toolbar.findViewById(R.id.iv_setting_mypage);
         iv_setting_mypage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                //세팅 페이지 없애고 어떻게?
 
-
-               //임시로 여기서 작업 +  원래 글 보는 화면
-                Intent intent = new Intent(context, PostContentActivity.class);
-                startActivity(intent);
             }
         });
+        */
 
-        ImageView iv_round_profile_mypage = (ImageView) appbarlayout_mypage.findViewById(R.id.iv_round_profile_mypage);
-        Glide.with(context)
-                .load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYuOvt6wBrcmOygN2bzKbs2T1BcDJiWIS_HSqd4aWqqSmQ53OPrQ")
-                .apply(RequestOptions.circleCropTransform())
-                .into(iv_round_profile_mypage);
+        iv_round_profile_mypage = (ImageView) appbarlayout_mypage.findViewById(R.id.iv_round_profile_mypage);
+        tv_user_name_mypage = (TextView) appbarlayout_mypage.findViewById(R.id.tv_user_name_mypage);
+
+        tv_num_heart_mypage = (TextView) appbarlayout_mypage.findViewById(R.id.tv_num_heart_mypage);
+        tv_num_follower_mypage = (TextView) appbarlayout_mypage.findViewById(R.id.tv_num_follower_mypage);
 
 
         /*
@@ -121,6 +129,8 @@ public class MyPageActivity extends AppCompatActivity {
             }
         });
         */
+
+        getMyInfo();
 
     }
 
@@ -141,8 +151,7 @@ public class MyPageActivity extends AppCompatActivity {
                     //내 포스트 가져오기 생기면 수정하기.
                     return PostFragment.newInstance("player", "1");
                 case 1:
-                    fragment = Fragment.instantiate(context, AlbumFragment.class.getName());
-                    break;
+                    return AlbumFragment.newInstance("player");
                 case 2:
                     fragment = Fragment.instantiate(context, SettingFragment.class.getName());
                     break;
@@ -185,5 +194,41 @@ public class MyPageActivity extends AppCompatActivity {
             }
         }
     }
+
+    private void getMyInfo() {
+        NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
+        Call<ResForm<User>> call = networkModel.getUserInfo();
+        call.enqueue(new Callback<ResForm<User>>() {
+            @Override
+            public void onResponse(Call<ResForm<User>> call, Response<ResForm<User>> response) {
+                if (response.body() != null) {
+                    ResForm<User> result = response.body();
+
+                    if (result.getStatus().equals("true")) {
+                        User myInfo = result.getResData();
+
+                        Glide.with(context)
+                                .load(myInfo.getProfileimg_thumb())
+                                .apply(RequestOptions.circleCropTransform())
+                                .into(iv_round_profile_mypage);
+
+                        tv_user_name_mypage.setText(myInfo.getNickname());
+                        tv_num_heart_mypage.setText(String.valueOf(myInfo.getLikecount()));
+                        tv_num_follower_mypage.setText(String.valueOf(myInfo.getFollowercount()));
+
+
+                    } else {
+                        Toast.makeText(context, result.getErrMsg(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResForm<User>> call, Throwable t) {
+
+            }
+        });
+    }
+
 }
 

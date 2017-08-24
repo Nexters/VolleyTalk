@@ -1,51 +1,64 @@
 package com.teamnexters.volleytalk.cheering;
 
+import com.teamnexters.volleytalk.User;
+
 /**
  * Created by MIN on 2017. 8. 16..
  */
 
 public class Cheering {
-    private String content;
-    private String user;
-    private String imgURL;
-    private String time;
+    private int seq;
+    private int playerseq;
+    private String comment;
+    private String userid;
+    private String createdAt;
+    private User user;
 
-    public Cheering(String content, String user, String imgURL, String time) {
-        this.content = content;
-        this.user = user;
-        this.imgURL = imgURL;
-        this.time = time;
+    public int getSeq() {
+        return seq;
     }
 
-    public String getContent() {
-        return content;
+    public void setSeq(int seq) {
+        this.seq = seq;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public int getPlayerseq() {
+        return playerseq;
     }
 
-    public String getUser() {
+    public void setPlayerseq(int playerseq) {
+        this.playerseq = playerseq;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public User getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
-    }
-
-    public String getImgURL() {
-        return imgURL;
-    }
-
-    public void setImgURL(String imgURL) {
-        this.imgURL = imgURL;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 }

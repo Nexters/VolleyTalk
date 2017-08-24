@@ -1,6 +1,7 @@
 package com.teamnexters.volleytalk.follow.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.teamnexters.volleytalk.R;
 import com.teamnexters.volleytalk.config.Config;
 import com.teamnexters.volleytalk.follow.TeamFollow;
+import com.teamnexters.volleytalk.team.DetailTeamActivity;
 
 import java.util.List;
 
@@ -71,10 +73,10 @@ public class TeamFollowAdapter extends BaseAdapter {
 
         if ( selectedItem.getTypeseq() < Config.FEMALE_TEAM_START_SEQ ) {
             teamNameList = context.getResources().getStringArray(R.array.team_male_list);
-            teamName = teamNameList[selectedItem.getTypeseq() - Config.MALE_TEAM_START_SEQ];
+            teamName = teamNameList[selectedItem.getTypeseq() - Config.MALE_TEAM_START_SEQ].replace(System.getProperty("line.separator"), " ");
         }  else {
             teamNameList = context.getResources().getStringArray(R.array.team_female_list);
-            teamName = teamNameList[selectedItem.getTypeseq() - Config.FEMALE_TEAM_START_SEQ];
+            teamName = teamNameList[selectedItem.getTypeseq() - Config.FEMALE_TEAM_START_SEQ].replace(System.getProperty("line.separator"), " ");
         }
 
         tv_team_name_follow.setText(teamName);
@@ -85,7 +87,8 @@ public class TeamFollowAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-           //클릭했을 때 구현 필요
+                Intent intent = new Intent(context, DetailTeamActivity.class);
+                context.startActivity(intent);
             }
         });
 

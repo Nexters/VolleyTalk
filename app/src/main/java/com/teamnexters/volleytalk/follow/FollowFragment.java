@@ -8,6 +8,9 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
@@ -63,6 +66,7 @@ public class FollowFragment extends Fragment {
         adapter_team_follow = new TeamFollowAdapter(list_team_follow);
         lv_team_follow.setAdapter(adapter_team_follow);
 
+
         parentArray = new SparseArray<>();
         childArray = new SparseArray<>();
         elv_player_follow = (NonScrollExpandableListView) rootView_follow.findViewById(R.id.elv_player_follow);
@@ -78,7 +82,6 @@ public class FollowFragment extends Fragment {
 
         return rootView_follow;
     }
-
 
 
     public void getFollowList() {
@@ -131,7 +134,6 @@ public class FollowFragment extends Fragment {
 
     public void arrangePlayerFollowInfo(List<PlayerFollow> list_player_follow) {
 
-
         for(int i = 0; i < list_player_follow.size(); i++) {
             Player p = list_player_follow.get(i).getPlayerInfo();
             p.setSeq(list_player_follow.get(i).getTypeseq());
@@ -145,6 +147,5 @@ public class FollowFragment extends Fragment {
             childArray.get(p.getTeamseq()).add(p);
         }
     }
-
 
 }

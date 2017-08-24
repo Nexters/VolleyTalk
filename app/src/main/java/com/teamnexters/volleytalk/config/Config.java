@@ -21,7 +21,7 @@ public class Config {
     public static final int FOLDED_LIST_SIZE = 5;
 
     public static final int MALE_TEAM_START_SEQ = 1;
-    public static final int FEMALE_TEAM_START_SEQ = 2;
+    public static final int FEMALE_TEAM_START_SEQ = 8;
 
     /**
      * JHC Config
