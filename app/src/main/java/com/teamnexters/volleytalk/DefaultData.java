@@ -5,13 +5,19 @@ package com.teamnexters.volleytalk;
  */
 
 public class DefaultData {
+    private int seq;
     private String status;
     private String user;
     private String res;
     private String mimetype;
+    private String result;
 
-    public DefaultData(String status) {
-        this.status = status;
+    public int getSeq() {
+        return seq;
+    }
+
+    public void setSeq(int seq) {
+        this.seq = seq;
     }
 
     public String getStatus() {
@@ -44,5 +50,13 @@ public class DefaultData {
 
     public void setMimetype(String mimetype) {
         this.mimetype = mimetype;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
     }
 }

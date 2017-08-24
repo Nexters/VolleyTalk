@@ -46,7 +46,7 @@ public class WriteActivity extends AppCompatActivity {
     private Cursor cursor;
 
     private String type;
-    private String seq;
+    private int seq;
 
 
     @Override
@@ -61,7 +61,7 @@ public class WriteActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         type = intent.getStringExtra("type");
-        seq = intent.getStringExtra("seq");
+        seq = intent.getIntExtra("seq", 0);
 
         ImageView iv_get_photo_write = (ImageView) findViewById(R.id.iv_get_photo_write);
         iv_get_photo_write.setOnClickListener(new View.OnClickListener() {
@@ -152,7 +152,7 @@ public class WriteActivity extends AppCompatActivity {
         MultipartBody.Part imagePart = null;
 
         RequestBody requestType = RequestBody.create(MediaType.parse("multipart/form-data"), type);
-        RequestBody requestSeq = RequestBody.create(MediaType.parse("multipart/form-data"), seq);
+        RequestBody requestSeq = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(seq));
         RequestBody requestTitle = RequestBody.create(MediaType.parse("multipart/form-data"), et_title_write.getText().toString());
         RequestBody requestContents = RequestBody.create(MediaType.parse("multipart/form-data"), et_contents_write.getText().toString());
 

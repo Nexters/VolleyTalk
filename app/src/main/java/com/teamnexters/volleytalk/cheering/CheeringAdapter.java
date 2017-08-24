@@ -56,7 +56,7 @@ public class CheeringAdapter extends BaseAdapter {
 
     @Override
     public int getItemViewType(int position) {
-        if (cheeringList.get(position).getUser().equals(UserProfile.loadFromCache().getNickname()))
+        if (cheeringList.get(position).getUserid().equals(String.valueOf(UserProfile.loadFromCache().getId())))
             return SELF_CHEERING;
         else
             return OTHERS_CHEERING;
@@ -90,13 +90,18 @@ public class CheeringAdapter extends BaseAdapter {
         TextView tv_content_cheering = (TextView) view.findViewById(R.id.tv_content_cheering);
         TextView tv_writer_cheering = (TextView) view.findViewById(R.id.tv_writer_cheering);
 
-        tv_content_cheering.setText(selectedCheering.getContent());
-        tv_writer_cheering.setText(selectedCheering.getUser() + " | " + selectedCheering.getTime());
+        tv_content_cheering.setText(selectedCheering.getComment());
 
-        Glide.with(context)
-                .load(selectedCheering.getImgURL())
-                .apply(RequestOptions.circleCropTransform())
-                .into(iv_profileImg_cheering);
+        if (selectedCheering.getUser() != null) {
+            tv_writer_cheering.setText(selectedCheering.getUser().getNickname() + " | " + selectedCheering.getCreatedAt());
+
+            Glide.with(context)
+                    .load(selectedCheering.getUser().getProfileimg_thumb())
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(iv_profileImg_cheering);
+        } else {
+            tv_writer_cheering.setText(selectedCheering.getUserid() + " | " + selectedCheering.getCreatedAt());
+        }
 
         return view;
     }

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/parentLayout_postcontent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
@@ -30,8 +32,7 @@
                 android:gravity="center"
                 android:textSize="20sp"
                 android:textColor="#ffffff"
-                android:lineSpacingExtra="8sp"
-                android:text="문성민"/>
+                android:lineSpacingExtra="8sp"/>
 
 
             <!--
@@ -47,71 +48,203 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:padding="16dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_title_postcontent"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:padding="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_title_postcontent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textColor="#4a4a4a"
+                        android:letterSpacing="-0.01" />
+
+                    <TextView
+                        android:id="@+id/tv_writer_date_postcontent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="#9b9b9b"
+                        android:letterSpacing="-0.01"
+                        android:paddingTop="6dp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#e4e4e4"/>
+
+
+                <ImageView
+                    android:id="@+id/iv_photo_postcontent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textColor="#4a4a4a"
-                    android:letterSpacing="-0.01" />
+                    android:minHeight="100dp"
+                    android:maxHeight="350dp"
+                    android:visibility="gone"
+                    android:layout_margin="15dp"/>
 
                 <TextView
-                    android:id="@+id/tv_writer_date_postcontent"
+                    android:id="@+id/tv_content_postcontent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="#9b9b9b"
-                    android:letterSpacing="-0.01"
-                    android:paddingTop="6dp"/>
+                    android:layout_height="match_parent"
+                    android:layout_margin="15dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#e4e4e4"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll_like_this_post"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/iv_i_like_this_post"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ico_heart_gray"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="5dp"
+                            android:gravity="center"
+                            android:text="좋아요"/>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#e4e4e4" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_add_comment_in_this_post"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ico_reply"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="5dp"
+                            android:gravity="center"
+                            android:text="댓글달기"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#e4e4e4"/>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="16dp"
+                        android:gravity="center_vertical"
+                        android:textSize="14sp"
+                        android:textColor="#4a4a4a"
+                        android:letterSpacing="-0.01"
+                        android:text="댓글"/>
+
+                    <TextView
+                        android:id="@+id/tv_num_comment_in_this_post"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:gravity="center_vertical"
+                        android:textSize="14sp"
+                        android:textColor="#4a4a4a"
+                        android:letterSpacing="-0.01"
+                        android:text="2"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#e4e4e4"/>
+
+                <com.teamnexters.volleytalk.ui_element.NonScrollListView
+                    android:id="@+id/lv_comment_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
 
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#e4e4e4"/>
+        </ScrollView>
+    </LinearLayout>
 
 
-            <ImageView
-                android:id="@+id/iv_photo_postcontent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="100dp"
-                android:maxHeight="350dp"
-                android:visibility="gone"
-                android:layout_margin="15dp"/>
+    <LinearLayout
+        android:id="@+id/ll_comment_form"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:visibility="gone"
+        android:elevation="4dp">
 
-            <TextView
-                android:id="@+id/tv_content_postcontent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="15dp"/>
+        <EditText
+            android:id="@+id/et_comment_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#e4e4e4"/>
+        <Button
+            android:id="@+id/btn_apply_comment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="등록"/>
 
-
-
-        </LinearLayout>
-
-    </ScrollView>
+        <Button
+            android:id="@+id/btn_cancel_comment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="취소"/>
+    </LinearLayout>
 
 
 </LinearLayout>

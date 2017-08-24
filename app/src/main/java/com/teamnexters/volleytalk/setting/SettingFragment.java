@@ -18,8 +18,15 @@ import android.widget.Toast;
 import com.kakao.auth.Session;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.LogoutResponseCallback;
+import com.kakao.usermgmt.response.model.UserProfile;
 import com.teamnexters.volleytalk.R;
+import com.teamnexters.volleytalk.ResForm;
 import com.teamnexters.volleytalk.SplashActivity;
+import com.teamnexters.volleytalk.tool.NetworkModel;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by MIN on 2017. 8. 12..
@@ -84,6 +91,53 @@ public class SettingFragment extends Fragment {
             }
         });
 
+        RelativeLayout item_dropOut_user_setting = (RelativeLayout) rootView_setting.findViewById(R.id.item_dropOut_user_setting);
+        item_dropOut_user_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requestDropOut();
+
+                //세션 종료 후 앱 재시작
+                Session.getCurrentSession().close();
+
+                Intent mStartActivity = new Intent(getContext(), SplashActivity.class);
+                int mPendingIntentId = 123456;
+                PendingIntent mPendingIntent = PendingIntent.getActivity(getContext(), mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+                AlarmManager mgr = (AlarmManager)getContext().getSystemService(Context.ALARM_SERVICE);
+                mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+                System.exit(0);
+            }
+        });
+
         return rootView_setting;
+    }
+
+
+    private void requestDropOut() {
+        NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
+        Call<ResForm<String>> call =  networkModel.dropOut(String.valueOf(UserProfile.loadFromCache().getId()));
+
+        call.enqueue(new Callback<ResForm<String>>() {
+            @Override
+            public void onResponse(Call<ResForm<String>> call, Response<ResForm<String>> response) {
+                if ( response.body() != null ) {
+                    ResForm<String> result = response.body();
+
+                    if ( result.getStatus().equals("true") ) {
+                        Log.e("TEST", result.getResData());
+                        Toast.makeText(getContext(), "정상적으로 탈퇴되었습니다.", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Toast.makeText(getContext(), result.getErrMsg(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResForm<String>> call, Throwable t) {
+
+            }
+        });
+
     }
 }

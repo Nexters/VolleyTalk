@@ -1,21 +1,29 @@
 package com.teamnexters.volleytalk.follow.adapter;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.teamnexters.volleytalk.R;
+import com.teamnexters.volleytalk.ResForm;
+import com.teamnexters.volleytalk.follow.TeamFollow;
+import com.teamnexters.volleytalk.player.DetailPlayerActivity;
 import com.teamnexters.volleytalk.player.Player;
+import com.teamnexters.volleytalk.tool.NetworkModel;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by MIN on 2017. 8. 19..
@@ -26,6 +34,8 @@ public class PlayerFollowExpandableAdapter extends BaseExpandableListAdapter {
     private Context context;
     private SparseArray<String> parentArray;
     private SparseArray<List<Player>> childArray;
+    private Intent intent;
+
 
 
     public PlayerFollowExpandableAdapter(Context context, SparseArray parentArray, SparseArray childArray) {
@@ -65,7 +75,7 @@ public class PlayerFollowExpandableAdapter extends BaseExpandableListAdapter {
         }
 
         TextView tv_teamname_including_following_player_follow = (TextView) view.findViewById(R.id.tv_teamname_including_following_player_follow);
-        tv_teamname_including_following_player_follow.setText(parentArray.get(parentArray.keyAt(i)));
+        tv_teamname_including_following_player_follow.setText(parentArray.get(parentArray.keyAt(i)).replace(System.getProperty("line.separator"), " "));
 
         return view;
     }
@@ -93,7 +103,7 @@ public class PlayerFollowExpandableAdapter extends BaseExpandableListAdapter {
             view = inflater.inflate(R.layout.item_lv_player, viewGroup, false);
         }
 
-        Player selectedPlayer = (Player) getChild(grounPosition, childPosition);
+        final Player selectedPlayer = (Player) getChild(grounPosition, childPosition);
 
         ImageView iv_star_player = (ImageView) view.findViewById(R.id.iv_star_player);
         TextView tv_back_num_player = (TextView) view.findViewById(R.id.tv_back_num_player);
@@ -108,10 +118,18 @@ public class PlayerFollowExpandableAdapter extends BaseExpandableListAdapter {
                 .into(iv_star_player);
 
         tv_back_num_player.setText("No." + selectedPlayer.getBacknumber());
-        //tv_name_player.setText(selectedPlayer.getPlayerInfo().getName());
+        tv_name_player.setText(selectedPlayer.getName());
         tv_position_player.setText(selectedPlayer.getPosition());
         tv_num_like_player.setText(selectedPlayer.getLikecount());
         tv_num_post_player.setText(selectedPlayer.getPostcount());
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(context, DetailPlayerActivity.class);
+                getAndGoPlayerDetail(selectedPlayer.getSeq());
+            }
+        });
 
         return view;
     }
@@ -127,5 +145,29 @@ public class PlayerFollowExpandableAdapter extends BaseExpandableListAdapter {
     }
 
 
+    private void getAndGoPlayerDetail(int playerseq) {
+        NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
+        Call<ResForm<Player>> call = networkModel.getPlayerInfo(playerseq);
+        call.enqueue(new Callback<ResForm<Player>>() {
+            @Override
+            public void onResponse(Call<ResForm<Player>> call, Response<ResForm<Player>> response) {
+                if (response.body() != null) {
+                    ResForm<Player> result = response.body();
+
+                    if(result.getStatus().equals("true")) {
+                        intent.putExtra("who", result.getResData());
+                        context.startActivity(intent);
+                    } else {
+                        Toast.makeText(context, result.getErrMsg(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResForm<Player>> call, Throwable t) {
+
+            }
+        });
+    }
 
 }

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.teamnexters.volleytalk.R;
 import com.teamnexters.volleytalk.follow.UserFollow;
@@ -59,6 +60,13 @@ public class UserFollowAdapter extends BaseAdapter {
         tv_user_name_follow.setText(selectedUser.getUserInfo().getNickname());
         tv_num_follower_follow.setText(String.valueOf(selectedUser.getUserInfo().getFollowercount()));
         tv_num_post_follow.setText(String.valueOf(selectedUser.getUserInfo().getPostcount()));
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "준비중입니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
     }
