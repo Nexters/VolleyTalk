@@ -27,6 +27,8 @@ public class TeamModel implements Serializable {
     int team_img;
     @SerializedName("team_text")
     String team_text;
+    @SerializedName("team_gender")
+    String team_gender;
 
     public int getSeq() {
         return seq;
@@ -58,5 +60,13 @@ public class TeamModel implements Serializable {
 
     public void setTeamText(String team_text) {
         this.team_text = team_text;
+    }
+
+    public String getTeamGender() {
+        return team_gender;
+    }
+
+    public void setTeamGender(String team_gender) {
+        this.team_gender = team_gender;
     }
 }

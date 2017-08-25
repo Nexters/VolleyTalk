@@ -1,6 +1,12 @@
 package com.teamnexters.volleytalk.common;
 
+import com.teamnexters.volleytalk.ResForm;
+import com.teamnexters.volleytalk.player.PlayerList;
+import com.teamnexters.volleytalk.team.model.TeamDetailModel;
+import com.teamnexters.volleytalk.team.model.TeamDetailModelRetro;
 import com.teamnexters.volleytalk.team.model.TeamModelRetro;
+
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -21,10 +27,17 @@ import retrofit2.http.Query;
 public interface ApiService {
     public static final String API_URL = "http://13.124.105.110:3000/";
 
-    @GET("student_list")
-    Call<ResponseBody> getComment(@Query("postId") int postId);
+    /*********************************************************************************
+     * Team
+     ********************************************************************************/
+    @GET("team/info")
+    Call<ResForm<List<TeamDetailModel>>> getTeamInfo(@Query("gender") String gender,
+                                                     @Query("teamSeq") int teamSeq);
 
-    /**
+    @GET("team/info")
+    Call<ResForm<List<PlayerList>>> getPlayerList(@Query("gender") String gender);
+
+    /*********************************************************************************
      * Category
      ********************************************************************************/
     @FormUrlEncoded
@@ -34,7 +47,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("category/get/video_list")
     Call<TeamModelRetro> getVideoList(@Field("language") String strLang,
-                                       @Field("category_type") String categoryType,
-                                       @Field("list_flag") String list_flag);
+                                      @Field("category_type") String categoryType,
+                                      @Field("list_flag") String list_flag);
 
 }

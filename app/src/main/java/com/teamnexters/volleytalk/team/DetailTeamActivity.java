@@ -10,28 +10,44 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.teamnexters.volleytalk.R;
+import com.teamnexters.volleytalk.ResForm;
 import com.teamnexters.volleytalk.WriteActivity;
-import com.teamnexters.volleytalk.album.AlbumFragment;
-import com.teamnexters.volleytalk.cheering.CheeringFragment;
+import com.teamnexters.volleytalk.common.ApiService;
 import com.teamnexters.volleytalk.player.Player;
-import com.teamnexters.volleytalk.post.PostFragment;
+import com.teamnexters.volleytalk.player.PlayerList;
 import com.teamnexters.volleytalk.team.fragment.TeamDetailAlbumFragment;
 import com.teamnexters.volleytalk.team.fragment.TeamDetailAllFragment;
 import com.teamnexters.volleytalk.team.fragment.TeamDetailNewsFragment;
 import com.teamnexters.volleytalk.team.fragment.TeamDetailPlayerFragment;
 import com.teamnexters.volleytalk.team.fragment.TeamDetailResultFragment;
+import com.teamnexters.volleytalk.team.model.TeamDetailModel;
+import com.teamnexters.volleytalk.team.model.TeamDetailModelRetro;
+import com.teamnexters.volleytalk.team.model.TeamModel;
+import com.teamnexters.volleytalk.team.model.TeamModelRetro;
+import com.teamnexters.volleytalk.tool.NetworkModel;
 import com.tsengvn.typekit.TypekitContextWrapper;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.teamnexters.volleytalk.common.ApiService.API_URL;
+import static com.teamnexters.volleytalk.config.Config.JHC_DEBUG;
 
 /**
  * Created by MIN on 2017. 8. 11..
@@ -70,6 +86,15 @@ public class DetailTeamActivity extends AppCompatActivity implements View.OnClic
     private Context context;
     private Player who;
 
+    private Retrofit retrofit;
+    private ApiService apiService;
+    private TeamModelRetro teamModelRetro;
+    private TeamDetailModelRetro teamDetailModelRetro;
+
+    private Call<TeamDetailModelRetro> retroCall;
+
+    private TeamModel teamModel;
+
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
@@ -80,23 +105,116 @@ public class DetailTeamActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailteam);
 
+        teamModel = (TeamModel) getIntent().getExtras().getSerializable("TEAM_MODEL");
+
 //        Intent intent = getIntent();
 //        who = (Player) intent.getSerializableExtra("who");
 //
 //        context = getApplicationContext();
 
         initResources();
-
-
         changeTabsFont();
+
+
+        getTeamInfo2();
 
     }
 
+    private void getTeamInfo2() {
+        Log.e(JHC_DEBUG, "REQUEST : " + teamModel.getTeamGender() + " / " + teamModel.getSeq());
+        NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
+//        Call<ResForm<List<TeamDetailModel>>> call = apiService.getTeamInfo(teamModel.getTeamGender(), teamModel.getSeq());
+        Call<ResForm<List<TeamDetailModel>>> call = networkModel.getTeamInfo(teamModel.getTeamGender(), teamModel.getSeq());
+        call.enqueue(new Callback<ResForm<List<TeamDetailModel>>>() {
+            @Override
+            public void onResponse(Call<ResForm<List<TeamDetailModel>>> call, Response<ResForm<List<TeamDetailModel>>> response) {
+                ResForm<List<TeamDetailModel>> list = response.body();
+                Log.e(JHC_DEBUG, "isStatus : " + list.getStatus());
+                Toast.makeText(DetailTeamActivity.this, "isStatus : " + list.getStatus(), Toast.LENGTH_SHORT).show();
+                if (list.getStatus().equals("true")) {
+                    list.getResData();
+                } else {
+                    Toast.makeText(DetailTeamActivity.this, list.getErrMsg(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResForm<List<TeamDetailModel>>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void getTeamInfo() {
+
+        Log.e(JHC_DEBUG, "REQUEST : " + teamModel.getTeamGender() + " / " + teamModel.getSeq());
+//        retroCall = apiService.getTeamInfo(teamModel.getTeamGender(), teamModel.getSeq());
+//        retroCall.enqueue(new Callback<TeamDetailModelRetro>() {
+//            @Override
+//            public void onResponse(Call<TeamDetailModelRetro> call, Response<TeamDetailModelRetro> response) {
+//
+//                if (response == null) {
+//                    Log.e("JHC_DEBUG2", "RESPONSE IS NULL");
+//                    return;
+//                }
+//
+//                if (!response.isSuccessful()) {
+//                    Log.e("JHC_DEBUG3", response.body().toString());
+//                    return;
+//                }
+//
+//
+//                teamDetailModelRetro = response.body();
+//                Log.e(JHC_DEBUG, "isStatus : " + teamDetailModelRetro.isStatus());
+//
+//                Toast.makeText(DetailTeamActivity.this, "SIZE : " + teamDetailModelRetro.getList().size(), Toast.LENGTH_SHORT).show();
+//
+//                for (int i = 0; i < teamDetailModelRetro.getList().size(); i++) {
+//                    Log.e(JHC_DEBUG, "SEQ : " + teamDetailModelRetro.getList().get(i).getSeq());
+//                }
+//
+////                /** Header View **/
+////                headerView = getLayoutInflater().inflate(R.layout.activity_category_content_header, null, false);
+////                list_category.addHeaderView(headerView);
+////
+////                initViewPager();
+////
+////                setToggleButton(response.body().getBannerList().size());
+////
+////                bannerPageAdapter = new BannerPageAdapter(getSupportFragmentManager(), response.body());
+////                viewpager_banner.setAdapter(bannerPageAdapter);
+////                viewpager_banner.setOnPageChangeListener(CategoryActivity.this);
+////                viewpager_banner.setCurrentItem(teamModelRetro.getBannerList().size() * 1000);
+////                viewpager_banner.setInterval(5000);
+////                viewpager_banner.startAutoScroll();
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<TeamDetailModelRetro> call, Throwable t) {
+//                Log.e("JHC_DEBUG2", "데이터 가져오기에 실패했습니다. " + t.getMessage());
+//            }
+//        });
+    }
+
     private void initResources() {
+        initRetrofit();
         initToolbar();
         initTopLayout();
         initViewPager();
         initTabLayout();
+    }
+
+    private void initRetrofit() {
+        /** Retrofit **/
+        retrofit = new Retrofit.Builder()
+                .baseUrl(API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        apiService = retrofit.create(ApiService.class);
+
+        teamModelRetro = new TeamModelRetro();
+        teamDetailModelRetro = new TeamDetailModelRetro();
     }
 
     private void initToolbar() {

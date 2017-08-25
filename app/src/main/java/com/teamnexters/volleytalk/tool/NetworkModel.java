@@ -14,6 +14,7 @@ import com.teamnexters.volleytalk.player.Player;
 import com.teamnexters.volleytalk.player.PlayerList;
 import com.teamnexters.volleytalk.post.Comment;
 import com.teamnexters.volleytalk.post.Post;
+import com.teamnexters.volleytalk.team.model.TeamDetailModel;
 
 import java.util.List;
 
@@ -134,6 +135,12 @@ public interface NetworkModel {
     @GET("img/{file}")
     Call<ResponseBody> getImageFile(@Path("file") String filename);
 
+    /*********************************************************************************
+     * Team
+     ********************************************************************************/
+    @GET("team/info")
+    Call<ResForm<List<TeamDetailModel>>> getTeamInfo(@Query("gender") String gender,
+                                                     @Query("teamSeq") int teamSeq);
 
     AddCookiesInterceptor in1 = new AddCookiesInterceptor();
     OkHttpClient client = new OkHttpClient.Builder()

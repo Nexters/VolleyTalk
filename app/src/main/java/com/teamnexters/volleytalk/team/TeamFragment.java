@@ -61,6 +61,8 @@ public class TeamFragment extends Fragment {
 
     private TeamModelRetro manTeamModelRetro;
     private TeamModelRetro womanTeamModelRetro;
+    private TeamModelRetro teamModelRetro;
+
     private TeamAdapter teamAdapter;
     private GridView gridView;
 
@@ -133,6 +135,8 @@ public class TeamFragment extends Fragment {
     private void test() {
         testMan();
         testWoman();
+
+        teamModelRetro = manTeamModelRetro;
     }
 
     private void testMan() {
@@ -142,7 +146,7 @@ public class TeamFragment extends Fragment {
         TypedArray imgs = getContext().getResources().obtainTypedArray(R.array.team_img_male_list);
 
         for (int i = 0; i < 7; i++) {
-            TeamModel teamModel = testItem(i + 1, manTeamColor[i], imgs.getResourceId(i, -1), manTeamList[i]);
+            TeamModel teamModel = testItem(i + 1, manTeamColor[i], imgs.getResourceId(i, -1), manTeamList[i], "M");
             manTeamModelRetro.getList().add(teamModel);
         }
 
@@ -156,19 +160,20 @@ public class TeamFragment extends Fragment {
         TypedArray imgs = getContext().getResources().obtainTypedArray(R.array.team_img_female_list);
 
         for (int i = 0; i < 7; i++) {
-            TeamModel teamModel = testItem(i + 1, womanTeamColor[i], imgs.getResourceId(i, -1), womanTeamList[i]);
+            TeamModel teamModel = testItem(i + 1, womanTeamColor[i], imgs.getResourceId(i, -1), womanTeamList[i], "F");
             womanTeamModelRetro.getList().add(teamModel);
         }
 
         teamAdapter.notifyDataSetChanged();
     }
 
-    private TeamModel testItem(int seq, int teamColor, int imgUrl, String txtTeam) {
+    private TeamModel testItem(int seq, int teamColor, int imgUrl, String txtTeam, String gender) {
         TeamModel teamModel = new TeamModel();
         teamModel.setSeq(seq);
         teamModel.setTeamColor(teamColor);
         teamModel.setTeamImg(imgUrl);
         teamModel.setTeamText(txtTeam);
+        teamModel.setTeamGender(gender);
         return teamModel;
     }
 
@@ -190,6 +195,7 @@ public class TeamFragment extends Fragment {
 
         manTeamModelRetro = new TeamModelRetro();
         womanTeamModelRetro = new TeamModelRetro();
+        teamModelRetro = new TeamModelRetro();
     }
 
     private void initRadioButtons(View view) {
@@ -208,6 +214,7 @@ public class TeamFragment extends Fragment {
                     if (isChecked) {
                         teamAdapter = new TeamAdapter(getContext(), manTeamModelRetro);
                         gridView.setAdapter(teamAdapter);
+                        teamModelRetro = manTeamModelRetro;
                     }
                     break;
 
@@ -215,6 +222,7 @@ public class TeamFragment extends Fragment {
                     if (isChecked) {
                         teamAdapter = new TeamAdapter(getContext(), womanTeamModelRetro);
                         gridView.setAdapter(teamAdapter);
+                        teamModelRetro = womanTeamModelRetro;
                     }
                     break;
             }
@@ -229,6 +237,7 @@ public class TeamFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), DetailTeamActivity.class);
+                intent.putExtra("TEAM_MODEL", teamModelRetro.getList().get(position));
                 startActivity(intent);
             }
         });
