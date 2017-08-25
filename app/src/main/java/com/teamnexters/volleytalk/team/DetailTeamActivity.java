@@ -25,20 +25,16 @@ import com.teamnexters.volleytalk.ResForm;
 import com.teamnexters.volleytalk.WriteActivity;
 import com.teamnexters.volleytalk.common.ApiService;
 import com.teamnexters.volleytalk.player.Player;
-import com.teamnexters.volleytalk.player.PlayerList;
 import com.teamnexters.volleytalk.team.fragment.TeamDetailAlbumFragment;
 import com.teamnexters.volleytalk.team.fragment.TeamDetailAllFragment;
 import com.teamnexters.volleytalk.team.fragment.TeamDetailNewsFragment;
 import com.teamnexters.volleytalk.team.fragment.TeamDetailPlayerFragment;
 import com.teamnexters.volleytalk.team.fragment.TeamDetailResultFragment;
-import com.teamnexters.volleytalk.team.model.TeamDetailModel;
-import com.teamnexters.volleytalk.team.model.TeamDetailModelRetro;
+import com.teamnexters.volleytalk.team.model.TeamDetailList;
 import com.teamnexters.volleytalk.team.model.TeamModel;
 import com.teamnexters.volleytalk.team.model.TeamModelRetro;
 import com.teamnexters.volleytalk.tool.NetworkModel;
 import com.tsengvn.typekit.TypekitContextWrapper;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -89,11 +85,9 @@ public class DetailTeamActivity extends AppCompatActivity implements View.OnClic
     private Retrofit retrofit;
     private ApiService apiService;
     private TeamModelRetro teamModelRetro;
-    private TeamDetailModelRetro teamDetailModelRetro;
 
-    private Call<TeamDetailModelRetro> retroCall;
-
-    private TeamModel teamModel;
+//    private TeamModel teamModel;
+    private TeamDetailList teamDetailList;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -105,96 +99,43 @@ public class DetailTeamActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailteam);
 
-        teamModel = (TeamModel) getIntent().getExtras().getSerializable("TEAM_MODEL");
-
-//        Intent intent = getIntent();
-//        who = (Player) intent.getSerializableExtra("who");
-//
-//        context = getApplicationContext();
+//        teamModel = (TeamModel) getIntent().getExtras().getSerializable("TEAM_MODEL");
+        teamDetailList = (TeamDetailList) getIntent().getExtras().getSerializable("TEAM_MODEL");
 
         initResources();
         changeTabsFont();
 
 
-        getTeamInfo2();
+        getTeamInfo();
 
     }
 
-    private void getTeamInfo2() {
-        Log.e(JHC_DEBUG, "REQUEST : " + teamModel.getTeamGender() + " / " + teamModel.getSeq());
+
+    private void getTeamInfo() {
+        Log.e(JHC_DEBUG, "REQUEST : " + teamDetailList.getGender() + " / " + teamDetailList.getSeq());
         NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
-//        Call<ResForm<List<TeamDetailModel>>> call = apiService.getTeamInfo(teamModel.getTeamGender(), teamModel.getSeq());
-        Call<ResForm<List<TeamDetailModel>>> call = networkModel.getTeamInfo(teamModel.getTeamGender(), teamModel.getSeq());
-        call.enqueue(new Callback<ResForm<List<TeamDetailModel>>>() {
+        Call<ResForm<TeamDetailList>> call = networkModel.getTeamInfo(teamDetailList.getGender(), teamDetailList.getSeq());
+        call.enqueue(new Callback<ResForm<TeamDetailList>>() {
             @Override
-            public void onResponse(Call<ResForm<List<TeamDetailModel>>> call, Response<ResForm<List<TeamDetailModel>>> response) {
-                ResForm<List<TeamDetailModel>> list = response.body();
+            public void onResponse(Call<ResForm<TeamDetailList>> call, Response<ResForm<TeamDetailList>> response) {
+                ResForm<TeamDetailList> list = response.body();
                 Log.e(JHC_DEBUG, "isStatus : " + list.getStatus());
-                Toast.makeText(DetailTeamActivity.this, "isStatus : " + list.getStatus(), Toast.LENGTH_SHORT).show();
                 if (list.getStatus().equals("true")) {
-                    list.getResData();
+
+                    tv_name_detail_team.setText(list.getResData().getName());
+                    tv_back_detail_team.setText(list.getResData().getExtablish() + "년 창단");
+                    tv_physical_detail_team.setText(list.getResData().getStadium());
+                    tv_num_heart_detail_team.setText(String.valueOf(list.getResData().getLikecount()));
+                    tv_num_feed_detail_team.setText(String.valueOf(list.getResData().getPostcount()));
                 } else {
                     Toast.makeText(DetailTeamActivity.this, list.getErrMsg(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<ResForm<List<TeamDetailModel>>> call, Throwable t) {
-
+            public void onFailure(Call<ResForm<TeamDetailList>> call, Throwable t) {
             }
         });
-    }
-
-    private void getTeamInfo() {
-
-        Log.e(JHC_DEBUG, "REQUEST : " + teamModel.getTeamGender() + " / " + teamModel.getSeq());
-//        retroCall = apiService.getTeamInfo(teamModel.getTeamGender(), teamModel.getSeq());
-//        retroCall.enqueue(new Callback<TeamDetailModelRetro>() {
-//            @Override
-//            public void onResponse(Call<TeamDetailModelRetro> call, Response<TeamDetailModelRetro> response) {
-//
-//                if (response == null) {
-//                    Log.e("JHC_DEBUG2", "RESPONSE IS NULL");
-//                    return;
-//                }
-//
-//                if (!response.isSuccessful()) {
-//                    Log.e("JHC_DEBUG3", response.body().toString());
-//                    return;
-//                }
-//
-//
-//                teamDetailModelRetro = response.body();
-//                Log.e(JHC_DEBUG, "isStatus : " + teamDetailModelRetro.isStatus());
-//
-//                Toast.makeText(DetailTeamActivity.this, "SIZE : " + teamDetailModelRetro.getList().size(), Toast.LENGTH_SHORT).show();
-//
-//                for (int i = 0; i < teamDetailModelRetro.getList().size(); i++) {
-//                    Log.e(JHC_DEBUG, "SEQ : " + teamDetailModelRetro.getList().get(i).getSeq());
-//                }
-//
-////                /** Header View **/
-////                headerView = getLayoutInflater().inflate(R.layout.activity_category_content_header, null, false);
-////                list_category.addHeaderView(headerView);
-////
-////                initViewPager();
-////
-////                setToggleButton(response.body().getBannerList().size());
-////
-////                bannerPageAdapter = new BannerPageAdapter(getSupportFragmentManager(), response.body());
-////                viewpager_banner.setAdapter(bannerPageAdapter);
-////                viewpager_banner.setOnPageChangeListener(CategoryActivity.this);
-////                viewpager_banner.setCurrentItem(teamModelRetro.getBannerList().size() * 1000);
-////                viewpager_banner.setInterval(5000);
-////                viewpager_banner.startAutoScroll();
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<TeamDetailModelRetro> call, Throwable t) {
-//                Log.e("JHC_DEBUG2", "데이터 가져오기에 실패했습니다. " + t.getMessage());
-//            }
-//        });
     }
 
     private void initResources() {
@@ -214,7 +155,6 @@ public class DetailTeamActivity extends AppCompatActivity implements View.OnClic
         apiService = retrofit.create(ApiService.class);
 
         teamModelRetro = new TeamModelRetro();
-        teamDetailModelRetro = new TeamDetailModelRetro();
     }
 
     private void initToolbar() {

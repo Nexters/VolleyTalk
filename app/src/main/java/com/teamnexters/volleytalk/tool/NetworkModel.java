@@ -14,6 +14,7 @@ import com.teamnexters.volleytalk.player.Player;
 import com.teamnexters.volleytalk.player.PlayerList;
 import com.teamnexters.volleytalk.post.Comment;
 import com.teamnexters.volleytalk.post.Post;
+import com.teamnexters.volleytalk.team.model.TeamDetailList;
 import com.teamnexters.volleytalk.team.model.TeamDetailModel;
 
 import java.util.List;
@@ -60,16 +61,10 @@ public interface NetworkModel {
     Call<ResForm<User>> getUserInfo(@Query("userid") String userid);
 
 
-
-
-
     @GET("news/list")
     Call<ResForm<NewsList>> getNewsList();
 
     //@GET("news/team")
-
-
-
 
 
     @GET("player/list")
@@ -79,12 +74,12 @@ public interface NetworkModel {
     Call<ResForm<Player>> getPlayerInfo(@Query("playerseq") int playerseq);
 
 
-
     @GET("post/list")
     Call<ResForm<List<Post>>> getPostList(@Query("type") String type,
-                                    @Query("seq") String seq,
-                                    @Query("start") int start,
-                                    @Query("postCount") int postCount);
+                                          @Query("seq") String seq,
+                                          @Query("start") int start,
+                                          @Query("postCount") int postCount);
+
     @GET("post/img/list")
     Call<ResForm<List<Post>>> getPostThumbnailImageList(@Query("type") String type,
                                                         @Query("start") int start,
@@ -97,7 +92,6 @@ public interface NetworkModel {
                                           @Part("seq") RequestBody seq,
                                           @Part("title") RequestBody title,
                                           @Part("contents") RequestBody contents);
-
 
 
     //@GET("like/list")
@@ -117,7 +111,7 @@ public interface NetworkModel {
     @FormUrlEncoded
     @POST("cheering/apply")
     Call<ResForm<DefaultData>> applyCheering(@Field("playerseq") int playerseq,
-                               @Field("comment") String comment);
+                                             @Field("comment") String comment);
 
     @GET("cheering/list")
     Call<ResForm<List<Cheering>>> getCheeringList(@Query("playerseq") int playerseq);
@@ -138,9 +132,12 @@ public interface NetworkModel {
     /*********************************************************************************
      * Team
      ********************************************************************************/
+    @GET("team/list")
+    Call<ResForm<List<TeamDetailList>>> getTeamList(@Query("gender") String gender);
+
     @GET("team/info")
-    Call<ResForm<List<TeamDetailModel>>> getTeamInfo(@Query("gender") String gender,
-                                                     @Query("teamSeq") int teamSeq);
+    Call<ResForm<TeamDetailList>> getTeamInfo(@Query("gender") String gender,
+                                              @Query("teamSeq") int teamSeq);
 
     AddCookiesInterceptor in1 = new AddCookiesInterceptor();
     OkHttpClient client = new OkHttpClient.Builder()

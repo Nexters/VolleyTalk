@@ -3,6 +3,7 @@ package com.teamnexters.volleytalk.team.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +18,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.teamnexters.volleytalk.R;
+import com.teamnexters.volleytalk.ResForm;
+import com.teamnexters.volleytalk.team.model.TeamDetailList;
 import com.teamnexters.volleytalk.team.model.TeamModel;
 import com.teamnexters.volleytalk.team.model.TeamModelRetro;
+
+import java.util.List;
 
 import static com.teamnexters.volleytalk.config.Config.JHC_DEBUG;
 
@@ -31,12 +36,12 @@ public class TeamAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private int layout;
     private Context context;
-    private TeamModelRetro teamModelRetro;
+    private ResForm<List<TeamDetailList>> list;
     private int last_position = -1;
 
-    public TeamAdapter(Context context, TeamModelRetro teamModelRetro) {
+    public TeamAdapter(Context context, ResForm<List<TeamDetailList>> list) {
         this.context = context;
-        this.teamModelRetro = teamModelRetro;
+        this.list = list;
         this.layout = R.layout.team_man;
 
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -45,13 +50,13 @@ public class TeamAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-        return teamModelRetro.getList().size();
+        return list.getResData().size();
     }
 
     @Override
     public Object getItem(int position) {
         // TODO Auto-generated method stub
-        return teamModelRetro.getList().get(position);
+        return list.getResData().get(position);
     }
 
     @Override
@@ -83,20 +88,22 @@ public class TeamAdapter extends BaseAdapter {
         }
 
 
-        final TeamModel teamModel = teamModelRetro.getList().get(position);
+        final TeamDetailList teamDetailList = list.getResData().get(position);
 
-        viewHolder.view_team.setBackgroundColor(teamModel.getTeamColor());
-        Log.e(JHC_DEBUG, "COLOR : " + teamModel.getTeamColor());
+        String resName = "@drawable/" + teamDetailList.getTeamlogo();
+        int imageResource = context.getResources().getIdentifier(resName, "drawable", context.getPackageName());
+        Glide.with(context)
+                .load(imageResource)
+                .apply(RequestOptions.fitCenterTransform())
+                .into(viewHolder.img_team);
 
-        if (teamModel.getTeamImg() != 0) {
-            Log.e(JHC_DEBUG, "IMG : " + teamModel.getTeamImg());
-            Glide.with(context)
-                    .load(teamModel.getTeamImg())
-                    .apply(RequestOptions.fitCenterTransform())
-                    .into(viewHolder.img_team);
-        }
+//        viewHolder.view_team.setBackgroundColor(teamDetailList.getTeamColor());
+//        Log.e(JHC_DEBUG, "COLOR : " + teamDetailList.getTeamColor());
 
-        viewHolder.txt_team.setText(teamModel.getTeamText());
+        int index = teamDetailList.getName().indexOf(" ");
+        StringBuilder builder = new StringBuilder(teamDetailList.getName());
+        builder.setCharAt(index, '\n');
+        viewHolder.txt_team.setText(builder.toString());
 
         if (position > last_position) {
             Animation animation = AnimationUtils.loadAnimation(context, R.anim.fade_in);

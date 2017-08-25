@@ -16,16 +16,23 @@ import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.teamnexters.volleytalk.R;
+import com.teamnexters.volleytalk.ResForm;
 import com.teamnexters.volleytalk.common.ApiService;
 import com.teamnexters.volleytalk.team.adapter.TeamAdapter;
+import com.teamnexters.volleytalk.team.model.TeamDetailList;
 import com.teamnexters.volleytalk.team.model.TeamModel;
 import com.teamnexters.volleytalk.team.model.TeamModelRetro;
+import com.teamnexters.volleytalk.tool.NetworkModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -63,6 +70,7 @@ public class TeamFragment extends Fragment {
     private TeamModelRetro womanTeamModelRetro;
     private TeamModelRetro teamModelRetro;
 
+    public ResForm<List<TeamDetailList>> teamDetailList;
     private TeamAdapter teamAdapter;
     private GridView gridView;
 
@@ -71,7 +79,6 @@ public class TeamFragment extends Fragment {
     private int list_count = 0;
 
 
-    private Call<TeamModelRetro> mainModelCall;
 
     public TeamFragment() {
         // Required empty public constructor
@@ -127,7 +134,9 @@ public class TeamFragment extends Fragment {
 
         initResources(view);
 
-        test();
+//        test();
+
+        getTeamList("M");
 
         return view;
     }
@@ -212,17 +221,19 @@ public class TeamFragment extends Fragment {
             switch (buttonView.getId()) {
                 case R.id.rb_male_team:
                     if (isChecked) {
-                        teamAdapter = new TeamAdapter(getContext(), manTeamModelRetro);
-                        gridView.setAdapter(teamAdapter);
-                        teamModelRetro = manTeamModelRetro;
+                        getTeamList("M");
+
+//                        teamAdapter = new TeamAdapter(getContext(), manTeamModelRetro);
+//                        gridView.setAdapter(teamAdapter);
                     }
                     break;
 
                 case R.id.rb_female_team:
                     if (isChecked) {
-                        teamAdapter = new TeamAdapter(getContext(), womanTeamModelRetro);
-                        gridView.setAdapter(teamAdapter);
-                        teamModelRetro = womanTeamModelRetro;
+                        getTeamList("F");
+
+//                        teamAdapter = new TeamAdapter(getContext(), womanTeamModelRetro);
+//                        gridView.setAdapter(teamAdapter);
                     }
                     break;
             }
@@ -231,14 +242,42 @@ public class TeamFragment extends Fragment {
 
     private void initGridView(View view) {
         gridView = (GridView) view.findViewById(R.id.gridView);
-        teamAdapter = new TeamAdapter(getContext(), manTeamModelRetro);
-        gridView.setAdapter(teamAdapter);
+//        teamAdapter = new TeamAdapter(getContext(), manTeamModelRetro);
+//        gridView.setAdapter(teamAdapter);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getContext(), DetailTeamActivity.class);
-                intent.putExtra("TEAM_MODEL", teamModelRetro.getList().get(position));
+                intent.putExtra("TEAM_MODEL", teamDetailList.getResData().get(position));
                 startActivity(intent);
+            }
+        });
+    }
+
+    private void getTeamList(String gender) {
+        NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
+        Call<ResForm<List<TeamDetailList>>> call = networkModel.getTeamList(gender);
+        call.enqueue(new Callback<ResForm<List<TeamDetailList>>>() {
+
+            @Override
+            public void onResponse(Call<ResForm<List<TeamDetailList>>> call, Response<ResForm<List<TeamDetailList>>> response) {
+                ResForm<List<TeamDetailList>> list = response.body();
+                Log.e(JHC_DEBUG, "isStatus : " + list.getStatus());
+                if (list.getStatus().equals("true")) {
+                    teamDetailList = list;
+                    teamAdapter = new TeamAdapter(getContext(), list);
+                    gridView.setAdapter(teamAdapter);
+                    for (int i=0; i<list.getResData().size(); i++) {
+                        Log.e(JHC_DEBUG, "SEQ : " + list.getResData().get(i).getSeq());
+//                        Log.e(JHC_DEBUG, "IMAGE : " + list.getResData().get(i).getTeamlogo());
+                    }
+                } else {
+                    Toast.makeText(getContext(), list.getErrMsg(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResForm<List<TeamDetailList>>> call, Throwable t) {
             }
         });
     }
