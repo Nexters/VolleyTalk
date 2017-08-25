@@ -49,23 +49,23 @@ public class AlbumFragment extends Fragment {
         context = getContext();
 
         View rootView_album = inflater.inflate(R.layout.fragment_album, container, false);
-        RecyclerView rl_album = (RecyclerView) rootView_album.findViewById(R.id.rv_album);
-
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 3);
-        rl_album.setLayoutManager(layoutManager);
-
-        //나중에 Resource -> dimen으로 수정
-        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(7);
-        rl_album.addItemDecoration(itemDecoration);
-
-        //리스트 만들어서 적당히 테스트 데이터 집어넣기.
-        postImgList = new ArrayList<>();
-
-
-        albumAdapter = new AlbumAdapter(postImgList, context);
-        rl_album.setAdapter(albumAdapter);
-
-        getPostImgList();
+//        RecyclerView rl_album = (RecyclerView) rootView_album.findViewById(R.id.rv_album);
+//
+//        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 3);
+//        rl_album.setLayoutManager(layoutManager);
+//
+//        //나중에 Resource -> dimen으로 수정
+//        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(7);
+//        rl_album.addItemDecoration(itemDecoration);
+//
+//        //리스트 만들어서 적당히 테스트 데이터 집어넣기.
+//        postImgList = new ArrayList<>();
+//
+//
+//        albumAdapter = new AlbumAdapter(postImgList, context);
+//        rl_album.setAdapter(albumAdapter);
+//
+//        getPostImgList();
 
         return rootView_album;
     }

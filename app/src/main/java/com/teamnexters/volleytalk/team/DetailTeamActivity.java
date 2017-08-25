@@ -26,7 +26,11 @@ import com.teamnexters.volleytalk.album.AlbumFragment;
 import com.teamnexters.volleytalk.cheering.CheeringFragment;
 import com.teamnexters.volleytalk.player.Player;
 import com.teamnexters.volleytalk.post.PostFragment;
+import com.teamnexters.volleytalk.team.fragment.TeamDetailAlbumFragment;
 import com.teamnexters.volleytalk.team.fragment.TeamDetailAllFragment;
+import com.teamnexters.volleytalk.team.fragment.TeamDetailNewsFragment;
+import com.teamnexters.volleytalk.team.fragment.TeamDetailPlayerFragment;
+import com.teamnexters.volleytalk.team.fragment.TeamDetailResultFragment;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 /**
@@ -183,12 +187,16 @@ public class DetailTeamActivity extends AppCompatActivity implements View.OnClic
 
             switch (position) {
                 case 0:
+                    return new TeamDetailAllFragment();
 //                    return PostFragment.newInstance("player", String.valueOf(who.getSeq()));
                 case 1:
+                    return new TeamDetailAlbumFragment();
                 case 2:
+                    return new TeamDetailNewsFragment();
                 case 3:
+                    return new TeamDetailResultFragment();
                 case 4:
-                    return new TeamDetailAllFragment();
+                    return new TeamDetailPlayerFragment();
             }
 
             return fragment;
