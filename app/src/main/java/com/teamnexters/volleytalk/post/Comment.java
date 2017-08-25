@@ -1,14 +1,14 @@
-package com.teamnexters.volleytalk.cheering;
+package com.teamnexters.volleytalk.post;
 
 import com.teamnexters.volleytalk.User;
 
 /**
- * Created by MIN on 2017. 8. 16..
+ * Created by MIN on 2017. 8. 24..
  */
 
-public class Cheering {
+public class Comment {
     private int seq;
-    private int playerseq;
+    private int postseq;
     private String comment;
     private String userid;
     private String createdAt;
@@ -22,12 +22,12 @@ public class Cheering {
         this.seq = seq;
     }
 
-    public int getPlayerseq() {
-        return playerseq;
+    public int getPostseq() {
+        return postseq;
     }
 
-    public void setPlayerseq(int playerseq) {
-        this.playerseq = playerseq;
+    public void setPostseq(int postseq) {
+        this.postseq = postseq;
     }
 
     public String getComment() {

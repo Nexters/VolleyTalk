@@ -42,13 +42,14 @@
                         android:src="@mipmap/ico_arrow_back"/>
 
 
+                    <!--
                     <ImageView
                         android:id="@+id/iv_setting_mypage"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/ico_setting"/>
+                        android:src="@mipmap/ico_setting"/> -->
 
                 </RelativeLayout>
 

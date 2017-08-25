@@ -328,8 +328,10 @@ public class TeamFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
 
+        /*
         if (mainModelCall.isExecuted()) {
             mainModelCall.cancel();
         }
+        */
     }
 }

@@ -338,11 +338,10 @@ public class TeamDetailAllFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
-//        if (mainModelCall.isExecuted()) {
-//            mainModelCall.cancel();
-//        }
+        /*
+        if (mainModelCall.isExecuted()) {
+            mainModelCall.cancel();
+        }
+        */
     }
-
-
 }

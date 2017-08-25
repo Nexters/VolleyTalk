@@ -1,31 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:background="#f7f7f7">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/et_cheering"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:focusable="false"
+            android:paddingStart="7dp"
+            android:paddingEnd="7dp"
+            android:background="@drawable/background_text_cheering"
             android:hint="응원해주세요!"/>
 
         <Button
+            android:id="@+id/btn_apply_cheering"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@drawable/background_btn_cheering"
+            android:text="등록"
+            android:textColor="@android:color/white"/>
         
     </LinearLayout>
     
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal">
 
         <TextView
@@ -38,13 +54,14 @@
             android:text="TALK"/>
 
         <TextView
+            android:id="@+id/tv_num_cheering"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
             android:textSize="16sp"
             android:textColor="#1b4d83"
             android:letterSpacing="-0.01"
-            android:lineSpacingExtra="10sp"
-            android:text="137"/>
+            android:lineSpacingExtra="10sp"/>
 
     </LinearLayout>
 

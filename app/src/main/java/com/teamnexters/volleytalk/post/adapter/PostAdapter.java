@@ -1,4 +1,4 @@
-package com.teamnexters.volleytalk.post;
+package com.teamnexters.volleytalk.post.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -19,6 +19,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.teamnexters.volleytalk.R;
 import com.teamnexters.volleytalk.config.Config;
+import com.teamnexters.volleytalk.post.Post;
 import com.teamnexters.volleytalk.tool.NetworkModel;
 
 import java.util.List;

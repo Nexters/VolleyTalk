@@ -11,12 +11,13 @@
         android:layout_height="wrap_content">
 
         <RelativeLayout
+            android:id="@+id/header_lv_team_follow"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/lv_header">
+            android:background="@drawable/header_follow">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -40,12 +41,13 @@
 
 
         <RelativeLayout
+            android:id="@+id/header_lv_player_follow"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/lv_header">
+            android:background="@drawable/header_follow">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -69,12 +71,13 @@
 
 
         <RelativeLayout
+            android:id="@+id/header_lv_user_follow"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="16dp"
-            android:background="@drawable/lv_header">
+            android:background="@drawable/header_follow">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -96,6 +99,20 @@
             android:divider="@drawable/lv_days_match_divider"
             android:elevation="4dp" />
 
+        <RelativeLayout
+            android:id="@+id/rl_none_follow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:background="#f5f5f5">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/img_like_none"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
     </LinearLayout>
 
 </ScrollView>

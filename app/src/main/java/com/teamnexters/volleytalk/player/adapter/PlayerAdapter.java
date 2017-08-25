@@ -95,6 +95,7 @@ public class PlayerAdapter extends BaseAdapter {
 
         tv_back_num_player.setText("No." + selectedPlayer.getBacknumber());
         tv_name_player.setText(selectedPlayer.getName());
+        tv_position_player.setText(selectedPlayer.getPosition());
 
         tv_num_like_player.setText(selectedPlayer.getLikecount());
         tv_num_post_player.setText(selectedPlayer.getPostcount());

@@ -1,5 +1,6 @@
 package com.teamnexters.volleytalk;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.kakao.auth.Session;
 import com.teamnexters.volleytalk.tool.NetworkModel;
+import com.tsengvn.typekit.TypekitContextWrapper;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,6 +26,11 @@ import retrofit2.Response;
 public class SetNewPropertyActivity extends AppCompatActivity {
 
     private Button btn_go_to_next_page_welcome;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

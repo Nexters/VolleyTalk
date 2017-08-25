@@ -1,5 +1,6 @@
 package com.teamnexters.volleytalk.follow;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,7 +9,12 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.teamnexters.volleytalk.R;
@@ -42,6 +48,8 @@ public class FollowFragment extends Fragment {
     PlayerFollowExpandableAdapter adapter_player_follow;
     NonScrollExpandableListView elv_player_follow;
 
+    RelativeLayout header_lv_team_follow, header_lv_player_follow, header_lv_user_follow, rl_none_follow;
+
     SparseArray<String> parentArray;
     SparseArray<List<Player>> childArray;
 
@@ -50,18 +58,20 @@ public class FollowFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView_follow = inflater.inflate(R.layout.fragment_follow, container, false);
 
-        //if 서버에서 follow 정보 받아와서 size 0 일 경우
-        // mipmap.img_like_none 화면 중앙에 넣을 것
-        // 이 때 배경 색은 #fdfdfd인듯
+        header_lv_team_follow = (RelativeLayout) rootView_follow.findViewById(R.id.header_lv_team_follow);
+        header_lv_player_follow = (RelativeLayout) rootView_follow.findViewById(R.id.header_lv_player_follow);
+        header_lv_user_follow = (RelativeLayout) rootView_follow.findViewById(R.id.header_lv_user_follow);
+
+        rl_none_follow = (RelativeLayout) rootView_follow.findViewById(R.id.rl_none_follow);
 
         // 팀, 선수, 유저는 밑에서 처리
-
         NonScrollListView lv_team_follow = (NonScrollListView) rootView_follow.findViewById(R.id.lv_team_follow);
 
         //list_team_follow.add(new Follow(3, "team", 1, "497708408"));
         list_team_follow = new ArrayList<>();
         adapter_team_follow = new TeamFollowAdapter(list_team_follow);
         lv_team_follow.setAdapter(adapter_team_follow);
+
 
         parentArray = new SparseArray<>();
         childArray = new SparseArray<>();
@@ -80,7 +90,6 @@ public class FollowFragment extends Fragment {
     }
 
 
-
     public void getFollowList() {
         NetworkModel networkModel = NetworkModel.retrofit.create(NetworkModel.class);
         Call<ResForm<FollowList>> call = networkModel.getFollowList();
@@ -89,18 +98,7 @@ public class FollowFragment extends Fragment {
             public void onResponse(Call<ResForm<FollowList>> call, Response<ResForm<FollowList>> response) {
                 ResForm<FollowList> result = response.body();
                 if (result.getStatus().equals("true")) {
-                    list_team_follow.addAll(result.getResData().getTeam());
-                    adapter_team_follow.notifyDataSetChanged();
-
-                    list_user_follow.addAll(result.getResData().getUser());
-                    adapter_user_follow.notifyDataSetChanged();
-
-                    arrangePlayerFollowInfo(result.getResData().getPlayer());
-                    adapter_player_follow.setParentArray(parentArray);
-                    adapter_player_follow.setChildArray(childArray);
-                    adapter_player_follow.notifyDataSetChanged();
-                    openPlayerFollowListView();
-
+                    setAllListView(result.getResData());
                 } else {
                     Toast.makeText(getContext(), result.getErrMsg(), Toast.LENGTH_SHORT).show();
                 }
@@ -128,9 +126,49 @@ public class FollowFragment extends Fragment {
         }
     }
 
+    public void setAllListView(FollowList list) {
+        //set TeamFollow ListView
+        if ( list.getTeam().size() > 0 ) {
+            header_lv_team_follow.setVisibility(View.VISIBLE);
+            list_team_follow.addAll(list.getTeam());
+            adapter_team_follow.notifyDataSetChanged();
+        } else {
+            header_lv_team_follow.setVisibility(View.GONE);
+        }
+
+        //set UserFollow ListView
+        if ( list.getUser().size() > 0 ) {
+            header_lv_user_follow.setVisibility(View.VISIBLE);
+            list_user_follow.addAll(list.getUser());
+            adapter_user_follow.notifyDataSetChanged();
+        } else {
+            header_lv_user_follow.setVisibility(View.GONE);
+        }
+
+        //set PlayerFollow ListView
+        if( list.getPlayer().size() > 0 ) {
+            header_lv_player_follow.setVisibility(View.VISIBLE);
+            arrangePlayerFollowInfo(list.getPlayer());
+            adapter_player_follow.setParentArray(parentArray);
+            adapter_player_follow.setChildArray(childArray);
+            adapter_player_follow.notifyDataSetChanged();
+            openPlayerFollowListView();
+        } else {
+            header_lv_player_follow.setVisibility(View.GONE);
+        }
+
+
+        if(list.getPlayer().size() == 0 && list.getUser().size()  == 0 && list.getTeam().size() == 0) {
+            rl_none_follow.setVisibility(View.VISIBLE);
+        } else {
+            rl_none_follow.setVisibility(View.GONE);
+        }
+
+
+    }
+
 
     public void arrangePlayerFollowInfo(List<PlayerFollow> list_player_follow) {
-
 
         for(int i = 0; i < list_player_follow.size(); i++) {
             Player p = list_player_follow.get(i).getPlayerInfo();
@@ -145,6 +183,5 @@ public class FollowFragment extends Fragment {
             childArray.get(p.getTeamseq()).add(p);
         }
     }
-
 
 }

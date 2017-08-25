@@ -3,12 +3,16 @@ package com.teamnexters.volleytalk.tool;
 import com.bumptech.glide.request.Request;
 import com.teamnexters.volleytalk.ExistNickname;
 import com.teamnexters.volleytalk.ResForm;
+import com.teamnexters.volleytalk.User;
+import com.teamnexters.volleytalk.cheering.Cheering;
 import com.teamnexters.volleytalk.config.Config;
 import com.teamnexters.volleytalk.DefaultData;
 import com.teamnexters.volleytalk.follow.Follow;
 import com.teamnexters.volleytalk.follow.FollowList;
 import com.teamnexters.volleytalk.news.NewsList;
+import com.teamnexters.volleytalk.player.Player;
 import com.teamnexters.volleytalk.player.PlayerList;
+import com.teamnexters.volleytalk.post.Comment;
 import com.teamnexters.volleytalk.post.Post;
 
 import java.util.List;
@@ -21,6 +25,8 @@ import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -46,7 +52,11 @@ public interface NetworkModel {
                                                      @Query("email") String email,
                                                      @Query("profileImg") String profileImg);
 
-    //@POST("user/delete")
+    @POST("user/delete")
+    Call<ResForm<String>> dropOut(@Query("userid") String userid);
+
+    @GET("user/info")
+    Call<ResForm<User>> getUserInfo(@Query("userid") String userid);
 
 
 
@@ -64,9 +74,8 @@ public interface NetworkModel {
     @GET("player/list")
     Call<ResForm<List<PlayerList>>> getPlayerList(@Query("gender") String gender);
 
-    //@GET("player/info")
-
-
+    @GET("player/info")
+    Call<ResForm<Player>> getPlayerInfo(@Query("playerseq") int playerseq);
 
 
 
@@ -92,8 +101,9 @@ public interface NetworkModel {
 
     //@GET("like/list")
 
-    //@POST("like/apply")
-
+    @POST("like/apply")
+    Call<ResForm<DefaultData>> applyLike(@Query("likeTypes") String likeTypes,
+                                         @Query("likeSeq") int likeSeq);
 
 
     @GET("follow/list")
@@ -103,20 +113,26 @@ public interface NetworkModel {
     Call<ResForm<Follow>> applyFollow(@Query("followTypes") String followTypes,
                                       @Query("followSeq") int followSeq);
 
+    @FormUrlEncoded
+    @POST("cheering/apply")
+    Call<ResForm<DefaultData>> applyCheering(@Field("playerseq") int playerseq,
+                               @Field("comment") String comment);
 
-    //@GET("cheering/apply")
+    @GET("cheering/list")
+    Call<ResForm<List<Cheering>>> getCheeringList(@Query("playerseq") int playerseq);
 
-    //@POST("cheering/list")
+    @FormUrlEncoded
+    @POST("comment/apply")
+    Call<ResForm<DefaultData>> applyComment(@Field("type") String type,
+                                            @Field("postseq") int postseq,
+                                            @Field("comment") String comment);
 
-
-    //@GET("comment/apply")
-
-    //@POST("comment/list")
+    @GET("comment/list")
+    Call<ResForm<List<Comment>>> getCommentList(@Query("type") String type,
+                                                @Query("seq") int seq);
 
     @GET("img/{file}")
     Call<ResponseBody> getImageFile(@Path("file") String filename);
-
-
 
 
     AddCookiesInterceptor in1 = new AddCookiesInterceptor();
