@@ -8,6 +8,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.teamnexters.volleytalk.R;
 import com.teamnexters.volleytalk.team.model.PostAllModelRetro;
@@ -83,5 +84,10 @@ public class DetailTeamPlayerAdapter extends BaseAdapter {
 
     public class ViewHolder {
         ImageView iv_item_rv;
+        TextView tv_name_player;
+        TextView tv_back_num_player;
+        TextView tv_position_player;
+        TextView tv_num_like_player;
+        TextView tv_num_post_player;
     }
 }
